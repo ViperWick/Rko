@@ -128,15 +128,98 @@
         </table>
     </div>
 
+    <div id="competitionModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 8px;">
+        <h2>新增比賽</h2>
+        <form id="competitionForm">
+            <div>
+                <label>比賽名稱：</label>
+                <input type="text" name="name" required>
+            </div>
+            <div>
+                <label>比賽日期：</label>
+                <input type="date" name="date" required>
+            </div>
+            <div>
+                <label>比賽地點：</label>
+                <input type="text" name="location" required>
+            </div>
+            <div>
+                <button type="submit">確定</button>
+                <button type="button" onclick="closeCompetitionModal()">取消</button>
+            </div>
+        </form>
+    </div>
+
     <script>
+        let competitionData = {
+            players: []
+        };
+
+        function saveToLocalStorage() {
+            localStorage.setItem('competitionData', JSON.stringify(competitionData));
+        }
+
+        function loadFromLocalStorage() {
+            const saved = localStorage.getItem('competitionData');
+            if (saved) {
+                competitionData = JSON.parse(saved);
+                renderPlayerList();
+            }
+        }
+
+        function renderPlayerList() {
+            const tbody = document.getElementById('playerList');
+            tbody.innerHTML = competitionData.players.map(player => `
+                <tr>
+                    <td>${player.category}</td>
+                    <td>${player.name}</td>
+                    <td>${player.id}</td>
+                    <td>${player.group}</td>
+                    <td>${player.personalId}</td>
+                    <td><span class="status-badge ${player.status === '已報到' ? 'status-success' : 'status-pending'}">${player.status}</span></td>
+                    <td>
+                        <button onclick="editPlayer(this)">編輯</button>
+                        <button onclick="deletePlayer(this)">刪除</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
         function importData() {
-            // 實現匯入功能
-            alert('請選擇Excel檔案匯入');
+            // 创建文件输入元素
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.xlsx,.xls,.csv';
+            
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                // 这里可以添加Excel文件解析逻辑
+                // 可以使用xlsx库来处理Excel文件
+                console.log('文件已选择:', file.name);
+            }
+            
+            input.click();
         }
 
         function exportData() {
-            // 實現匯出功能
-            alert('資料匯出中...');
+            // 获取表格数据
+            const table = document.querySelector('.data-table');
+            const rows = Array.from(table.querySelectorAll('tbody tr'));
+            
+            // 转换为CSV格式
+            const csvContent = rows.map(row => {
+                return Array.from(row.cells)
+                    .slice(0, -1) // 排除最后一列的操作按钮
+                    .map(cell => cell.textContent)
+                    .join(',');
+            }).join('\n');
+            
+            // 创建下载链接
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = '比賽資料.csv';
+            link.click();
         }
 
         function addCompetition() {
