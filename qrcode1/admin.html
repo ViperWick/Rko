@@ -85,9 +85,81 @@
             background-color: #ff9800;
             color: white;
         }
+
+        /* 登入界面樣式 */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 35, 126, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        .login-form {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 320px;
+        }
+        
+        .login-form h2 {
+            margin: 0 0 30px;
+            color: #1a237e;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .login-form input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .login-form button {
+            width: 100%;
+            padding: 12px;
+            background: #ff8f00;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .login-form button:hover {
+            background: #f57c00;
+        }
     </style>
 </head>
 <body>
+    <!-- 登入界面 -->
+    <div id="loginOverlay" class="login-overlay">
+        <div class="login-form">
+            <h2>Q-pi 後台管理系統</h2>
+            <form id="loginForm" onsubmit="return handleLogin(event)">
+                <div class="form-group">
+                    <input type="text" id="username" placeholder="管理員帳號" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="密碼" required>
+                </div>
+                <button type="submit">登入系統</button>
+            </form>
+        </div>
+    </div>
+
     <div class="container">
         <div class="header">
             <div class="logo">Q-pi 後台管理系統</div>
@@ -95,6 +167,7 @@
                 <button onclick="importData()">匯入資料</button>
                 <button onclick="exportData()">匯出報表</button>
                 <button onclick="addCompetition()">新增比賽</button>
+                <button onclick="logout()" style="background-color: #f44336;">登出</button>
             </div>
         </div>
 
@@ -136,7 +209,7 @@
                 <input type="text" name="name" required>
             </div>
             <div>
-                <label>比賽日期：</label>
+                <label>��賽日期：</label>
                 <input type="date" name="date" required>
             </div>
             <div>
@@ -261,6 +334,63 @@
 
         // 在頁面載入時也更新一次
         document.addEventListener('DOMContentLoaded', updateAttendanceDisplay);
+
+        // 登入系統相關功能
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // 這裡可以設置多��管理員帳號
+            const validUsers = {
+                'admin': 'qpi2024',
+                'staff': 'staff2024'
+            };
+            
+            if (validUsers[username] === password) {
+                // 登入成功
+                sessionStorage.setItem('isLoggedIn', 'true');
+                sessionStorage.setItem('username', username);
+                document.getElementById('loginOverlay').style.display = 'none';
+                
+                // 更新頁面顯示登入用戶
+                const userDisplay = document.createElement('span');
+                userDisplay.textContent = `管理員：${username}`;
+                document.querySelector('.logo').appendChild(userDisplay);
+            } else {
+                alert('帳號或密碼錯誤！');
+            }
+            return false;
+        }
+        
+        // 檢查登入狀態
+        function checkLoginStatus() {
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+            const loginOverlay = document.getElementById('loginOverlay');
+            
+            if (!isLoggedIn) {
+                loginOverlay.style.display = 'flex';
+            } else {
+                loginOverlay.style.display = 'none';
+                const username = sessionStorage.getItem('username');
+                const userDisplay = document.createElement('span');
+                userDisplay.textContent = ` 管理員：${username}`;
+                document.querySelector('.logo').appendChild(userDisplay);
+            }
+        }
+        
+        // 登出功能
+        function logout() {
+            sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('username');
+            window.location.reload();
+        }
+        
+        // 在頁面載入時檢查登入狀態
+        document.addEventListener('DOMContentLoaded', function() {
+            checkLoginStatus();
+            updateAttendanceDisplay();
+        });
     </script>
 </body>
 </html> 
