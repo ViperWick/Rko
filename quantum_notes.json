@@ -1,0 +1,45 @@
+{
+  "course_info": {
+    "title": "量子計算學習筆記",
+    "created_date": "2025-08-16 17:56:16",
+    "last_updated": "2025-08-17 08:56:51",
+    "total_modules": 1,
+    "completed_modules": 0
+  },
+  "modules": {
+    "module_1": {
+      "title": "Module 1: Required Notions",
+      "content": "學習量子計算的關鍵概念，理解量子電腦與經典電腦的根本差異",
+      "objectives": [
+        "識別經典電腦和量子電腦之間的根本區別",
+        "描述測量量子比特時會發生什麼",
+        "描述量子邏輯閘的作用",
+        "識別不同類型的量子閘",
+        "識別IBM量子作曲家的組成部分",
+        "描述如何使用量子作曲家將量子比特置於疊加態",
+        "描述如何使用量子作曲家糾纏量子比特"
+      ],
+      "added_date": "2025-08-17 08:56:51",
+      "status": "學習中",
+      "completion_percentage": 0,
+      "notes": "\n[2025-08-17 08:56:51] 核心學習內容：量子電腦的獨特性、量子邏輯閘運作原理、量子糾纏概念\n[2025-08-17 08:56:51] 關鍵概念：量子比特、布洛赫球、量子糾纏、態疊加、量子邏輯閘",
+      "practice_exercises": [
+        {
+          "exercise": "在IBM量子作曲家上創建疊加態",
+          "added_date": "2025-08-17 08:56:51",
+          "status": "待完成"
+        },
+        {
+          "exercise": "使用CNOT門創建糾纏態",
+          "added_date": "2025-08-17 08:56:51",
+          "status": "待完成"
+        }
+      ]
+    }
+  },
+  "learning_progress": {
+    "current_module": null,
+    "next_target": null,
+    "study_time": "0小時"
+  }
+}
