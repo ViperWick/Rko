@@ -1,43 +1,5 @@
-# Python
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# Virtual Environment
-quantum_learning_env/
-venv/
-ENV/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Learning Progress
-learning_progress.json
+*.pyc
 *.log
+gmail_ai_agent/credentials.json
+gmail_ai_agent/token.json

@@ -1,0 +1,4 @@
+# Optional: voice trigger for listen-ollama-summarize
+# If PyAudio fails on Windows: pip install pipwin && pipwin install pyaudio
+SpeechRecognition>=3.10.0
+pyaudio>=0.2.14

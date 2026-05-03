@@ -1,0 +1,33 @@
+{
+  "_說明": "eToro Alpha Portfolios 追蹤設定。eToro 不提供持倉 API，需手動從各投資組合頁面「基本情況」分頁複製成分股，貼到 symbols 陣列。每月再平衡後可更新一次。",
+  "portfolios": [
+    {
+      "id": "puremomentum",
+      "name": "PureMomentum",
+      "type": "方向性",
+      "symbols": [],
+      "_取得方式": "登入 eToro → 投資組合 → PureMomentum → 基本情況/持倉 → 複製股票代碼"
+    },
+    {
+      "id": "momentum-ls",
+      "name": "Momentum-LS",
+      "type": "方向性",
+      "symbols": [],
+      "_取得方式": "https://www.etoro.com/smartportfolios/momentum-ls → 基本情況分頁複製成分股"
+    },
+    {
+      "id": "puregrowth",
+      "name": "PureGrowth",
+      "type": "專業",
+      "symbols": [],
+      "_取得方式": "登入 eToro → 投資組合 → PureGrowth → 基本情況"
+    },
+    {
+      "id": "marketpicks",
+      "name": "MarketPicks",
+      "type": "專業",
+      "symbols": [],
+      "_取得方式": "登入 eToro → 投資組合 → MarketPicks → 基本情況"
+    }
+  ]
+}

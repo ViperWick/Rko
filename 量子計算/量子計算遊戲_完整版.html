@@ -1,0 +1,2434 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>量子謎題：Alice的量子冒險</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft JhengHei', 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.2), rgba(79, 70, 229, 0.2));
+            border-radius: 20px;
+            border: 2px solid rgba(147, 51, 234, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #a78bfa, #ec4899, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(20deg); }
+        }
+
+        .alice-intro {
+            font-size: 1.3em;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border-left: 5px solid #fbbf24;
+        }
+
+        .mission-panel {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.3), rgba(245, 158, 11, 0.3));
+            border: 2px solid #fbbf24;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 900px;
+        }
+
+        .mission-title {
+            font-size: 2em;
+            font-weight: bold;
+            color: #fbbf24;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .rules-explanation {
+            background: rgba(59, 130, 246, 0.2);
+            border-left: 4px solid #3b82f6;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+
+        .rules-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #60a5fa;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .story-checkpoint {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(147, 51, 234, 0.2));
+            border: 2px solid #a78bfa;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+
+        .objective-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(5, 150, 105, 0.3));
+            border: 3px solid #10b981;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .progress-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.2));
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #60a5fa, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        .enigmas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .enigma-card {
+            background: linear-gradient(135deg, rgba(88, 28, 135, 0.3), rgba(109, 40, 217, 0.3));
+            border-radius: 20px;
+            padding: 30px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(168, 85, 247, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enigma-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(168, 85, 247, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+        }
+
+        .enigma-card:hover::before {
+            left: 100%;
+        }
+
+        .enigma-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #a78bfa;
+            box-shadow: 0 20px 60px rgba(168, 85, 247, 0.4);
+        }
+
+        .enigma-card.completed {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(5, 150, 105, 0.3));
+            border-color: #10b981;
+        }
+
+        .enigma-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #fbbf24;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .enigma-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #e9d5ff;
+        }
+
+        .enigma-story {
+            font-size: 1.1em;
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .enigma-concept {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(251, 191, 36, 0.2);
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.4);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            border-radius: 30px;
+            padding: 50px;
+            max-width: 900px;
+            width: 100%;
+            position: relative;
+            border: 3px solid rgba(168, 85, 247, 0.5);
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.8);
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(239, 68, 68, 0.3);
+            border: 2px solid #ef4444;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .close-btn:hover {
+            background: #ef4444;
+            transform: rotate(90deg);
+        }
+
+        .story-header {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.2));
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            border-left: 5px solid #fbbf24;
+        }
+
+        .story-title {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #fbbf24;
+        }
+
+        .story-text {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .challenge-section {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 25px 0;
+        }
+
+        .challenge-title {
+            font-size: 1.8em;
+            color: #a78bfa;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantum-simulator {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.2));
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border: 2px solid rgba(59, 130, 246, 0.4);
+        }
+
+        .qubit-display {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .qubit {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            font-weight: bold;
+            border: 4px solid white;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .qubit.state-0 {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+        }
+
+        .qubit.state-1 {
+            background: linear-gradient(135deg, #ef4444, #991b1b);
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.5);
+        }
+
+        .qubit.superposition {
+            background: linear-gradient(135deg, #a78bfa, #7c3aed, #ec4899);
+            animation: pulseGlow 2s infinite;
+            box-shadow: 0 0 40px rgba(167, 139, 250, 0.6);
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 40px rgba(167, 139, 250, 0.6);
+            }
+            50% { 
+                transform: scale(1.1);
+                box-shadow: 0 0 60px rgba(167, 139, 250, 0.9);
+            }
+        }
+
+        .gate-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .gate-btn {
+            padding: 20px;
+            font-size: 1.3em;
+            font-weight: bold;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .gate-btn.x-gate {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border: 2px solid #fbbf24;
+        }
+
+        .gate-btn.h-gate {
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            border: 2px solid #a78bfa;
+        }
+
+        .gate-btn.z-gate {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            border: 2px solid #22d3ee;
+        }
+
+        .gate-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .action-btn {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            margin-top: 25px;
+            transition: all 0.3s ease;
+            border: 2px solid #34d399;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.5);
+        }
+
+        .result-message {
+            margin-top: 25px;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            display: none;
+            animation: popIn 0.4s ease;
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .result-message.success {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(5, 150, 105, 0.3));
+            border: 3px solid #10b981;
+            color: #6ee7b7;
+        }
+
+        .result-message.error {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(220, 38, 38, 0.3));
+            border: 3px solid #ef4444;
+            color: #fca5a5;
+        }
+
+        .hint-box {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.2));
+            border-left: 5px solid #fbbf24;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .hint-title {
+            font-weight: bold;
+            color: #fbbf24;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alice-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ec4899, #db2777);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            border: 3px solid #fbbf24;
+        }
+
+        .concept-tag {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(168, 85, 247, 0.3);
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #c4b5fd;
+            border: 1px solid rgba(168, 85, 247, 0.5);
+            margin: 5px;
+        }
+
+        /* IBM Quantum Platform 風格的電路構建器 */
+        .circuit-builder {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid rgba(59, 130, 246, 0.4);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .circuit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        .circuit-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #60a5fa;
+        }
+
+        .circuit-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .circuit-btn {
+            padding: 8px 16px;
+            background: rgba(59, 130, 246, 0.3);
+            border: 1px solid #3b82f6;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .circuit-btn:hover {
+            background: rgba(59, 130, 246, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .circuit-layout {
+            display: flex;
+            gap: 20px;
+        }
+
+        .gates-panel {
+            width: 200px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .gates-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #a78bfa;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .gate-item {
+            width: 100%;
+            padding: 15px 20px;
+            margin: 10px 0;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(147, 51, 234, 0.4));
+            border: 3px solid rgba(168, 85, 247, 0.8);
+            border-radius: 15px;
+            cursor: grab;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1.1em;
+            position: relative;
+            user-select: none;
+            min-height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .gate-item:hover {
+            transform: scale(1.08) translateY(-3px);
+            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.5);
+            border-color: rgba(168, 85, 247, 1);
+        }
+
+        .gate-item:active {
+            cursor: grabbing;
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .gate-item.dragging {
+            opacity: 0.7;
+            transform: scale(1.1) rotate(10deg);
+            z-index: 1000;
+        }
+
+        .gate-item.x-gate { 
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.4), rgba(217, 119, 6, 0.4)); 
+            border-color: #f59e0b; 
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+        .gate-item.x-gate:hover {
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5);
+        }
+        
+        .gate-item.h-gate { 
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.4), rgba(109, 40, 217, 0.4)); 
+            border-color: #8b5cf6; 
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+            min-height: 45px;
+            font-size: 1em;
+        }
+        .gate-item.h-gate:hover {
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.5);
+        }
+        
+        .gate-item.z-gate { 
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.4), rgba(8, 145, 178, 0.4)); 
+            border-color: #06b6d4; 
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+        }
+        .gate-item.z-gate:hover {
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.5);
+        }
+
+        .circuit-canvas {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid rgba(59, 130, 246, 0.4);
+            min-height: 450px;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .qubit-line {
+            display: flex;
+            align-items: center;
+            margin: 35px 0;
+            padding: 20px 0;
+            border-bottom: 3px solid rgba(59, 130, 246, 0.4);
+            position: relative;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .qubit-label {
+            width: 80px;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #60a5fa;
+            text-align: center;
+            background: rgba(59, 130, 246, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px solid rgba(59, 130, 246, 0.4);
+        }
+
+        .qubit-wire {
+            flex: 1;
+            height: 12px;
+            background: linear-gradient(90deg, #3b82f6, #1e40af, #3b82f6);
+            position: relative;
+            margin: 0 40px;
+            border-radius: 6px;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+            animation: wireGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes wireGlow {
+            0% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.6); }
+            100% { box-shadow: 0 0 25px rgba(59, 130, 246, 0.8); }
+        }
+
+        .gate-on-wire {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            border: 3px solid white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6em;
+            font-weight: bold;
+            color: white;
+            cursor: move;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .gate-on-wire:hover {
+            transform: translate(-50%, -50%) scale(1.15);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .gate-on-wire.x-gate { 
+            background: linear-gradient(135deg, #f59e0b, #d97706); 
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+        .gate-on-wire.x-gate:hover {
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6);
+        }
+        
+        .gate-on-wire.h-gate { 
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9); 
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+        }
+        .gate-on-wire.h-gate:hover {
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.6);
+        }
+        
+        .gate-on-wire.z-gate { 
+            background: linear-gradient(135deg, #06b6d4, #0891b2); 
+            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
+        }
+        .gate-on-wire.z-gate:hover {
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.6);
+        }
+
+        .drop-zone {
+            position: absolute;
+            top: 50%;
+            left: 15%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 80px;
+            border: 4px dashed rgba(59, 130, 246, 0.6);
+            border-radius: 20px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            font-weight: bold;
+            z-index: 5;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .drop-zone.active {
+            display: flex;
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.4);
+            transform: translate(-50%, -50%) scale(1.2);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.7);
+            border-style: solid;
+        }
+
+        .drop-zone:hover {
+            border-color: #60a5fa;
+            background: rgba(59, 130, 246, 0.25);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .circuit-timeline {
+            position: absolute;
+            right: -30px;
+            top: 0;
+            bottom: 0;
+            width: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .timeline-step {
+            width: 20px;
+            height: 20px;
+            background: rgba(59, 130, 246, 0.3);
+            border: 2px solid #3b82f6;
+            border-radius: 50%;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            color: #60a5fa;
+            font-weight: bold;
+        }
+
+        .circuit-result {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .result-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #10b981;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .result-qubits {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .result-qubit {
+            text-align: center;
+            padding: 15px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .result-qubit-label {
+            font-size: 0.9em;
+            color: #6ee7b7;
+            margin-bottom: 10px;
+        }
+
+        .result-qubit-state {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #10b981;
+        }
+
+        /* 關卡特色元素 */
+        .special-element {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            border: 2px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .coin-flip {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .coin {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid #fbbf24;
+        }
+
+        .coin.heads {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #1a1a2e;
+        }
+
+        .coin.tails {
+            background: linear-gradient(135deg, #6b7280, #374151);
+            color: white;
+        }
+
+        .coin.superposition {
+            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            animation: pulseGlow 2s infinite;
+            color: white;
+        }
+
+        .coin:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(251, 191, 36, 0.5);
+        }
+
+        .chessboard {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            border: 3px solid #fbbf24;
+            border-radius: 10px;
+        }
+
+        .chess-square {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .chess-square.light {
+            background: #fbbf24;
+            color: #1a1a2e;
+        }
+
+        .chess-square.dark {
+            background: #92400e;
+            color: white;
+        }
+
+        .chess-square.queen {
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            color: white;
+            animation: pulseGlow 2s infinite;
+        }
+
+        .chess-square:hover {
+            transform: scale(1.05);
+            box-shadow: inset 0 0 20px rgba(251, 191, 36, 0.5);
+        }
+
+        .door-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .door {
+            width: 120px;
+            height: 160px;
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+            border: 3px solid #92400e;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #1a1a2e;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .door::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .door:hover::before {
+            left: 100%;
+        }
+
+        .door:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.5);
+        }
+
+        .door.open {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            transform: rotateY(15deg);
+        }
+
+        .stars-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .star {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .star:hover {
+            transform: scale(1.2);
+            filter: brightness(1.2);
+        }
+
+        .star.entangled {
+            animation: pulseGlow 2s infinite;
+            background: linear-gradient(135deg, #ec4899, #be185d);
+        }
+
+        .library-shelf {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        .book {
+            width: 40px;
+            height: 60px;
+            background: linear-gradient(135deg, #6b7280, #374151);
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8em;
+        }
+
+        .book:hover {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+            color: #1a1a2e;
+        }
+
+        .book.target {
+            background: linear-gradient(135deg, #10b981, #059669);
+            animation: pulseGlow 2s infinite;
+        }
+
+        /* 量子狀態可視化 */
+        .quantum-state-visualizer {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border: 2px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .state-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .qubit-state {
+            text-align: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .qubit-state-label {
+            font-size: 0.9em;
+            color: #60a5fa;
+            margin-bottom: 8px;
+        }
+
+        .qubit-state-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #10b981;
+            font-family: 'Courier New', monospace;
+        }
+
+        .bloch-sphere {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(168, 85, 247, 0.8), rgba(59, 130, 246, 0.6), rgba(0, 0, 0, 0.8));
+            border: 3px solid rgba(168, 85, 247, 0.5);
+            position: relative;
+            margin: 0 auto;
+            animation: slowRotate 10s linear infinite;
+        }
+
+        .bloch-sphere::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: #fbbf24;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px #fbbf24;
+            animation: pulse 2s infinite;
+        }
+
+        .state-vector {
+            text-align: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .state-vector-equation {
+            font-size: 1.3em;
+            font-family: 'Courier New', monospace;
+            color: #ec4899;
+            margin-bottom: 10px;
+        }
+
+        .probability-bars {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .probability-bar {
+            flex: 1;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .probability-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            transition: height 0.5s ease;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .probability-fill.zero {
+            background: linear-gradient(to top, #3b82f6, #60a5fa);
+        }
+
+        .probability-fill.one {
+            background: linear-gradient(to top, #ec4899, #f472b6);
+        }
+
+        .probability-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8em;
+            color: #60a5fa;
+            font-weight: bold;
+        }
+
+        .probability-value {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9em;
+            color: white;
+            font-weight: bold;
+        }
+
+        @keyframes slowRotate {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌌 The Quantum Enigmas</h1>
+            <div class="alice-intro">
+                <div style="display: flex; align-items: center; gap: 20px; justify-content: center; margin-bottom: 15px;">
+                    <div class="alice-avatar">🧩</div>
+                    <div style="text-align: left;">
+                        <div style="font-size: 1.5em; font-weight: bold; color: #fbbf24;">Interactive Quantum Puzzles</div>
+                        <div style="opacity: 0.9;">Learn Quantum Computing Through Mysterious Enigmas</div>
+                    </div>
+                </div>
+                <p>
+                    歡迎來到量子謎題的世界！這是一個互動式的量子計算學習平台，靈感來自榮獲 <strong style="color: #fbbf24;">Applied Arts Canada's Best Illustration 2023 Award</strong> 的"The Quantum Enigmas"系列動畫。
+                    透過12個精心設計的量子謎題，從狀態疊加到量子平行性，從糾纏到演算法，您將逐步掌握量子計算的核心概念。
+                </p>
+            </div>
+
+            <div class="mission-panel">
+                <div class="mission-title">
+                    <span>🎯</span>
+                    <span>The Quantum Enigmas Collection</span>
+                </div>
+                <p style="font-size: 1.2em; line-height: 1.8; margin-bottom: 20px;">
+                    探索量子編程的非凡世界！我們介紹了量子計算的關鍵概念，並設計了一系列有趣的謎題供您解決。
+                    雖然目前還沒有量子優勢，但從一個謎題到另一個謎題，您將通過測試各種場景來深入理解量子邏輯。
+                </p>
+                <div class="objective-box">
+                    🧩 學習目標：應用狀態疊加、糾纏和量子平行性等概念解決謎題
+                </div>
+                <p style="font-size: 1.1em; line-height: 1.7; opacity: 0.95; margin-top: 20px;">
+                    使用拖拽式的量子電路構建器來解決每個謎題。每個謎題都有獨特的視覺元素和互動功能，
+                    這是一個很好的方式來進入量子編程，並在實踐中應用量子概念。準備好開始冒險了嗎？
+                </p>
+            </div>
+        </div>
+
+        <div class="progress-section">
+            <div class="stat-card">
+                <div class="stat-number" id="completed-count">0</div>
+                <div class="stat-label">已破解謎題</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-attempts">0</div>
+                <div class="stat-label">嘗試次數</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="success-rate">0%</div>
+                <div class="stat-label">成功率</div>
+            </div>
+        </div>
+
+        <div class="enigmas-grid" id="enigmas-grid"></div>
+    </div>
+
+    <!-- 謎題模態窗口 -->
+    <div class="modal" id="enigma-modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">×</button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        // 遊戲狀態
+        const gameState = {
+            completedEnigmas: new Set(),
+            currentEnigma: null,
+            totalAttempts: 0,
+            successfulAttempts: 0
+        };
+
+        // 12個量子謎題（靈感來自Institut quantique）
+        const enigmas = [
+            {
+                id: 1,
+                number: "001",
+                title: "寶藏之門",
+                subtitle: "The Treasure Door",
+                story: "The adventure starts here! Alice is walking on a distant planet. Suddenly, she comes across two guardians, two doors and a treasure. Will she be able to answer the riddle correctly to win the key to the treasure?",
+                storyContext: "這是一個經典的邏輯問題，但可以用量子計算機來解決。這是進入量子編程的好方法，讓我們應用狀態疊加(state superposition)、糾纏(entanglement)和量子平行性(quantum parallelism)的概念。",
+                challenge: "使用量子疊加態同時檢查兩扇門，找到寶藏的鑰匙！將量子位元從|0⟩轉換到疊加態。",
+                rules: "在量子世界中，我們使用Hadamard閘（H閘）來創造疊加態。一個處於|0⟩態的量子位元，經過H閘後會變成 (|0⟩ + |1⟩)/√2，這意味著它同時處於兩種狀態！這就是量子疊加和量子平行性的威力。",
+                howToPlay: "拖拽量子閘門到電路線上來構建量子電路。觀察初始態、當前態和目標態的變化。使用Hadamard閘創造疊加態，讓Alice能夠同時檢查兩扇門！",
+                concept: "量子疊加與量子平行性",
+                type: "gate-selection",
+                initialState: "0",
+                targetState: "superposition",
+                availableGates: ["X", "H", "Z"],
+                correctAnswer: ["H"],
+                hint: "Hadamard閘（H閘）是創造疊加態的關鍵！它能讓量子位元同時處於|0⟩和|1⟩兩種狀態，實現量子平行性。就像Alice同時檢查兩扇門！",
+                reward: "🎉 正確答案！Alice成功使用量子疊加態同時檢查了兩扇門，找到了寶藏的鑰匙！這就是量子計算的魔力所在。"
+            },
+            {
+                id: 2,
+                number: "002",
+                title: "量子硬幣",
+                subtitle: "The Quantum Coin",
+                story: "獲得第一塊碎片後，Alice來到「機率星球」的集市。一個戴著高帽的外星商人攔住她：「想要通行證？我們來玩個遊戲！」他拿出一枚閃爍著奇異光芒的硬幣：「這是量子硬幣，不是普通硬幣。猜對了，我給你第二塊量子碎片；猜錯了，你必須回到起點。」",
+                storyContext: "Alice仔細觀察這枚硬幣，發現它同時顯示著正面和反面的圖案！商人笑著說：「在量子世界裡，這枚硬幣處於疊加態，同時是正面和反面。但我可以調整它的參數，讓遊戲對我有利！」Alice意識到她必須自己創造一個真正公平的量子硬幣。",
+                challenge: "創造一個公平的量子硬幣：調整α參數使P(|0⟩) = 50%",
+                rules: "量子態可以寫成 |ψ⟩ = α|0⟩ + β|1⟩，其中α和β是複數振幅。測量到|0⟩的機率是P(|0⟩) = |α|²，測量到|1⟩的機率是P(|1⟩) = |β|²。由於總機率必須是1，所以α² + β² = 1。對於50/50的公平硬幣，我們需要α² = 0.5。",
+                howToPlay: "使用滑桿調整α的值。觀察下方顯示的機率變化，當P(|0⟩)達到50%時，你就創造出了完美的公平量子硬幣！記住：β會自動根據α² + β² = 1來調整。",
+                concept: "量子測量與機率",
+                type: "probability-adjustment",
+                targetProbability: 0.50,
+                hint: "要創造50/50的機率，α和β必須相等。因為α² + β² = 1，而α² = β² = 0.5，所以α ≈ 0.707（也就是1/√2）。這正是疊加態的標準形式！",
+                reward: "🎉 完美！Alice創造了絕對公平的量子硬幣。商人驚訝地說：「你真的懂量子力學！」他信守承諾，交出了第二塊量子碎片。"
+            },
+            {
+                id: 3,
+                number: "003",
+                title: "四格棋盤",
+                subtitle: "The Four-Square Chessboard",
+                story: "Alice抵達「邏輯星球」的古老神殿。神殿中央有一個發光的棋盤，只有四個格子（2x2）。神殿守護者出現：「這裡隱藏著一個量子皇后。經典探險家需要逐格檢查，但真正的量子探險家知道更好的方法。」棋盤顯示當前狀態為|0⟩（左上角），但皇后在|1⟩位置（右下角）。",
+                storyContext: "Alice思考：「我需要翻轉量子位元的狀態，從|0⟩變成|1⟩。」她想起X閘的作用——它就像量子世界的NOT門，可以將|0⟩變成|1⟩，或將|1⟩變成|0⟩。這是最基本但也最重要的量子操作！",
+                challenge: "應用X閘來翻轉量子位元的狀態，從|0⟩到|1⟩",
+                rules: "X閘（也叫Pauli-X閘或NOT閘）是最基礎的量子閘之一。它的作用很簡單：X|0⟩ = |1⟩ 且 X|1⟩ = |0⟩。就像經典電腦的NOT門，但作用在量子位元上！這是量子邏輯運算的基礎。",
+                howToPlay: "觀察三個量子位元狀態：左側是初始態|0⟩，中間是當前態（會隨你的操作改變），右側是目標態|1⟩。選擇正確的閘門來達成目標。X閘可以直接翻轉狀態。",
+                concept: "量子閘門操作",
+                type: "gate-selection",
+                initialState: "0",
+                targetState: "1",
+                availableGates: ["X", "H", "Z"],
+                correctAnswer: ["X"],
+                hint: "X閘就像量子世界的翻轉開關！它能將|0⟩翻轉成|1⟩，將|1⟩翻轉成|0⟩。這是最直接的量子操作！",
+                reward: "🎉 正確！Alice成功翻轉了量子位元，找到了量子皇后！神殿守護者點頭稱許：「你已掌握基本量子操作。」第三塊碎片浮現。"
+            },
+            {
+                id: 4,
+                number: "004",
+                title: "量子版蒙提霍爾問題",
+                subtitle: "The Monty Hall Problem",
+                story: "Alice來到「遊戲星球」的電視演播廳。燈光閃耀，主持人熱情地說：「歡迎來到量子遊戲秀！」面前有三扇門，主持人解釋：「一扇門後有第四塊量子碎片，兩扇是空的。你選一扇門後，我會打開一扇空門，然後你可以選擇是否換門。」這是著名的蒙提霍爾問題！",
+                storyContext: "Alice知道，在經典版本中，換門的勝率是2/3。但她想用量子方法驗證一個特性：如果她應用H閘創造疊加態，然後再應用一次H閘，會發生什麼？她驚訝地發現，Hadamard閘是「自己的逆運算」——連續應用兩次會回到起點！",
+                challenge: "證明H·H = I：應用兩次H閘回到原始狀態",
+                rules: "在量子計算中，每個閘門都有「逆運算」。有些閘門的逆運算是另一個閘門，但Hadamard閘很特殊——它是自己的逆運算！也就是說 H·H = I（單位矩陣）。這意味著|0⟩ → H → |+⟩ → H → |0⟩，完美地回到起點。",
+                howToPlay: "你需要連續應用兩次H閘。第一次H閘會將|0⟩變成疊加態|+⟩，第二次H閘會將|+⟩變回|0⟩。這證明了Hadamard閘的自逆性質！",
+                concept: "量子閘逆運算",
+                type: "gate-sequence",
+                initialState: "0",
+                targetState: "0",
+                availableGates: ["H"],
+                correctAnswer: ["H", "H"],
+                hint: "Hadamard閘有個神奇特性：應用兩次就會抵消！就像往前走一步再往後走一步，回到原點。試試看連續點兩次H閘！",
+                reward: "🎉 驚人的發現！Alice證明了H·H = I。主持人鼓掌：「你理解了量子操作的可逆性！」第四塊碎片出現在空中。"
+            },
+            {
+                id: 5,
+                number: "005",
+                title: "糾纏的雙子星",
+                subtitle: "The Entangled Twins",
+                story: "Alice的飛船進入「糾纏星系」，這裡有兩顆神秘的雙子星，它們以不可思議的方式連結在一起。星球上的科學家告訴她：「這兩顆星處於量子糾纏態。測量其中一顆的狀態，另一顆會瞬間響應，無論距離多遠！愛因斯坦稱之為『鬼魅般的超距作用』，但這確實是量子力學的真實現象。」",
+                storyContext: "科學家繼續說：「要獲得第五塊碎片，你必須創造一個特殊的不對稱疊加態。不是50/50的平衡態，而是75%機率在|0⟩，25%在|1⟩。這需要精確控制量子態的振幅！」Alice意識到這比創造平衡態更具挑戰性。",
+                challenge: "創造不對稱的疊加態：P(|0⟩) = 75%",
+                rules: "量子態不一定要是對稱的！我們可以創造任意比例的疊加態。例如，如果我們想要75%的機率測量到|0⟩，就需要設定α²= 0.75。由於α² + β² = 1，這意味著β² = 0.25。這種不對稱疊加態在量子演算法中非常重要！",
+                howToPlay: "調整滑桿改變α值，觀察P(|0⟩)和P(|1⟩)的變化。你的目標是讓P(|0⟩)達到75%（允許小誤差）。記住α²是機率，所以α是機率的平方根！",
+                concept: "量子糾纏與非局域性",
+                type: "probability-adjustment",
+                targetProbability: 0.75,
+                hint: "要達到75%的機率，我們需要α² = 0.75。計算α = √0.75 ≈ 0.866。這個值介於完全確定（α=1）和完全隨機（α=0.707）之間！",
+                reward: "🎉 精確控制！Alice創造了完美的75/25疊加態。雙子星發出共鳴的光芒，第五塊碎片在兩顆星之間的糾纏連線中浮現！"
+            },
+            {
+                id: 6,
+                number: "006",
+                title: "相位之謎",
+                subtitle: "The Phase Mystery",
+                story: "Alice來到「相位星球」，這裡的一切都籠罩在波動的光芒中。一位量子物理學家現身：「歡迎來到相位的世界！量子態不只有振幅，還有一個隱藏的維度——相位。兩個看起來相同的疊加態，可能因為相位不同而產生完全不同的干涉效果。」他指向兩個發光的球體，看起來一模一樣，但干涉圖案卻截然不同。",
+                storyContext: "物理學家解釋：「|+⟩ = (|0⟩ + |1⟩)/√2 和 |−⟩ = (|0⟩ − |1⟩)/√2 都是疊加態，測量機率都是50/50，但中間那個負號（相位差）會在量子干涉中產生巨大差異！Z閘就是改變相位的工具，它不改變測量機率，但會翻轉|1⟩的相位。」",
+                challenge: "應用H和Z閘的組合來創造帶有相位的疊加態",
+                rules: "Z閘（Pauli-Z閘）是相位閘：Z|0⟩ = |0⟩，Z|1⟩ = −|1⟩。看起來它只對|1⟩做了些事情，加上一個負號（π相位）。單獨測量時看不出差別，但在疊加態中，這個相位會改變干涉效果！組合H·Z可以創造具有特殊相位關係的量子態。",
+                howToPlay: "你需要按順序應用兩個閘門：先用H閘創造疊加態，再用Z閘改變相位。觀察電路的變化，當你正確組合這兩個閘門時，就會達到目標態|ψ⟩（表示具有特殊相位的複雜量子態）。",
+                concept: "量子相位",
+                type: "gate-sequence",
+                initialState: "0",
+                targetState: "complex",
+                availableGates: ["H", "Z"],
+                correctAnswer: ["H", "Z"],
+                hint: "相位是量子力學的隱藏力量！先用H閘創造疊加態 (|0⟩ + |1⟩)/√2，然後用Z閘將它變成 (|0⟩ − |1⟩)/√2。測量機率不變，但相位改變了！",
+                reward: "🎉 太棒了！Alice掌握了相位控制。物理學家讚賞地說：「你理解了量子力學最深層的秘密之一！」第六塊碎片在干涉圖案中顯現。"
+            },
+            {
+                id: 7,
+                number: "007",
+                title: "Deutsch演算法",
+                subtitle: "The Deutsch Algorithm",
+                story: "Alice到達「演算法星球」的研究所。一位老教授出現：「年輕人，我這裡有個黑盒子，裡面有個函數。它可能是『常數函數』（輸入什麼都輸出一樣的值），也可能是『平衡函數』（一半輸入給0，一半給1）。經典電腦需要測試兩次才能確定，但1985年David Deutsch證明：量子電腦只需要查詢一次！」",
+                storyContext: "教授繼續：「這是Deutsch演算法，是歷史上第一個證明量子電腦優於經典電腦的演算法！雖然只快了一次查詢，但它證明了量子疊加和干涉的力量。要理解它，你需要掌握閘門組合的技巧。讓我們從一個經典的閘門序列開始：X→H→Z。」",
+                challenge: "組合多個閘門：從|1⟩依序經過X→H→Z",
+                rules: "Deutsch演算法展示了「量子平行性」的概念——在疊加態中同時計算多個輸入。這個練習讓你體驗組合多個量子閘的效果：X閘翻轉狀態（|1⟩→|0⟩），H閘創造疊加，Z閘改變相位。這些基本操作組合起來就能實現強大的量子演算法！",
+                howToPlay: "你需要按照正確的順序依次應用三個閘門。順序很重要！先點X閘，再點H閘，最後點Z閘。觀察每一步量子態如何變化，體會量子電路的工作原理。",
+                concept: "量子演算法",
+                type: "gate-sequence",
+                initialState: "1",
+                targetState: "complex",
+                availableGates: ["X", "H", "Z"],
+                correctAnswer: ["X", "H", "Z"],
+                hint: "按順序思考每一步：第一步用X將|1⟩翻轉成|0⟩；第二步用H創造疊加態；第三步用Z改變相位。這個序列是量子演算法的基本構件！",
+                reward: "🎉 完美執行！Alice掌握了量子演算法的基礎。教授激動地說：「你理解了Deutsch演算法的精髓！」第七塊碎片從黑盒中飛出。"
+            },
+            {
+                id: 8,
+                number: "008",
+                title: "量子隱形傳態",
+                subtitle: "Quantum Teleportation",
+                story: "Alice接到緊急通訊！她的夥伴Bob在遙遠的另一個星系需要一個關鍵的量子態資訊。通訊員警告：「量子態無法複製（no-cloning定理），你不能直接傳送量子位元。但我們有量子隱形傳態技術！」這是1993年Bennett等人發現的驚人技術：利用量子糾纏和經典通訊，可以「傳送」量子態而不違反物理定律。",
+                storyContext: "通訊員解釋：「量子隱形傳態不是真的把粒子瞬間移動，而是利用預先共享的糾纏對。Alice測量她的粒子，將測量結果透過經典通訊告訴Bob，Bob根據這個資訊重建量子態。但首先，你需要準備一個特定的量子態：70%機率在|0⟩，30%在|1⟩。」",
+                challenge: "創造70/30的疊加態：P(|0⟩) = 70%",
+                rules: "量子隱形傳態是量子通訊的基石！它展示了量子糾纏的實用價值。這個練習中，你需要創造一個70/30的不對稱疊加態。這種精確的量子態控制在量子通訊協議中至關重要。記住：α²是測量到|0⟩的機率，所以如果我們想要70%，就需要α = √0.70。",
+                howToPlay: "調整滑桿來改變α值，仔細觀察P(|0⟩)的百分比。你的目標是讓它盡可能接近70%。這需要比50/50更精確的控制，體現了量子態操控的精妙之處！",
+                concept: "量子資訊傳輸",
+                type: "probability-adjustment",
+                targetProbability: 0.70,
+                hint: "要達到70%的機率，計算α = √0.70 ≈ 0.837。這個值比50/50的0.707要大，因為我們想要更高機率測量到|0⟩！",
+                reward: "🎉 量子態準備完成！Alice成功創造了70/30疊加態，傳送通道建立。遠處的Bob接收到量子資訊，第八塊碎片在傳送光束中顯現！"
+            },
+            {
+                id: 9,
+                number: "009",
+                title: "量子搜尋",
+                subtitle: "Grover's Search",
+                story: "Alice來到「資料星球」的巨大圖書館。管理員說：「這裡有十億筆資料，你要找的那一筆藏在其中。」Alice嘆氣：「經典搜尋平均要檢查一半的資料...」管理員微笑：「但你是量子探險家！用Grover搜尋演算法！Lov Grover在1996年發明了它，搜尋速度是經典的平方根倍——在十億筆資料中，只需要約31,623次查詢而不是5億次！」",
+                storyContext: "管理員繼續：「Grover演算法的核心是『振幅放大』。它利用量子干涉，系統地增加正確答案的機率振幅。關鍵技巧之一是理解閘門的等價性。例如，H·Z·H這個序列實際上等價於X閘！讓我們來驗證這個神奇的關係。」",
+                challenge: "理解並驗證HZH = X的等價關係",
+                rules: "在量子計算中，不同的閘門序列可能產生相同的效果！H·Z·H是一個著名的例子：這三個閘門的組合等價於一個X閘。這叫做「基變換」，是Grover演算法中關鍵的數學技巧。理解這種等價關係能讓你看穿量子演算法的本質！",
+                howToPlay: "依序點擊：先H，再Z，最後H。觀察最終的結果狀態。雖然過程經過疊加和相位變化，但最終效果就像直接應用了X閘一樣！這展示了量子閘門的數學美感。",
+                concept: "Grover演算法",
+                type: "gate-sequence",
+                initialState: "0",
+                targetState: "complex",
+                availableGates: ["H", "Z"],
+                correctAnswer: ["H", "Z", "H"],
+                hint: "這是量子魔法！H·Z·H = X。第一個H創造疊加，Z改變相位，第二個H將疊加轉回基態——最終效果就是翻轉！這是Grover演算法中反射操作的核心。",
+                reward: "🎉 精彩！Alice理解了Grover演算法的數學基礎。圖書館突然亮起，第九塊碎片從書架中飛出！管理員說：「你掌握了量子搜尋的精髓！」"
+            },
+            {
+                id: 10,
+                number: "010",
+                title: "量子質因數分解",
+                subtitle: "Shor's Algorithm",
+                story: "Alice進入「密碼星球」的安全中心。警報響起！螢幕顯示一個巨大的數字：「這是RSA-2048加密的密鑰。」安全主管緊張地說：「如果能分解這個數字，找到它的質因數，整個加密系統就會崩潰！經典超級電腦需要數十億年，但...」他看著Alice：「1994年Peter Shor發明的量子演算法可以在多項式時間內解決！這就是為什麼全世界都在研發量子電腦，也在準備後量子密碼學。」",
+                storyContext: "主管解釋：「Shor演算法利用量子傅立葉變換和週期性找規律。雖然完整的演算法很複雜，但我們可以從基本的閘門序列理解它的概念。試試這個練習：H·H·X。看起來簡單，但它展示了量子電路設計的一個重要原則——有時候繞個彎會得到意想不到的結果！」",
+                challenge: "組合變換：H→H→X達到|1⟩態",
+                rules: "Shor演算法是量子計算中最著名的演算法之一！它證明了量子電腦能在密碼學領域帶來革命性影響。這個練習展示了量子電路的靈活性：雖然H·H會抵消回到|0⟩，但我們可以接著用X閘達到|1⟩。這種「先做再做反操作再做別的」的思路在量子演算法設計中很常見。",
+                howToPlay: "按順序點擊三個閘門：H、H、X。前兩個H會互相抵消（記得H·H=I），讓你回到|0⟩，然後X閘將它翻轉成|1⟩。雖然繞了一圈，但展示了量子電路的可組合性。",
+                concept: "Shor演算法",
+                type: "gate-sequence",
+                initialState: "0",
+                targetState: "1",
+                availableGates: ["X", "H"],
+                correctAnswer: ["H", "H", "X"],
+                hint: "想想看：|0⟩ → H → |+⟩ → H → |0⟩ → X → |1⟩。前兩步先疊加再取消，第三步翻轉。雖然看起來繞路了，但在真實的量子演算法中，這種「準備-處理-恢復-轉換」的模式很常見！",
+                reward: "🎉 突破！Alice完成了Shor演算法的基礎練習。警報解除，主管說：「你理解了量子密碼破解的潛力！」第十塊碎片從加密系統中解放出來。"
+            },
+            {
+                id: 11,
+                number: "011",
+                title: "量子錯誤修正",
+                subtitle: "Quantum Error Correction",
+                story: "Alice的飛船經過「雜訊星雲」，量子計算機開始出錯！螢幕閃爍紅光：「警告：量子退相干！」工程師緊急聯繫她：「量子態極其脆弱！環境的任何擾動——溫度、電磁波、宇宙射線——都會破壞量子資訊。經典電腦可以用簡單的備份來糾錯，但量子態不能被複製（no-cloning定理）！」",
+                storyContext: "工程師繼續：「這就是為什麼我們需要量子錯誤修正碼！Shor碼、Steane碼、表面碼...這些技術能在不測量量子態的情況下檢測並修正錯誤。這是實現實用量子電腦的關鍵！但首先，證明你能在任何基態下都能創造疊加態。試試從|1⟩開始創造疊加態。」",
+                challenge: "從|1⟩創造疊加態",
+                rules: "量子錯誤修正是量子計算的聖杯之一！它需要巧妙地編碼量子資訊，使得錯誤可以被檢測和修正，同時不破壞量子疊加。這個練習測試你的基礎：H閘不僅能將|0⟩變成疊加態，也能將|1⟩變成疊加態！具體來說：H|1⟩ = (|0⟩ − |1⟩)/√2，這是另一種基本疊加態。",
+                howToPlay: "初始態是|1⟩（紅色的qubit），你的目標是讓它變成疊加態（紫色閃爍的qubit）。只需要選擇正確的閘門。H閘的強大之處在於它對兩個基態都有效！",
+                concept: "量子錯誤修正",
+                type: "gate-selection",
+                initialState: "1",
+                targetState: "superposition",
+                availableGates: ["X", "H", "Z"],
+                correctAnswer: ["H"],
+                hint: "H閘是萬能的疊加態創造者！無論起始態是|0⟩還是|1⟩，H閘都能創造疊加態。H|0⟩ = |+⟩，H|1⟩ = |−⟩。兩者都是疊加態，只是相位不同！",
+                reward: "🎉 完美！Alice穩定了量子系統。工程師欣慰地說：「你理解了量子態的對稱性！這是設計糾錯碼的基礎。」第十一塊碎片從修復的系統中浮現，飛船穿出雜訊星雲！"
+            },
+            {
+                id: 12,
+                number: "012",
+                title: "量子霸權挑戰",
+                subtitle: "Quantum Supremacy",
+                story: "Alice終於抵達終點——「霸權星球」的量子核心神殿。十一塊碎片在她周圍旋轉，發出耀眼的光芒。神殿守護者的聲音響起：「你已經走了很遠，掌握了量子疊加、糾纏、閘門、演算法...但最後一關是終極測試！」天空投影出Google、IBM、中國科大的實驗：「2019年，Google的Sycamore處理器用53個量子位元，200秒完成了經典超級電腦需要1萬年的隨機電路採樣——這就是量子霸權！」",
+                storyContext: "守護者繼續：「量子霸權不是統治，而是證明：量子電腦能做到經典電腦做不到的事。但實現它需要極致的精確控制。現在，證明你的精確度——創造一個60/40的疊加態。不是簡單的50/50，不是粗略的75/25，而是精確的60/40！這需要大師級的量子態操控能力。完成這個，量子核心就是你的！」",
+                challenge: "終極挑戰：創造精確的60/40疊加態 [P(|0⟩) = 60%]",
+                rules: "量子霸權代表了量子計算的頂峰！它需要：(1) 足夠多的量子位元 (2) 足夠長的量子電路深度 (3) 極低的錯誤率 (4) 精確的量子態控制。這個挑戰測試第四點：你能創造一個精確到60/40的疊加態嗎？這需要α² = 0.60，即α = √0.60 ≈ 0.775。比起標準的0.707或0.866，這個值需要更精細的調整！",
+                howToPlay: "這是最終考驗！仔細調整滑桿，讓P(|0⟩)盡可能接近60%。允許的誤差範圍比之前更小。每次微調都要觀察百分比的變化。當你達到目標時，12塊碎片將合而為一，量子核心的秘密將揭曉！",
+                concept: "量子霸權",
+                type: "probability-adjustment",
+                targetProbability: 0.60,
+                hint: "這是最難的機率挑戰！α² = 0.60意味著α = √0.60 ≈ 0.775。這個值介於0.707（50%）和0.866（75%）之間，需要非常精確的控制。慢慢調整，你可以做到的！",
+                reward: "🎆 不可思議！Alice成功了！十二塊碎片瞬間融合，形成耀眼的量子核心。守護者現身：「你掌握了量子計算的所有基礎：疊加、測量、閘門、相位、演算法、糾錯...你有資格持有量子核心！」整個宇宙迴響著量子共鳴。Alice成為真正的量子大師！"
+            }
+        ];
+
+        // 初始化遊戲
+        function initGame() {
+            renderEnigmas();
+            updateStats();
+        }
+
+        // 渲染謎題列表
+        function renderEnigmas() {
+            const grid = document.getElementById('enigmas-grid');
+            grid.innerHTML = '';
+
+            enigmas.forEach(enigma => {
+                const card = document.createElement('div');
+                card.className = 'enigma-card';
+                
+                if (gameState.completedEnigmas.has(enigma.id)) {
+                    card.classList.add('completed');
+                }
+
+                card.innerHTML = `
+                    <div class="enigma-number">
+                        <span>謎題 ${enigma.number}</span>
+                        ${gameState.completedEnigmas.has(enigma.id) ? '<span style="color: #10b981;">✓</span>' : ''}
+                    </div>
+                    <div class="enigma-title">${enigma.title}</div>
+                    <div style="font-size: 0.9em; opacity: 0.7; margin-bottom: 10px;">${enigma.subtitle}</div>
+                    <div class="enigma-story">${enigma.story.substring(0, 120)}...</div>
+                    <div class="concept-tag">📚 ${enigma.concept}</div>
+                `;
+
+                card.onclick = () => openEnigma(enigma.id);
+                grid.appendChild(card);
+            });
+        }
+
+        // 開啟謎題
+        function openEnigma(enigmaId) {
+            const enigma = enigmas.find(e => e.id === enigmaId);
+            gameState.currentEnigma = enigma;
+
+            const modalContent = document.getElementById('modal-content');
+            modalContent.innerHTML = renderEnigmaContent(enigma);
+
+            document.getElementById('enigma-modal').classList.add('active');
+            
+            // 初始化拖拽功能
+            setTimeout(() => {
+                initDragAndDrop();
+            }, 100);
+        }
+
+        // 渲染謎題內容
+        function renderEnigmaContent(enigma) {
+            let gameArea = '';
+            
+            if (enigma.type === 'gate-selection' || enigma.type === 'gate-sequence') {
+                // 為每個關卡添加特色元素
+                let specialElement = '';
+                
+                if (enigma.id === 1) {
+                    // The Quantum Enigmas 001 - The Treasure Door
+                    specialElement = `
+                        <div class="special-element">
+                            <div style="text-align: center; margin-bottom: 20px; font-size: 1.3em; color: #fbbf24; font-weight: bold;">
+                                🌟 The Quantum Enigmas 001
+                            </div>
+                            <div style="text-align: center; margin-bottom: 15px; color: #fff; font-size: 1.1em; line-height: 1.6;">
+                                Alice stands before <strong>two guardians</strong> and <strong>two doors</strong>.<br>
+                                Behind one door lies the <strong style="color: #fbbf24;">treasure</strong>, behind the other... nothing.
+                            </div>
+                            <div class="door-container">
+                                <div class="door" onclick="selectDoor(1)">
+                                    <div style="font-size: 1.3em;">🚪</div>
+                                    <div>Door 1</div>
+                                    <div style="font-size: 0.8em;">Guardian A</div>
+                                </div>
+                                <div class="door" onclick="selectDoor(2)">
+                                    <div style="font-size: 1.3em;">🚪</div>
+                                    <div>Door 2</div>
+                                    <div style="font-size: 0.8em;">Guardian B</div>
+                                </div>
+                            </div>
+                            <div style="text-align: center; margin-top: 20px; color: #ec4899; font-size: 1em; line-height: 1.6;">
+                                <strong>The Riddle:</strong> Can Alice answer correctly to win the key?<br>
+                                <span style="color: #a78bfa;">💡 Hint: Use quantum superposition to check both doors at once!</span>
+                            </div>
+                        </div>
+                    `;
+                } else if (enigma.id === 2) {
+                    // The Quantum Enigmas 002 - The Quantum Coin
+                    specialElement = `
+                        <div class="special-element">
+                            <div style="text-align: center; margin-bottom: 15px; font-size: 1.2em; color: #fbbf24;">
+                                🪙 The Quantum Enigmas 002 - The Quantum Coin
+                            </div>
+                            <div style="text-align: center; margin-bottom: 15px; color: #a78bfa; font-size: 1em;">
+                                A quantum coin that can be in superposition of heads and tails.
+                                <br>Can you make it perfectly fair?
+                            </div>
+                            <div class="coin-flip">
+                                <div class="coin heads" id="coin-0">Heads</div>
+                                <div style="font-size: 2em; color: #fbbf24;">vs</div>
+                                <div class="coin tails" id="coin-1">Tails</div>
+                            </div>
+                            <div style="text-align: center; margin-top: 15px; color: #a78bfa;">
+                                <strong>Challenge:</strong> Create a 50/50 probability distribution using quantum mechanics!
+                            </div>
+                        </div>
+                    `;
+                } else if (enigma.id === 3) {
+                    // The Quantum Enigmas 003 - The Four-Square Chessboard
+                    specialElement = `
+                        <div class="special-element">
+                            <div style="text-align: center; margin-bottom: 15px; font-size: 1.2em; color: #fbbf24;">
+                                ♟️ The Quantum Enigmas 003 - The Four-Square Chessboard
+                            </div>
+                            <div style="text-align: center; margin-bottom: 15px; color: #a78bfa; font-size: 1em;">
+                                A mysterious 2x2 chessboard with a hidden queen.
+                                <br>Can you find her using quantum logic?
+                            </div>
+                            <div class="chessboard">
+                                <div class="chess-square light" data-square="0">|0⟩</div>
+                                <div class="chess-square dark" data-square="1">|1⟩</div>
+                                <div class="chess-square dark" data-square="2">|0⟩</div>
+                                <div class="chess-square light queen" data-square="3">👑</div>
+                            </div>
+                            <div style="text-align: center; margin-top: 15px; color: #ec4899;">
+                                <strong>Puzzle:</strong> The queen is in position |1⟩. Use quantum gates to reveal her!
+                            </div>
+                        </div>
+                    `;
+                } else if (enigma.id === 5) {
+                    // 實驗5：量子糾纏態創建 - IBM風格
+                    specialElement = `
+                        <div class="special-element">
+                            <div style="text-align: center; margin-bottom: 15px; font-size: 1.2em; color: #fbbf24;">
+                                🧪 Experiment 5: Quantum Entanglement Creation
+                            </div>
+                            <div class="stars-container">
+                                <div class="star" id="star-1">q₁</div>
+                                <div style="font-size: 1.5em; color: #a78bfa; align-self: center;">↔</div>
+                                <div class="star" id="star-2">q₂</div>
+                            </div>
+                            <div style="text-align: center; margin-top: 15px; color: #a78bfa;">
+                                <strong>Objective:</strong> Create asymmetric superposition state with P(|0⟩) = 75%
+                            </div>
+                        </div>
+                    `;
+                } else if (enigma.id === 9) {
+                    // 實驗9：Grover搜尋演算法 - IBM風格
+                    specialElement = `
+                        <div class="special-element">
+                            <div style="text-align: center; margin-bottom: 15px; font-size: 1.2em; color: #fbbf24;">
+                                🧪 Experiment 9: Grover's Search Algorithm
+                            </div>
+                            <div class="library-shelf">
+                                <div class="book">Data</div>
+                                <div class="book">Data</div>
+                                <div class="book target">Target</div>
+                                <div class="book">Data</div>
+                                <div class="book">Data</div>
+                            </div>
+                            <div style="text-align: center; margin-top: 15px; color: #10b981;">
+                                <strong>Objective:</strong> Implement HZH = X equivalence to understand Grover's algorithm
+                            </div>
+                        </div>
+                    `;
+                }
+
+                gameArea = `
+                    <div class="circuit-builder">
+                        <div class="circuit-header">
+                            <div class="circuit-title">🧩 Quantum Puzzle Solver</div>
+                            <div class="circuit-controls">
+                                <button class="circuit-btn" onclick="runCircuit()">▶️ Solve Puzzle</button>
+                                <button class="circuit-btn" onclick="resetCircuit()">🔄 Reset</button>
+                                <button class="circuit-btn" onclick="clearCircuit()">🗑️ Clear</button>
+                            </div>
+                        </div>
+                        
+                        ${specialElement}
+                        
+                        <!-- 量子狀態可視化 -->
+                        <div class="quantum-state-visualizer">
+                            <div style="text-align: center; margin-bottom: 15px; font-size: 1.2em; color: #fbbf24;">
+                                🔮 Current Quantum State
+                            </div>
+                            <div class="state-display">
+                                <div class="qubit-state">
+                                    <div class="qubit-state-label">Current State</div>
+                                    <div class="qubit-state-value" id="current-quantum-state">|${enigma.initialState}⟩</div>
+                                </div>
+                                <div class="bloch-sphere" id="bloch-sphere"></div>
+                                <div class="state-vector">
+                                    <div class="qubit-state-label">State Vector</div>
+                                    <div class="state-vector-equation" id="state-vector-equation">
+                                        ${enigma.initialState === '0' ? '|ψ⟩ = |0⟩' : (enigma.initialState === '1' ? '|ψ⟩ = |1⟩' : '|ψ⟩ = (|0⟩ + |1⟩)/√2')}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="probability-bars">
+                                <div class="probability-bar">
+                                    <div class="probability-fill zero" id="prob-zero" style="height: ${enigma.initialState === '0' ? '100%' : (enigma.initialState === '1' ? '0%' : '50%')}"></div>
+                                    <div class="probability-value" id="prob-zero-value">${enigma.initialState === '0' ? '100%' : (enigma.initialState === '1' ? '0%' : '50%')}</div>
+                                    <div class="probability-label">P(|0⟩)</div>
+                                </div>
+                                <div class="probability-bar">
+                                    <div class="probability-fill one" id="prob-one" style="height: ${enigma.initialState === '0' ? '0%' : (enigma.initialState === '1' ? '100%' : '50%')}"></div>
+                                    <div class="probability-value" id="prob-one-value">${enigma.initialState === '0' ? '0%' : (enigma.initialState === '1' ? '100%' : '50%')}</div>
+                                    <div class="probability-label">P(|1⟩)</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="circuit-layout">
+                            <div class="gates-panel">
+                                <div class="gates-title">Quantum Gates</div>
+                                ${enigma.availableGates.map(gate => `
+                                    <div class="gate-item ${gate.toLowerCase()}-gate" draggable="true" data-gate="${gate}">
+                                        ${gate} Gate
+                                    </div>
+                                `).join('')}
+                            </div>
+                            
+                            <div class="circuit-canvas">
+                                <div class="qubit-line" data-qubit="0">
+                                    <div class="qubit-label">q[0]</div>
+                                    <div class="qubit-wire" id="qubit-wire-0">
+                                        <div class="drop-zone" data-position="0"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="circuit-timeline">
+                                    <div class="timeline-step">1</div>
+                                    <div class="timeline-step">2</div>
+                                    <div class="timeline-step">3</div>
+                                    <div class="timeline-step">4</div>
+                                    <div class="timeline-step">5</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="circuit-result" id="circuit-result" style="display: none;">
+                            <div class="result-title">Puzzle Solution Result</div>
+                            <div class="result-qubits">
+                                <div class="result-qubit">
+                                    <div class="result-qubit-label">Initial State</div>
+                                    <div class="result-qubit-state">|${enigma.initialState}⟩</div>
+                                </div>
+                                <div class="result-qubit">
+                                    <div class="result-qubit-label">Current State</div>
+                                    <div class="result-qubit-state" id="current-state">|${enigma.initialState}⟩</div>
+                                </div>
+                                <div class="result-qubit">
+                                    <div class="result-qubit-label">Target State</div>
+                                    <div class="result-qubit-state">
+                                        ${enigma.targetState === 'superposition' ? '|+⟩' : (enigma.targetState === 'complex' ? '|ψ⟩' : '|' + enigma.targetState + '⟩')}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; font-family: monospace; margin: 20px 0; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 10px;">
+                            <strong>Circuit Sequence:</strong> <span id="circuit-sequence">（No gates placed yet）</span>
+                        </div>
+                    </div>
+                `;
+            } else if (enigma.type === 'probability-adjustment') {
+                gameArea = `
+                    <div class="quantum-simulator">
+                        <div style="margin: 20px 0;">
+                            <label style="display: block; text-align: center; font-size: 1.3em; margin-bottom: 20px;">
+                                調整 α 值（|0⟩ 的振幅）
+                            </label>
+                            <input type="range" min="0" max="1" step="0.001" value="0.5" 
+                                   style="width: 100%; height: 10px; background: linear-gradient(90deg, #3b82f6, #a78bfa); border-radius: 5px;"
+                                   id="alpha-slider" oninput="updateProbability()">
+                            <div style="text-align: center; font-size: 1.8em; margin-top: 15px; color: #a78bfa;" id="alpha-value">
+                                α = 0.500
+                            </div>
+                        </div>
+                        <div style="margin: 30px 0;">
+                            <div style="font-size: 1.4em; text-align: center; margin-bottom: 20px;">
+                                量子態: |ψ⟩ = α|0⟩ + β|1⟩
+                            </div>
+                            <div style="font-size: 1.2em; text-align: center; margin-bottom: 20px;">
+                                β = √(1 - α²) = <span id="beta-value" style="color: #ec4899;">0.866</span>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 25px;">
+                                <div style="background: rgba(59, 130, 246, 0.3); padding: 25px; border-radius: 15px; border: 2px solid #3b82f6;">
+                                    <div style="font-size: 1.2em; margin-bottom: 10px;">測量到 |0⟩ 的機率</div>
+                                    <div style="font-size: 3em; color: #60a5fa; font-weight: bold;" id="prob-0">25.0%</div>
+                                </div>
+                                <div style="background: rgba(239, 68, 68, 0.3); padding: 25px; border-radius: 15px; border: 2px solid #ef4444;">
+                                    <div style="font-size: 1.2em; margin-bottom: 10px;">測量到 |1⟩ 的機率</div>
+                                    <div style="font-size: 3em; color: #f87171; font-weight: bold;" id="prob-1">75.0%</div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 25px; text-align: center; font-size: 1.3em; padding: 20px; background: rgba(251, 191, 36, 0.2); border-radius: 10px; border: 2px solid #fbbf24;">
+                                🎯 目標: P(|0⟩) = ${(enigma.targetProbability * 100).toFixed(0)}%
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="story-header">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <div class="alice-avatar">👩‍🚀</div>
+                        <div>
+                            <div class="story-title">謎題 ${enigma.number}: ${enigma.title}</div>
+                            <div style="opacity: 0.8; font-size: 0.9em;">${enigma.subtitle}</div>
+                            </div>
+                        </div>
+                    <div class="story-text">${enigma.story}</div>
+                    ${enigma.storyContext ? `
+                        <div class="story-checkpoint">
+                            <strong style="color: #a78bfa;">📖 故事進展</strong><br><br>
+                            ${enigma.storyContext}
+                        </div>
+                    ` : ''}
+                    <div class="concept-tag">📚 量子概念：${enigma.concept}</div>
+                    </div>
+
+                ${enigma.rules ? `
+                    <div class="rules-explanation">
+                        <div class="rules-title">
+                            <span>📋</span>
+                            <span>量子規則說明</span>
+                    </div>
+                        <div>${enigma.rules}</div>
+                </div>
+                ` : ''}
+
+                ${enigma.howToPlay ? `
+                    <div class="rules-explanation" style="background: rgba(16, 185, 129, 0.2); border-left-color: #10b981;">
+                        <div class="rules-title" style="color: #6ee7b7;">
+                            <span>🎮</span>
+                            <span>如何操作</span>
+                    </div>
+                        <div>${enigma.howToPlay}</div>
+                </div>
+                ` : ''}
+
+                <div class="challenge-section">
+                    <div class="challenge-title">
+                        <span>🎯</span>
+                        <span>你的挑戰</span>
+                    </div>
+                    <p style="font-size: 1.2em; line-height: 1.6;">${enigma.challenge}</p>
+                </div>
+
+                ${gameArea}
+
+                <button class="action-btn" onclick="checkAnswer()">
+                    ✨ 檢查答案
+                </button>
+
+                <div class="result-message" id="result-message"></div>
+
+                <div class="hint-box">
+                    <div class="hint-title">
+                        <span>💡</span>
+                        <span>提示</span>
+                    </div>
+                    <div style="font-size: 1.1em; line-height: 1.6;">${enigma.hint}</div>
+                </div>
+            `;
+        }
+
+        // 量子電路構建器邏輯
+        let appliedGates = [];
+        let currentState = '0';
+        let circuitGates = [];
+        let draggedGate = null;
+
+        // 拖拽功能初始化
+        function initDragAndDrop() {
+            const gateItems = document.querySelectorAll('.gate-item');
+            const qubitWires = document.querySelectorAll('.qubit-wire');
+
+            gateItems.forEach(gate => {
+                gate.addEventListener('dragstart', (e) => {
+                    draggedGate = e.target.dataset.gate;
+                    e.target.classList.add('dragging');
+                    e.target.style.opacity = '0.7';
+                    
+                    // 創建拖拽預覽
+                    const dragPreview = e.target.cloneNode(true);
+                    dragPreview.style.transform = 'rotate(15deg) scale(1.1)';
+                    dragPreview.style.opacity = '0.8';
+                    document.body.appendChild(dragPreview);
+                    e.dataTransfer.setDragImage(dragPreview, 30, 30);
+                    
+                    setTimeout(() => {
+                        document.body.removeChild(dragPreview);
+                    }, 0);
+                });
+
+                gate.addEventListener('dragend', (e) => {
+                    e.target.classList.remove('dragging');
+                    e.target.style.opacity = '1';
+                    draggedGate = null;
+                    
+                    // 隱藏所有drop zone
+                    document.querySelectorAll('.drop-zone').forEach(zone => {
+                        zone.classList.remove('active');
+                    });
+                });
+            });
+
+            qubitWires.forEach(wire => {
+                wire.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'copy';
+                    const dropZone = wire.querySelector('.drop-zone');
+                    dropZone.classList.add('active');
+                });
+
+                wire.addEventListener('dragleave', (e) => {
+                    const dropZone = wire.querySelector('.drop-zone');
+                    dropZone.classList.remove('active');
+                });
+
+                wire.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    const dropZone = wire.querySelector('.drop-zone');
+                    dropZone.classList.remove('active');
+                    
+                    if (draggedGate) {
+                        addGateToCircuit(draggedGate, wire);
+                        
+                        // 添加成功動畫
+                        dropZone.style.background = 'rgba(16, 185, 129, 0.4)';
+                        dropZone.style.borderColor = '#10b981';
+                        setTimeout(() => {
+                            dropZone.style.background = '';
+                            dropZone.style.borderColor = '';
+                        }, 500);
+                    }
+                });
+            });
+        }
+
+        function addGateToCircuit(gateType, wire) {
+            const position = circuitGates.length;
+            const gateElement = document.createElement('div');
+            gateElement.className = `gate-on-wire ${gateType.toLowerCase()}-gate`;
+            gateElement.textContent = gateType;
+            gateElement.dataset.gate = gateType;
+            gateElement.dataset.position = position;
+            gateElement.draggable = true;
+            
+            // 設置位置 - 更大的放置範圍
+            const positions = [20, 40, 60, 80]; // 預定義的4個位置，間距更大
+            const percentage = positions[position] || 50;
+            gateElement.style.left = `${percentage}%`;
+            
+            // 添加進入動畫
+            gateElement.style.transform = 'translate(-50%, -50%) scale(0)';
+            gateElement.style.opacity = '0';
+            
+            wire.appendChild(gateElement);
+            circuitGates.push(gateType);
+            
+            // 觸發進入動畫
+            setTimeout(() => {
+                gateElement.style.transition = 'all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+                gateElement.style.transform = 'translate(-50%, -50%) scale(1)';
+                gateElement.style.opacity = '1';
+            }, 50);
+            
+            updateCircuitSequence();
+            
+            // 添加移除功能和懸停提示
+            gateElement.addEventListener('dblclick', () => {
+                removeGateFromCircuit(gateElement);
+            });
+            
+            gateElement.addEventListener('mouseenter', () => {
+                gateElement.title = `雙擊移除 ${gateType} 閘`;
+            });
+            
+            // 添加震動效果表示成功放置
+            gateElement.style.animation = 'pulseGlow 0.6s ease';
+        }
+
+        function removeGateFromCircuit(gateElement) {
+            const gateType = gateElement.dataset.gate;
+            const index = circuitGates.indexOf(gateType);
+            if (index > -1) {
+                // 添加移除動畫
+                gateElement.style.transition = 'all 0.3s ease';
+                gateElement.style.transform = 'translate(-50%, -50%) scale(0) rotate(180deg)';
+                gateElement.style.opacity = '0';
+                
+                setTimeout(() => {
+                    circuitGates.splice(index, 1);
+                    gateElement.remove();
+                    updateCircuitSequence();
+                    reorganizeGates();
+                }, 300);
+            }
+        }
+
+        function reorganizeGates() {
+            const gates = document.querySelectorAll('.gate-on-wire');
+            const positions = [20, 40, 60, 80]; // 預定義的4個位置，間距更大
+            
+            gates.forEach((gate, index) => {
+                const percentage = positions[index] || 50;
+                gate.style.transition = 'all 0.4s ease';
+                gate.style.left = `${percentage}%`;
+                gate.dataset.position = index;
+            });
+        }
+
+        function updateCircuitSequence() {
+            const sequenceElement = document.getElementById('circuit-sequence');
+            if (circuitGates.length === 0) {
+                sequenceElement.textContent = '（尚未放置閘門）';
+            } else {
+                sequenceElement.textContent = circuitGates.join(' → ');
+            }
+        }
+
+        function runCircuit() {
+            if (circuitGates.length === 0) {
+                alert('請先放置一些量子閘門！');
+                return;
+            }
+
+            const enigma = gameState.currentEnigma;
+            let tempState = enigma.initialState;
+            let inSuperposition = false;
+            let stateVector = tempState === '0' ? '|ψ⟩ = |0⟩' : '|ψ⟩ = |1⟩';
+            let probZero = tempState === '0' ? 100 : 0;
+            let probOne = tempState === '1' ? 100 : 0;
+            
+            // 模擬電路執行
+            for (let gate of circuitGates) {
+                if (gate === 'X') {
+                    if (!inSuperposition) {
+                        tempState = tempState === '0' ? '1' : '0';
+                        stateVector = tempState === '0' ? '|ψ⟩ = |0⟩' : '|ψ⟩ = |1⟩';
+                        probZero = tempState === '0' ? 100 : 0;
+                        probOne = tempState === '1' ? 100 : 0;
+                    }
+                } else if (gate === 'H') {
+                    inSuperposition = !inSuperposition;
+                    if (inSuperposition) {
+                        stateVector = '|ψ⟩ = (|0⟩ + |1⟩)/√2';
+                        probZero = 50;
+                        probOne = 50;
+                    } else {
+                        stateVector = tempState === '0' ? '|ψ⟩ = |0⟩' : '|ψ⟩ = |1⟩';
+                        probZero = tempState === '0' ? 100 : 0;
+                        probOne = tempState === '1' ? 100 : 0;
+                    }
+                } else if (gate === 'Z') {
+                    // Z閘不改變測量結果，但會改變相位
+                    if (inSuperposition) {
+                        stateVector = '|ψ⟩ = (|0⟩ - |1⟩)/√2';
+                    }
+                }
+            }
+            
+            currentState = inSuperposition ? 'superposition' : tempState;
+            
+            // 更新量子狀態可視化
+            updateQuantumStateVisualization(currentState, stateVector, probZero, probOne);
+            
+            // 更新結果顯示
+            const resultDiv = document.getElementById('circuit-result');
+            const currentStateDiv = document.getElementById('current-state');
+            
+            if (currentState === 'superposition') {
+                currentStateDiv.textContent = '|+⟩';
+                currentStateDiv.style.color = '#a78bfa';
+            } else {
+                currentStateDiv.textContent = `|${currentState}⟩`;
+                currentStateDiv.style.color = currentState === '0' ? '#3b82f6' : '#ef4444';
+            }
+            
+            resultDiv.style.display = 'block';
+            
+            // 添加動畫效果
+            currentStateDiv.style.animation = 'pulseGlow 1s ease-in-out';
+            setTimeout(() => {
+                currentStateDiv.style.animation = '';
+            }, 1000);
+        }
+
+        function updateQuantumStateVisualization(currentState, stateVector, probZero, probOne) {
+            // 更新當前狀態
+            const currentQuantumState = document.getElementById('current-quantum-state');
+            if (currentQuantumState) {
+                currentQuantumState.textContent = currentState === 'superposition' ? '|+⟩' : 
+                                                 (currentState === 'complex' ? '|ψ⟩' : '|' + currentState + '⟩');
+            }
+            
+            // 更新狀態向量
+            const stateVectorEquation = document.getElementById('state-vector-equation');
+            if (stateVectorEquation) {
+                stateVectorEquation.textContent = stateVector;
+            }
+            
+            // 更新機率條
+            const probZeroFill = document.getElementById('prob-zero');
+            const probOneFill = document.getElementById('prob-one');
+            const probZeroValue = document.getElementById('prob-zero-value');
+            const probOneValue = document.getElementById('prob-one-value');
+            
+            if (probZeroFill && probOneFill && probZeroValue && probOneValue) {
+                probZeroFill.style.height = probZero + '%';
+                probOneFill.style.height = probOne + '%';
+                probZeroValue.textContent = probZero + '%';
+                probOneValue.textContent = probOne + '%';
+            }
+            
+            // 更新Bloch球動畫
+            const blochSphere = document.getElementById('bloch-sphere');
+            if (blochSphere) {
+                if (currentState === 'superposition') {
+                    blochSphere.style.animation = 'slowRotate 3s linear infinite';
+                } else {
+                    blochSphere.style.animation = 'slowRotate 10s linear infinite';
+                }
+            }
+        }
+
+        function clearCircuit() {
+            const gates = document.querySelectorAll('.gate-on-wire');
+            gates.forEach(gate => gate.remove());
+            circuitGates = [];
+            updateCircuitSequence();
+            
+            const resultDiv = document.getElementById('circuit-result');
+            resultDiv.style.display = 'none';
+            
+            // 重置量子狀態可視化
+            const enigma = gameState.currentEnigma;
+            const initialState = enigma.initialState;
+            const initialVector = initialState === '0' ? '|ψ⟩ = |0⟩' : '|ψ⟩ = |1⟩';
+            const initialProbZero = initialState === '0' ? 100 : 0;
+            const initialProbOne = initialState === '1' ? 100 : 0;
+            
+            updateQuantumStateVisualization(initialState, initialVector, initialProbZero, initialProbOne);
+        }
+
+        function resetCircuit() {
+            clearCircuit();
+            const enigma = gameState.currentEnigma;
+            currentState = enigma.initialState;
+            appliedGates = [];
+            
+            document.getElementById('result-message').style.display = 'none';
+        }
+
+        // 舊的applyGate函數保持向後兼容
+        function applyGate(gate) {
+            appliedGates.push(gate);
+            const enigma = gameState.currentEnigma;
+            const initialState = enigma.initialState;
+            
+            let tempState = initialState;
+            let inSuperposition = false;
+            
+            for (let g of appliedGates) {
+                if (g === 'X') {
+                    if (!inSuperposition) {
+                        tempState = tempState === '0' ? '1' : '0';
+                    }
+                } else if (g === 'H') {
+                    inSuperposition = !inSuperposition;
+                } else if (g === 'Z') {
+                    // Z閘不改變測量結果
+                }
+            }
+            
+            currentState = inSuperposition ? 'superposition' : tempState;
+            
+            const currentQubit = document.getElementById('current-qubit');
+            if (currentQubit) {
+                currentQubit.className = 'qubit';
+                
+                if (currentState === 'superposition') {
+                    currentQubit.classList.add('superposition');
+                    currentQubit.textContent = '|+⟩';
+                } else {
+                    currentQubit.classList.add(`state-${currentState}`);
+                    currentQubit.textContent = `|${currentState}⟩`;
+                }
+            }
+            
+            const gatesApplied = document.getElementById('gates-applied');
+            if (gatesApplied) {
+                gatesApplied.textContent = appliedGates.join(' → ');
+            }
+        }
+
+        function updateProbability() {
+            const alpha = parseFloat(document.getElementById('alpha-slider').value);
+            const beta = Math.sqrt(1 - alpha * alpha);
+            const prob0 = alpha * alpha;
+            const prob1 = beta * beta;
+
+            document.getElementById('alpha-value').textContent = `α = ${alpha.toFixed(3)}`;
+            document.getElementById('beta-value').textContent = beta.toFixed(3);
+            document.getElementById('prob-0').textContent = `${(prob0 * 100).toFixed(1)}%`;
+            document.getElementById('prob-1').textContent = `${(prob1 * 100).toFixed(1)}%`;
+        }
+
+        function checkAnswer() {
+            gameState.totalAttempts++;
+            const enigma = gameState.currentEnigma;
+            const resultDiv = document.getElementById('result-message');
+            let isCorrect = false;
+
+            if (enigma.type === 'gate-selection' || enigma.type === 'gate-sequence') {
+                // 優先使用電路構建器的答案
+                const gatesToCheck = circuitGates.length > 0 ? circuitGates : appliedGates;
+                isCorrect = JSON.stringify(gatesToCheck) === JSON.stringify(enigma.correctAnswer);
+            } else if (enigma.type === 'probability-adjustment') {
+                const alpha = parseFloat(document.getElementById('alpha-slider').value);
+                const prob = alpha * alpha;
+                const target = enigma.targetProbability;
+                isCorrect = Math.abs(prob - target) < 0.015;
+            }
+
+            if (isCorrect) {
+                resultDiv.className = 'result-message success';
+                    resultDiv.innerHTML = `
+                    ${enigma.reward ? enigma.reward : `🎉 <strong>太棒了！Alice成功破解了這個量子謎題！</strong>`}
+                    <br><br>
+                    <div style="font-size: 0.9em; opacity: 0.9;">
+                        你已經掌握了「${enigma.concept}」的概念！<br>
+                        ${enigma.id < 12 ? '繼續前進，還有更多精彩的量子冒險等著你！' : '<strong style="color: #fbbf24;">🏆 恭喜你完成所有挑戰！你是真正的量子大師！</strong>'}
+                        </div>
+                    `;
+                resultDiv.style.display = 'block';
+                gameState.completedEnigmas.add(enigma.id);
+                gameState.successfulAttempts++;
+                
+                setTimeout(() => {
+                    closeModal();
+                    renderEnigmas();
+                    updateStats();
+                }, enigma.id === 12 ? 5000 : 3000); // 最後一關多停留2秒
+            } else {
+                resultDiv.className = 'result-message error';
+                if (enigma.type === 'gate-selection' || enigma.type === 'gate-sequence') {
+                    resultDiv.innerHTML = `
+                        ❌ <strong>還沒成功...</strong><br><br>
+                        <div style="font-size: 0.9em;">
+                            你的答案：${appliedGates.join(' → ') || '（沒有應用閘門）'}<br>
+                            Alice需要重新思考一下！查看提示，再試一次吧！
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        ❌ <strong>機率還沒達到目標值...</strong><br><br>
+                        <div style="font-size: 0.9em;">
+                            繼續調整α值，你快成功了！
+                        </div>
+                    `;
+                }
+                resultDiv.style.display = 'block';
+            }
+
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('completed-count').textContent = gameState.completedEnigmas.size;
+            document.getElementById('total-attempts').textContent = gameState.totalAttempts;
+            
+            const successRate = gameState.totalAttempts > 0 
+                ? (gameState.successfulAttempts / gameState.totalAttempts * 100).toFixed(0)
+                : 0;
+            document.getElementById('success-rate').textContent = successRate + '%';
+        }
+
+        function closeModal() {
+            document.getElementById('enigma-modal').classList.remove('active');
+            appliedGates = [];
+            currentState = '0';
+            circuitGates = [];
+            draggedGate = null;
+        }
+
+        // 特色元素互動功能
+        function selectDoor(doorNumber) {
+            const doors = document.querySelectorAll('.door');
+            doors.forEach(door => door.classList.remove('open'));
+            
+            const selectedDoor = document.querySelector(`.door:nth-child(${doorNumber})`);
+            if (selectedDoor) {
+                selectedDoor.classList.add('open');
+                
+                // 顯示結果
+                setTimeout(() => {
+                    if (doorNumber === 1) {
+                        alert('🎉 正確！門1後面有寶藏！量子疊加態讓你同時檢查了兩扇門！');
+                    } else {
+                        alert('❌ 這扇門是空的...但別擔心，量子疊加態讓你有50%的機會！');
+                    }
+                }, 500);
+            }
+        }
+
+        function flipCoin() {
+            const coins = document.querySelectorAll('.coin');
+            coins.forEach(coin => {
+                coin.classList.remove('heads', 'tails', 'superposition');
+                coin.classList.add('superposition');
+                
+                // 模擬硬幣翻轉動畫
+                coin.style.animation = 'none';
+                setTimeout(() => {
+                    coin.style.animation = 'pulseGlow 2s infinite';
+                }, 100);
+            });
+        }
+
+        function clickChessSquare(square) {
+            const squares = document.querySelectorAll('.chess-square');
+            const targetSquare = document.querySelector('[data-square="3"]');
+            
+            if (square === 3) {
+                targetSquare.style.animation = 'none';
+                setTimeout(() => {
+                    targetSquare.style.animation = 'pulseGlow 2s infinite';
+                }, 100);
+                alert('👑 找到量子皇后了！X閘成功翻轉了量子位元狀態！');
+            } else {
+                alert('這裡沒有皇后...繼續嘗試其他格子！');
+            }
+        }
+
+        function entangleStars() {
+            const stars = document.querySelectorAll('.star');
+            stars.forEach(star => {
+                star.classList.add('entangled');
+            });
+            
+            setTimeout(() => {
+                alert('✨ 雙子星現在處於量子糾纏態！測量其中一顆會瞬間確定另一顆的狀態！');
+            }, 1000);
+        }
+
+        function searchLibrary() {
+            const books = document.querySelectorAll('.book');
+            books.forEach((book, index) => {
+                setTimeout(() => {
+                    book.style.background = 'linear-gradient(135deg, #fbbf24, #d97706)';
+                    book.style.color = '#1a1a2e';
+                    
+                    if (index === 2) { // 目標書
+                        setTimeout(() => {
+                            book.classList.add('target');
+                            alert('🎯 找到了！Grover演算法成功找到了目標書籍！');
+                        }, 500);
+                    }
+                }, index * 200);
+            });
+        }
+
+        // 為特色元素添加事件監聽器
+        function initSpecialElements() {
+            // 硬幣翻轉
+            const coins = document.querySelectorAll('.coin');
+            coins.forEach(coin => {
+                coin.addEventListener('click', flipCoin);
+            });
+
+            // 棋盤點擊
+            const chessSquares = document.querySelectorAll('.chess-square');
+            chessSquares.forEach(square => {
+                square.addEventListener('click', () => {
+                    const squareNum = parseInt(square.dataset.square);
+                    clickChessSquare(squareNum);
+                });
+            });
+
+            // 星星糾纏
+            const stars = document.querySelectorAll('.star');
+            stars.forEach(star => {
+                star.addEventListener('click', entangleStars);
+            });
+
+            // 圖書館搜尋
+            const books = document.querySelectorAll('.book');
+            books.forEach(book => {
+                book.addEventListener('click', searchLibrary);
+            });
+        }
+
+        // 修改openEnigma函數以初始化特色元素
+        const originalOpenEnigma = openEnigma;
+        openEnigma = function(enigmaId) {
+            originalOpenEnigma(enigmaId);
+            
+            // 初始化特色元素
+            setTimeout(() => {
+                initSpecialElements();
+            }, 200);
+        };
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        initGame();
+    </script>
+</body>
+</html>
+

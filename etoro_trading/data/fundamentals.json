@@ -1,0 +1,142 @@
+[
+  {
+    "symbol": "GLD",
+    "price": 471.8,
+    "marketCap": 122809540608,
+    "revenue": null,
+    "revenueGrowth": null,
+    "peRatio": null,
+    "priceToSales": null,
+    "trailingEps": null
+  },
+  {
+    "symbol": "NKE",
+    "price": 58.64,
+    "marketCap": 86809681920,
+    "revenue": 46513000448,
+    "revenueGrowth": -0.09838012538452552,
+    "peRatio": 34.292397,
+    "priceToSales": 1.866353,
+    "trailingEps": 1.71
+  },
+  {
+    "symbol": "CRM",
+    "price": 193.08,
+    "marketCap": 183812161536,
+    "revenue": 41524998144,
+    "revenueGrowth": 0.08715609490202829,
+    "peRatio": 25.778372,
+    "priceToSales": 4.4265423,
+    "trailingEps": 7.49
+  },
+  {
+    "symbol": "IBM",
+    "price": 250.06,
+    "marketCap": 234564894720,
+    "revenue": 67534999552,
+    "revenueGrowth": 0.014435822825735531,
+    "peRatio": 22.467205,
+    "priceToSales": 3.4732347,
+    "trailingEps": 11.13
+  },
+  {
+    "symbol": "UNH",
+    "price": 291.96,
+    "marketCap": 264468627456,
+    "revenue": 447567003648,
+    "revenueGrowth": 0.07711061239646738,
+    "peRatio": 22.068027,
+    "priceToSales": 0.59090286,
+    "trailingEps": 13.23
+  },
+  {
+    "symbol": "PLTR",
+    "price": 153.19,
+    "marketCap": 366380810240,
+    "revenue": 4475445760,
+    "revenueGrowth": 0.5618339093221548,
+    "peRatio": 243.15874,
+    "priceToSales": 81.864655,
+    "trailingEps": 0.63
+  },
+  {
+    "symbol": "MSFT",
+    "price": 405.2,
+    "marketCap": 3011599663104,
+    "revenue": 305453006848,
+    "revenueGrowth": 0.1493215623240672,
+    "peRatio": 25.388472,
+    "priceToSales": 9.859453,
+    "trailingEps": 15.96
+  },
+  {
+    "symbol": "NVDA",
+    "price": 183.04,
+    "marketCap": 4448787103744,
+    "revenue": 215938007040,
+    "revenueGrowth": 0.654735357900948,
+    "peRatio": 37.279022,
+    "priceToSales": 20.60215,
+    "trailingEps": 4.91
+  },
+  {
+    "symbol": "ACN",
+    "price": 210.0,
+    "marketCap": 130229166080,
+    "revenue": 70725558272,
+    "revenueGrowth": 0.07360205326441206,
+    "peRatio": 17.355371,
+    "priceToSales": 1.841331,
+    "trailingEps": 12.1
+  },
+  {
+    "symbol": "ARKK",
+    "price": 74.93,
+    "marketCap": null,
+    "revenue": null,
+    "revenueGrowth": null,
+    "peRatio": 34.56637,
+    "priceToSales": null,
+    "trailingEps": null
+  },
+  {
+    "symbol": "PAVE",
+    "price": 54.28,
+    "marketCap": null,
+    "revenue": null,
+    "revenueGrowth": null,
+    "peRatio": 30.035288,
+    "priceToSales": null,
+    "trailingEps": null
+  },
+  {
+    "symbol": "IONQ",
+    "price": 37.13,
+    "marketCap": 13651730432,
+    "revenue": 130016000,
+    "revenueGrowth": 0.9541330187823247,
+    "peRatio": -37.53918,
+    "priceToSales": 105.00039,
+    "trailingEps": -5.84
+  },
+  {
+    "symbol": "AMD",
+    "price": 202.07,
+    "marketCap": 329457139712,
+    "revenue": 34638999552,
+    "revenueGrowth": 0.34337793290672874,
+    "peRatio": 77.42146,
+    "priceToSales": 9.511162,
+    "trailingEps": 2.61
+  },
+  {
+    "symbol": "SHOP",
+    "price": 129.65,
+    "marketCap": 169204088832,
+    "revenue": 11555999744,
+    "revenueGrowth": 0.3013513513513513,
+    "peRatio": 136.47368,
+    "priceToSales": 14.642098,
+    "trailingEps": 0.95
+  }
+]

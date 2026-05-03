@@ -1,0 +1,734 @@
+{
+  "balance": {
+    "credit": 1450.37,
+    "unrealized_pnl": -22355.37,
+    "bonus_credit": 0.0,
+    "positions_count": 1871,
+    "orders_count": 0
+  },
+  "total_positions_value": 87204.91,
+  "total_equity": 88655.28,
+  "cash_pct": 1.6,
+  "by_symbol": [
+    {
+      "symbol": "ETH",
+      "name": "Ethereum",
+      "amount": 14394.34,
+      "pnl": -2463.34,
+      "current_value": 11931.0,
+      "positions": 146,
+      "pnl_pct": -17.1
+    },
+    {
+      "symbol": "ADA",
+      "name": "Cardano",
+      "amount": 7980.39,
+      "pnl": -3955.92,
+      "current_value": 4024.47,
+      "positions": 265,
+      "pnl_pct": -49.6
+    },
+    {
+      "symbol": "NKE",
+      "name": "Nike",
+      "amount": 5705.0,
+      "pnl": -2368.52,
+      "current_value": 3336.48,
+      "positions": 72,
+      "pnl_pct": -41.5
+    },
+    {
+      "symbol": "PLUG",
+      "name": "Plug Power",
+      "amount": 4250.0,
+      "pnl": 116.38,
+      "current_value": 4366.38,
+      "positions": 124,
+      "pnl_pct": 2.7
+    },
+    {
+      "symbol": "CRM",
+      "name": "Salesforce",
+      "amount": 3900.0,
+      "pnl": -1080.77,
+      "current_value": 2819.23,
+      "positions": 31,
+      "pnl_pct": -27.7
+    },
+    {
+      "symbol": "BBBY",
+      "name": "Bed Bath & Beyond",
+      "amount": 3043.96,
+      "pnl": -1850.46,
+      "current_value": 1193.5,
+      "positions": 58,
+      "pnl_pct": -60.8
+    },
+    {
+      "symbol": "TDOC",
+      "name": "Teladoc Health",
+      "amount": 2979.96,
+      "pnl": -1988.34,
+      "current_value": 991.62,
+      "positions": 65,
+      "pnl_pct": -66.7
+    },
+    {
+      "symbol": "PYPL",
+      "name": "PYPL",
+      "amount": 2950.0,
+      "pnl": -1870.52,
+      "current_value": 1079.48,
+      "positions": 56,
+      "pnl_pct": -63.4
+    },
+    {
+      "symbol": "BLNK",
+      "name": "Blink Charging",
+      "amount": 2779.51,
+      "pnl": -1307.37,
+      "current_value": 1472.14,
+      "positions": 51,
+      "pnl_pct": -47.0
+    },
+    {
+      "symbol": "GEVO",
+      "name": "Gevo Inc",
+      "amount": 2750.08,
+      "pnl": -693.67,
+      "current_value": 2056.41,
+      "positions": 45,
+      "pnl_pct": -25.2
+    },
+    {
+      "symbol": "SOL",
+      "name": "SOL",
+      "amount": 2319.25,
+      "pnl": -913.59,
+      "current_value": 1405.66,
+      "positions": 111,
+      "pnl_pct": -39.4
+    },
+    {
+      "symbol": "SQ",
+      "name": "Block Inc",
+      "amount": 2124.86,
+      "pnl": -756.88,
+      "current_value": 1367.98,
+      "positions": 34,
+      "pnl_pct": -35.6
+    },
+    {
+      "symbol": "OCGN",
+      "name": "OCGN",
+      "amount": 1974.96,
+      "pnl": 1639.05,
+      "current_value": 3614.01,
+      "positions": 42,
+      "pnl_pct": 83.0
+    },
+    {
+      "symbol": "ORCL",
+      "name": "ORCL",
+      "amount": 1700.0,
+      "pnl": 7.84,
+      "current_value": 1707.84,
+      "positions": 17,
+      "pnl_pct": 0.5
+    },
+    {
+      "symbol": "U",
+      "name": "Unity Software",
+      "amount": 1600.0,
+      "pnl": -635.7,
+      "current_value": 964.3,
+      "positions": 26,
+      "pnl_pct": -39.7
+    },
+    {
+      "symbol": "MSFT",
+      "name": "Microsoft",
+      "amount": 1100.0,
+      "pnl": -40.29,
+      "current_value": 1059.71,
+      "positions": 11,
+      "pnl_pct": -3.7
+    },
+    {
+      "symbol": "ETOR",
+      "name": "ETOR",
+      "amount": 1098.96,
+      "pnl": -142.31,
+      "current_value": 956.65,
+      "positions": 11,
+      "pnl_pct": -12.9
+    },
+    {
+      "symbol": "BTC",
+      "name": "Bitcoin",
+      "amount": 1077.1,
+      "pnl": -113.19,
+      "current_value": 963.91,
+      "positions": 65,
+      "pnl_pct": -10.5
+    },
+    {
+      "symbol": "ZM",
+      "name": "ZM",
+      "amount": 825.0,
+      "pnl": -439.91,
+      "current_value": 385.09,
+      "positions": 18,
+      "pnl_pct": -53.3
+    },
+    {
+      "symbol": "NEAR",
+      "name": "NEAR",
+      "amount": 818.46,
+      "pnl": -141.09,
+      "current_value": 677.37,
+      "positions": 66,
+      "pnl_pct": -17.2
+    },
+    {
+      "symbol": "TEP.PA",
+      "name": "Teleperformance SE",
+      "amount": 800.0,
+      "pnl": -120.6,
+      "current_value": 679.4,
+      "positions": 7,
+      "pnl_pct": -15.1
+    },
+    {
+      "symbol": "QBTS",
+      "name": "QBTS",
+      "amount": 800.0,
+      "pnl": -82.2,
+      "current_value": 717.8,
+      "positions": 8,
+      "pnl_pct": -10.3
+    },
+    {
+      "symbol": "VST",
+      "name": "VST",
+      "amount": 700.0,
+      "pnl": 26.54,
+      "current_value": 726.54,
+      "positions": 7,
+      "pnl_pct": 3.8
+    },
+    {
+      "symbol": "AFRM",
+      "name": "AFRM",
+      "amount": 700.0,
+      "pnl": -0.7,
+      "current_value": 699.3,
+      "positions": 7,
+      "pnl_pct": -0.1
+    },
+    {
+      "symbol": "FET",
+      "name": "FET",
+      "amount": 669.94,
+      "pnl": -254.58,
+      "current_value": 415.36,
+      "positions": 50,
+      "pnl_pct": -38.0
+    },
+    {
+      "symbol": "FMC",
+      "name": "FMC",
+      "amount": 635.0,
+      "pnl": -315.13,
+      "current_value": 319.87,
+      "positions": 8,
+      "pnl_pct": -49.6
+    },
+    {
+      "symbol": "STRK",
+      "name": "STRK",
+      "amount": 609.98,
+      "pnl": -401.29,
+      "current_value": 208.69,
+      "positions": 39,
+      "pnl_pct": -65.8
+    },
+    {
+      "symbol": "SAP.DE",
+      "name": "SAP SE",
+      "amount": 600.0,
+      "pnl": -124.83,
+      "current_value": 475.17,
+      "positions": 5,
+      "pnl_pct": -20.8
+    },
+    {
+      "symbol": "CRIS",
+      "name": "CRIS",
+      "amount": 513.63,
+      "pnl": -396.74,
+      "current_value": 116.89,
+      "positions": 7,
+      "pnl_pct": -77.2
+    },
+    {
+      "symbol": "RHM.DE",
+      "name": "RHM.DE",
+      "amount": 500.0,
+      "pnl": -46.99,
+      "current_value": 453.01,
+      "positions": 4,
+      "pnl_pct": -9.4
+    },
+    {
+      "symbol": "COIN",
+      "name": "COIN",
+      "amount": 500.0,
+      "pnl": -5.93,
+      "current_value": 494.07,
+      "positions": 5,
+      "pnl_pct": -1.2
+    },
+    {
+      "symbol": "UUUU",
+      "name": "UUUU",
+      "amount": 499.73,
+      "pnl": -54.05,
+      "current_value": 445.68,
+      "positions": 5,
+      "pnl_pct": -10.8
+    },
+    {
+      "symbol": "SUI",
+      "name": "SUI",
+      "amount": 460.0,
+      "pnl": -121.88,
+      "current_value": 338.12,
+      "positions": 43,
+      "pnl_pct": -26.5
+    },
+    {
+      "symbol": "IONQ",
+      "name": "IONQ",
+      "amount": 400.0,
+      "pnl": 72.97,
+      "current_value": 472.97,
+      "positions": 4,
+      "pnl_pct": 18.2
+    },
+    {
+      "symbol": "RGTI",
+      "name": "RGTI",
+      "amount": 400.0,
+      "pnl": -56.68,
+      "current_value": 343.32,
+      "positions": 4,
+      "pnl_pct": -14.2
+    },
+    {
+      "symbol": "SMR",
+      "name": "SMR",
+      "amount": 400.0,
+      "pnl": -116.54,
+      "current_value": 283.46,
+      "positions": 4,
+      "pnl_pct": -29.1
+    },
+    {
+      "symbol": "QUBT",
+      "name": "QUBT",
+      "amount": 399.85,
+      "pnl": -51.1,
+      "current_value": 348.75,
+      "positions": 4,
+      "pnl_pct": -12.8
+    },
+    {
+      "symbol": "QSI",
+      "name": "QSI",
+      "amount": 399.52,
+      "pnl": -128.09,
+      "current_value": 271.43,
+      "positions": 5,
+      "pnl_pct": -32.1
+    },
+    {
+      "symbol": "VIE.PA",
+      "name": "VIE.PA",
+      "amount": 323.81,
+      "pnl": 31.76,
+      "current_value": 355.57,
+      "positions": 2,
+      "pnl_pct": 9.8
+    },
+    {
+      "symbol": "RR.L",
+      "name": "RR.L",
+      "amount": 300.0,
+      "pnl": -10.87,
+      "current_value": 289.13,
+      "positions": 2,
+      "pnl_pct": -3.6
+    },
+    {
+      "symbol": "APP",
+      "name": "APP",
+      "amount": 300.0,
+      "pnl": 3.33,
+      "current_value": 303.33,
+      "positions": 3,
+      "pnl_pct": 1.1
+    },
+    {
+      "symbol": "HOOD",
+      "name": "HOOD",
+      "amount": 300.0,
+      "pnl": -5.73,
+      "current_value": 294.27,
+      "positions": 3,
+      "pnl_pct": -1.9
+    },
+    {
+      "symbol": "CHPT",
+      "name": "CHPT",
+      "amount": 300.0,
+      "pnl": -160.11,
+      "current_value": 139.89,
+      "positions": 2,
+      "pnl_pct": -53.4
+    },
+    {
+      "symbol": "SOFI",
+      "name": "SOFI",
+      "amount": 299.95,
+      "pnl": -30.24,
+      "current_value": 269.71,
+      "positions": 3,
+      "pnl_pct": -10.1
+    },
+    {
+      "symbol": "TEAM",
+      "name": "TEAM",
+      "amount": 299.93,
+      "pnl": -62.18,
+      "current_value": 237.75,
+      "positions": 3,
+      "pnl_pct": -20.7
+    },
+    {
+      "symbol": "HBAR",
+      "name": "HBAR",
+      "amount": 294.97,
+      "pnl": -145.31,
+      "current_value": 149.66,
+      "positions": 23,
+      "pnl_pct": -49.3
+    },
+    {
+      "symbol": "ALGO",
+      "name": "ALGO",
+      "amount": 289.96,
+      "pnl": -116.85,
+      "current_value": 173.11,
+      "positions": 23,
+      "pnl_pct": -40.3
+    },
+    {
+      "symbol": "URA",
+      "name": "URA",
+      "amount": 275.0,
+      "pnl": 34.55,
+      "current_value": 309.55,
+      "positions": 12,
+      "pnl_pct": 12.6
+    },
+    {
+      "symbol": "KWEB",
+      "name": "KraneShares CSI China Internet",
+      "amount": 260.0,
+      "pnl": -31.52,
+      "current_value": 228.48,
+      "positions": 9,
+      "pnl_pct": -12.1
+    },
+    {
+      "symbol": "COPX",
+      "name": "COPX",
+      "amount": 259.99,
+      "pnl": 27.6,
+      "current_value": 287.59,
+      "positions": 9,
+      "pnl_pct": 10.6
+    },
+    {
+      "symbol": "CQQQ",
+      "name": "CQQQ",
+      "amount": 240.0,
+      "pnl": -15.66,
+      "current_value": 224.34,
+      "positions": 8,
+      "pnl_pct": -6.5
+    },
+    {
+      "symbol": "BNGO",
+      "name": "BNGO",
+      "amount": 239.0,
+      "pnl": -157.82,
+      "current_value": 81.18,
+      "positions": 7,
+      "pnl_pct": -66.0
+    },
+    {
+      "symbol": "ARKX",
+      "name": "ARKX",
+      "amount": 220.0,
+      "pnl": 5.19,
+      "current_value": 225.19,
+      "positions": 11,
+      "pnl_pct": 2.4
+    },
+    {
+      "symbol": "XRP",
+      "name": "XRP",
+      "amount": 219.96,
+      "pnl": -75.62,
+      "current_value": 144.34,
+      "positions": 18,
+      "pnl_pct": -34.4
+    },
+    {
+      "symbol": "CLOU",
+      "name": "CLOU",
+      "amount": 219.89,
+      "pnl": -2.61,
+      "current_value": 217.28,
+      "positions": 10,
+      "pnl_pct": -1.2
+    },
+    {
+      "symbol": "HD",
+      "name": "HD",
+      "amount": 200.0,
+      "pnl": -26.1,
+      "current_value": 173.9,
+      "positions": 2,
+      "pnl_pct": -13.1
+    },
+    {
+      "symbol": "TTWO",
+      "name": "TTWO",
+      "amount": 200.0,
+      "pnl": -13.71,
+      "current_value": 186.29,
+      "positions": 2,
+      "pnl_pct": -6.9
+    },
+    {
+      "symbol": "SIE.DE",
+      "name": "Siemens Aktiengesellschaft",
+      "amount": 200.0,
+      "pnl": 42.27,
+      "current_value": 242.27,
+      "positions": 1,
+      "pnl_pct": 21.1
+    },
+    {
+      "symbol": "SU.PA",
+      "name": "Schneider Electric SE",
+      "amount": 200.0,
+      "pnl": 27.83,
+      "current_value": 227.83,
+      "positions": 1,
+      "pnl_pct": 13.9
+    },
+    {
+      "symbol": "SNPS",
+      "name": "Synopsys Inc",
+      "amount": 200.0,
+      "pnl": 15.32,
+      "current_value": 215.32,
+      "positions": 2,
+      "pnl_pct": 7.7
+    },
+    {
+      "symbol": "SNOW",
+      "name": "Snowflake Inc.",
+      "amount": 200.0,
+      "pnl": -52.25,
+      "current_value": 147.75,
+      "positions": 2,
+      "pnl_pct": -26.1
+    },
+    {
+      "symbol": "RDW.US",
+      "name": "Redwire Corp",
+      "amount": 200.0,
+      "pnl": -3.51,
+      "current_value": 196.49,
+      "positions": 2,
+      "pnl_pct": -1.8
+    },
+    {
+      "symbol": "GEMI",
+      "name": "GEMI",
+      "amount": 200.0,
+      "pnl": -122.52,
+      "current_value": 77.48,
+      "positions": 3,
+      "pnl_pct": -61.3
+    },
+    {
+      "symbol": "XLM",
+      "name": "XLM",
+      "amount": 189.98,
+      "pnl": -57.94,
+      "current_value": 132.04,
+      "positions": 15,
+      "pnl_pct": -30.5
+    },
+    {
+      "symbol": "TRX",
+      "name": "TRX",
+      "amount": 175.0,
+      "pnl": 25.81,
+      "current_value": 200.81,
+      "positions": 16,
+      "pnl_pct": 14.7
+    },
+    {
+      "symbol": "SLV",
+      "name": "SLV",
+      "amount": 160.0,
+      "pnl": -15.63,
+      "current_value": 144.37,
+      "positions": 9,
+      "pnl_pct": -9.8
+    },
+    {
+      "symbol": "ARKF",
+      "name": "ARKF",
+      "amount": 160.0,
+      "pnl": 1.51,
+      "current_value": 161.51,
+      "positions": 8,
+      "pnl_pct": 0.9
+    },
+    {
+      "symbol": "WQTM",
+      "name": "WisdomTree Quantum Computing Fund",
+      "amount": 160.0,
+      "pnl": 23.1,
+      "current_value": 183.1,
+      "positions": 8,
+      "pnl_pct": 14.4
+    },
+    {
+      "symbol": "AREC",
+      "name": "American Resources Corp",
+      "amount": 153.25,
+      "pnl": -46.25,
+      "current_value": 107.0,
+      "positions": 1,
+      "pnl_pct": -30.2
+    },
+    {
+      "symbol": "PLTR",
+      "name": "PLTR",
+      "amount": 150.0,
+      "pnl": 9.59,
+      "current_value": 159.59,
+      "positions": 2,
+      "pnl_pct": 6.4
+    },
+    {
+      "symbol": "NXPI",
+      "name": "NXPI",
+      "amount": 144.98,
+      "pnl": -2.82,
+      "current_value": 142.16,
+      "positions": 7,
+      "pnl_pct": -1.9
+    },
+    {
+      "symbol": "DHR",
+      "name": "DHR",
+      "amount": 125.0,
+      "pnl": -22.88,
+      "current_value": 102.12,
+      "positions": 2,
+      "pnl_pct": -18.3
+    },
+    {
+      "symbol": "EXP",
+      "name": "EXP",
+      "amount": 125.0,
+      "pnl": -22.08,
+      "current_value": 102.92,
+      "positions": 2,
+      "pnl_pct": -17.7
+    },
+    {
+      "symbol": "JEPQ",
+      "name": "JEPQ",
+      "amount": 120.0,
+      "pnl": 3.38,
+      "current_value": 123.38,
+      "positions": 3,
+      "pnl_pct": 2.8
+    },
+    {
+      "symbol": "KBWB",
+      "name": "KBWB",
+      "amount": 120.0,
+      "pnl": 0.74,
+      "current_value": 120.74,
+      "positions": 2,
+      "pnl_pct": 0.6
+    },
+    {
+      "symbol": "QYLD",
+      "name": "QYLD",
+      "amount": 120.0,
+      "pnl": 3.08,
+      "current_value": 123.08,
+      "positions": 3,
+      "pnl_pct": 2.6
+    },
+    {
+      "symbol": "DOT",
+      "name": "DOT",
+      "amount": 115.0,
+      "pnl": -45.7,
+      "current_value": 69.3,
+      "positions": 10,
+      "pnl_pct": -39.7
+    },
+    {
+      "symbol": "TSLA",
+      "name": "Tesla",
+      "amount": 100.0,
+      "pnl": -9.71,
+      "current_value": 90.29,
+      "positions": 1,
+      "pnl_pct": -9.7
+    },
+    {
+      "symbol": "IBM",
+      "name": "IBM",
+      "amount": 100.0,
+      "pnl": -3.04,
+      "current_value": 96.96,
+      "positions": 1,
+      "pnl_pct": -3.0
+    },
+    {
+      "symbol": "UNH",
+      "name": "UNH",
+      "amount": 100.0,
+      "pnl": 24.83,
+      "current_value": 124.83,
+      "positions": 1,
+      "pnl_pct": 24.8
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "updated_at": "2026-03-06T21:08:32",
+  "portfolios": [
+    {
+      "id": "puremomentum",
+      "name": "PureMomentum",
+      "return_20d_pct": null,
+      "symbols_count": 0,
+      "note": "未設定成分股，請從 eToro 頁面複製"
+    },
+    {
+      "id": "momentum-ls",
+      "name": "Momentum-LS",
+      "return_20d_pct": -0.95,
+      "symbols_count": 5,
+      "note": null
+    },
+    {
+      "id": "puregrowth",
+      "name": "PureGrowth",
+      "return_20d_pct": null,
+      "symbols_count": 0,
+      "note": "未設定成分股，請從 eToro 頁面複製"
+    },
+    {
+      "id": "marketpicks",
+      "name": "MarketPicks",
+      "return_20d_pct": null,
+      "symbols_count": 0,
+      "note": "未設定成分股，請從 eToro 頁面複製"
+    }
+  ]
+}

@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>量子計算硬體模組採購清單</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft JhengHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #f5f5f5;
+            border-bottom: 3px solid #667eea;
+            padding: 0;
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+            position: relative;
+            min-width: 200px;
+        }
+
+        .nav-tab:hover {
+            background: #e8e8e8;
+            color: #667eea;
+        }
+
+        .nav-tab.active {
+            color: #667eea;
+            background: white;
+        }
+
+        .nav-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #667eea;
+        }
+
+        .content-section {
+            display: none;
+            padding: 40px;
+            animation: fadeIn 0.5s;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .budget-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .budget-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .budget-card.beginner {
+            border-left: 5px solid #4caf50;
+        }
+
+        .budget-card.intermediate {
+            border-left: 5px solid #ff9800;
+        }
+
+        .budget-card.professional {
+            border-left: 5px solid #f44336;
+        }
+
+        .budget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .budget-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .budget-badge {
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .badge-beginner {
+            background: #4caf50;
+            color: white;
+        }
+
+        .badge-intermediate {
+            background: #ff9800;
+            color: white;
+        }
+
+        .badge-professional {
+            background: #f44336;
+            color: white;
+        }
+
+        .budget-range {
+            font-size: 1.3em;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .component-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .component-card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transform: translateY(-3px);
+        }
+
+        .component-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .component-price {
+            font-size: 1.2em;
+            color: #f44336;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .component-details {
+            color: #666;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+
+        .component-details ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .hardware-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .hardware-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .hardware-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .hardware-table tr:hover {
+            background: #f5f5f5;
+        }
+
+        .price-tag {
+            display: inline-block;
+            background: #ff9800;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .supplier-card {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .supplier-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .supplier-info {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .supplier-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .supplier-link:hover {
+            text-decoration: underline;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: -30px;
+            width: 2px;
+            background: #667eea;
+        }
+
+        .timeline-item:last-child::before {
+            display: none;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 18px;
+            height: 18px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .timeline-content {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .timeline-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #333;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .nav-tabs {
+                flex-direction: column;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+
+            .components-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔬 量子計算硬體模組採購清單</h1>
+            <p>完整的實作指南與採購方案</p>
+        </header>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('budget', event)">💰 預算方案</button>
+            <button class="nav-tab" onclick="showSection('hardware', event)">🔧 硬體清單</button>
+            <button class="nav-tab" onclick="showSection('software', event)">💻 軟體工具</button>
+            <button class="nav-tab" onclick="showSection('suppliers', event)">🛒 供應商</button>
+            <button class="nav-tab" onclick="showSection('timeline', event)">📅 實作步驟</button>
+        </div>
+
+        <!-- 預算方案區 -->
+        <div id="budget" class="content-section active">
+            <h2 class="section-title">預算分級採購方案</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">預算級別</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">硬體模組</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">供應商</div>
+                </div>
+            </div>
+
+            <!-- 入門級 -->
+            <div class="budget-card beginner">
+                <div class="budget-header">
+                    <div>
+                        <div class="budget-title">🟢 入門級方案</div>
+                        <div class="budget-range">$500 - $2,000 USD (約 NT$15,000 - NT$60,000)</div>
+                    </div>
+                    <span class="budget-badge badge-beginner">適合初學者</span>
+                </div>
+                <p style="margin: 15px 0; color: #666;"><strong>適合對象：</strong>個人學習者、學生、初學者</p>
+                
+                <div class="components-grid">
+                    <div class="component-card">
+                        <div class="component-name">FPGA 開發板</div>
+                        <div class="component-price">$200-500</div>
+                        <div class="component-details">
+                            <strong>推薦型號：</strong>
+                            <ul>
+                                <li>Xilinx Artix-7 系列（Basys 3）</li>
+                                <li>Intel/Altera Cyclone 系列</li>
+                            </ul>
+                            <strong>用途：</strong>量子電路模擬、控制邏輯實現<br>
+                            <strong>連結：</strong><a href="https://www.xilinx.com/products/silicon-devices/soc/zynq-7000.html" target="_blank" class="supplier-link">Xilinx</a> | <a href="https://store.digilentinc.com/" target="_blank" class="supplier-link">Digilent</a>
+                        </div>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-name">量子隨機數發生器</div>
+                        <div class="component-price">$300-800</div>
+                        <div class="component-details">
+                            <strong>推薦型號：</strong>
+                            <ul>
+                                <li>ID Quantique QRNG（USB）</li>
+                                <li>DIY 光電效應模組</li>
+                            </ul>
+                            <strong>用途：</strong>真隨機數生成、量子密碼學實驗<br>
+                            <strong>連結：</strong><a href="https://www.idquantique.com/random-number-generation/products/quantis-random-number-generator/" target="_blank" class="supplier-link">ID Quantique</a>
+                        </div>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-name">RF 信號發生器</div>
+                        <div class="component-price">$400-1,000</div>
+                        <div class="component-details">
+                            <strong>規格：</strong>入門級微波信號源（1-6 GHz）
+                            <ul>
+                                <li>Mini-Circuits 系列</li>
+                            </ul>
+                            <strong>用途：</strong>量子控制脈衝生成練習<br>
+                            <strong>連結：</strong><a href="https://www.minicircuits.com/" target="_blank" class="supplier-link">Mini-Circuits</a>
+                        </div>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-name">示波器/頻譜分析儀</div>
+                        <div class="component-price">$300-800</div>
+                        <div class="component-details">
+                            <strong>規格：</strong>入門級數位示波器（100 MHz+）
+                            <ul>
+                                <li>或 USB 頻譜分析儀</li>
+                            </ul>
+                            <strong>用途：</strong>信號分析、調試
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: white; border-radius: 10px;">
+                    <strong>軟體工具（免費/開源）：</strong>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Qiskit + IBM Quantum Lab（免費）</li>
+                        <li>Cirq + Google Colab（免費）</li>
+                        <li>本地模擬器</li>
+                    </ul>
+                    <div style="margin-top: 15px; font-size: 1.2em; color: #f44336; font-weight: bold;">
+                        總預算：約 $1,200 - $3,100 USD
+                    </div>
+                </div>
+            </div>
+
+            <!-- 中級級 -->
+            <div class="budget-card intermediate">
+                <div class="budget-header">
+                    <div>
+                        <div class="budget-title">🟡 中級方案</div>
+                        <div class="budget-range">$5,000 - $20,000 USD (約 NT$150,000 - NT$600,000)</div>
+                    </div>
+                    <span class="budget-badge badge-intermediate">適合實驗室</span>
+                </div>
+                <p style="margin: 15px 0; color: #666;"><strong>適合對象：</strong>研究實驗室、小型公司、進階愛好者</p>
+                
+                <div class="components-grid">
+                    <div class="component-card">
+                        <div class="component-name">量子控制系統套件</div>
+                        <div class="component-price">$3,000-8,000</div>
+                        <div class="component-details">
+                            <strong>推薦：</strong>
+                            <ul>
+                                <li>Quantum Machines OPX+</li>
+                                <li>Zurich Instruments HDAWG</li>
+                            </ul>
+                            <strong>用途：</strong>多量子比特控制<br>
+                            <strong>連結：</strong><a href="https://www.quantum-machines.co/products/opx/" target="_blank" class="supplier-link">OPX+</a> | <a href="https://www.zhinst.com/americas/en/products/hdawg" target="_blank" class="supplier-link">HDAWG</a>
+                        </div>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-name">低溫系統</div>
+                        <div class="component-price">$2,000-5,000</div>
+                        <div class="component-details">
+                            <strong>類型：</strong>
+                            <ul>
+                                <li>桌面型稀釋製冷機（10 mK）</li>
+                                <li>液氦杜瓦瓶系統</li>
+                            </ul>
+                            <strong>用途：</strong>超導量子比特實驗
+                        </div>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-name">高精度 RF 設備</div>
+                        <div class="component-price">$3,000-6,000</div>
+                        <div class="component-details">
+                            <strong>包含：</strong>
+                            <ul>
+                                <li>微波信號源（6-20 GHz）</li>
+                                <li>低噪聲放大器</li>
+                                <li>微波開關矩陣</li>
+                            </ul>
+                            <strong>用途：</strong>量子閘門精確控制
+                        </div>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-name">數據採集系統</div>
+                        <div class="component-price">$1,000-2,000</div>
+                        <div class="component-details">
+                            <strong>規格：</strong>
+                            <ul>
+                                <li>高速 ADC（100+ MS/s）</li>
+                                <li>數位信號處理板</li>
+                            </ul>
+                            <strong>用途：</strong>量子態讀取
+                        </div>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-name">光量子模組（可選）</div>
+                        <div class="component-price">$2,000-5,000</div>
+                        <div class="component-details">
+                            <strong>包含：</strong>
+                            <ul>
+                                <li>單光子源</li>
+                                <li>光子探測器（SPAD）</li>
+                                <li>光學干涉儀</li>
+                            </ul>
+                            <strong>用途：</strong>光量子計算實驗
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: white; border-radius: 10px;">
+                    <strong>軟體工具：</strong>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>專業量子控制軟體（如 QM 的 QUA）</li>
+                        <li>自訂 Python 控制腳本</li>
+                        <li>雲端量子計算 API 訂閱</li>
+                    </ul>
+                    <div style="margin-top: 15px; font-size: 1.2em; color: #f44336; font-weight: bold;">
+                        總預算：約 $11,000 - $26,000 USD
+                    </div>
+                </div>
+            </div>
+
+            <!-- 專業級 -->
+            <div class="budget-card professional">
+                <div class="budget-header">
+                    <div>
+                        <div class="budget-title">🔴 專業級方案</div>
+                        <div class="budget-range">$50,000 - $500,000+ USD (約 NT$1,500,000 - NT$15,000,000+)</div>
+                    </div>
+                    <span class="budget-badge badge-professional">適合機構</span>
+                </div>
+                <p style="margin: 15px 0; color: #666;"><strong>適合對象：</strong>大型研究機構、量子計算公司、政府實驗室</p>
+                
+                <div class="components-grid">
+                    <div class="component-card">
+                        <div class="component-name">完整量子處理器系統</div>
+                        <div class="component-price">$200,000-500,000</div>
+                        <div class="component-details">
+                            <strong>選項：</strong>
+                            <ul>
+                                <li>IBM Quantum System One</li>
+                                <li>IonQ 離子阱系統</li>
+                                <li>Rigetti 超導量子處理器</li>
+                            </ul>
+                            <strong>用途：</strong>實際量子計算應用
+                        </div>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-name">低溫基礎設施</div>
+                        <div class="component-price">$100,000-200,000</div>
+                        <div class="component-details">
+                            <strong>包含：</strong>
+                            <ul>
+                                <li>大型稀釋製冷機（Bluefors, Oxford）</li>
+                                <li>液氦供應系統</li>
+                            </ul>
+                            <strong>用途：</strong>維持量子比特低溫環境
+                        </div>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-name">完整控制系統</div>
+                        <div class="component-price">$50,000-150,000</div>
+                        <div class="component-details">
+                            <strong>規格：</strong>
+                            <ul>
+                                <li>多通道微波控制（100+ 通道）</li>
+                                <li>時序同步系統</li>
+                                <li>實時反饋控制</li>
+                            </ul>
+                            <strong>用途：</strong>大規模量子比特控制
+                        </div>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-name">量子網路設備</div>
+                        <div class="component-price">$50,000-100,000</div>
+                        <div class="component-details">
+                            <strong>包含：</strong>
+                            <ul>
+                                <li>量子中繼器</li>
+                                <li>量子記憶體</li>
+                                <li>量子路由器</li>
+                            </ul>
+                            <strong>用途：</strong>量子通訊與網路
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: white; border-radius: 10px;">
+                    <strong>軟體與服務：</strong>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>企業級量子計算平台訂閱</li>
+                        <li>專屬技術支援</li>
+                        <li>客製化開發服務</li>
+                    </ul>
+                    <div style="margin-top: 15px; font-size: 1.2em; color: #f44336; font-weight: bold;">
+                        總預算：約 $400,000 - $950,000+ USD
+                    </div>
+                </div>
+            </div>
+
+            <!-- 個人 20 萬台幣：最接近量子電腦 -->
+            <div class="budget-card intermediate">
+                <div class="budget-header">
+                    <div>
+                        <div class="budget-title">🟦 個人方案：20萬台幣「最接近量子電腦」</div>
+                        <div class="budget-range">NT$200,000（無實驗室/無機房）</div>
+                    </div>
+                    <span class="budget-badge badge-intermediate">適合一般使用者</span>
+                </div>
+
+                <p style="margin: 15px 0; color: #666;">
+                    <strong>核心思路：</strong>在「無實驗室」的限制下，最接近真正量子電腦的方式是<strong>直接使用雲端量子硬體（IBM/Azure/AWS 等）</strong>，
+                    其餘預算用於「可長期學習與開發」的電腦環境與少量可在家操作的模組。
+                </p>
+
+                <div class="components-grid">
+                    <div class="component-card">
+                        <div class="component-name">必買 ① 開發主機（筆電/桌機）</div>
+                        <div class="component-price">NT$60,000 - 120,000</div>
+                        <div class="component-details">
+                            <strong>用途：</strong>本地模擬、寫程式、跑實驗、上雲端量子平台<br>
+                            <strong>建議：</strong>
+                            <ul>
+                                <li>記憶體 32GB 起（模擬/最佳化更順）</li>
+                                <li>SSD 1TB 起</li>
+                                <li>CPU 8 核心等級以上；GPU 可選（做量子 ML/最佳化才更需要）</li>
+                            </ul>
+                            <span class="highlight">這筆花得好，體驗會差非常多</span>
+                        </div>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-name">必買 ② 雲端量子硬體使用</div>
+                        <div class="component-price">NT$0 - 50,000（視方案/點數）</div>
+                        <div class="component-details">
+                            <strong>用途：</strong>真的把電路跑在量子硬體上（不是只有模擬）<br>
+                            <strong>路線：</strong>
+                            <ul>
+                                <li>IBM Quantum（Qiskit，常有免費配額）</li>
+                                <li>Azure Quantum（可接多家硬體供應商）</li>
+                                <li>AWS Braket（可用點數/計費）</li>
+                            </ul>
+                            <strong>備註：</strong>建議先用免費/低額方案跑通流程，再視需求加購點數。
+                        </div>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-name">建議加購 ③ QRNG（真隨機）</div>
+                        <div class="component-price">NT$10,000 - 30,000（視型號）</div>
+                        <div class="component-details">
+                            <strong>用途：</strong>在家可實作的「量子效果」硬體，做密碼學/隨機性實驗<br>
+                            <strong>價值：</strong>不需要實驗室，但能讓你有“摸得到”的量子硬體體驗
+                        </div>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-name">選配 ④ 基礎量測（入門示波器）</div>
+                        <div class="component-price">NT$10,000 - 30,000</div>
+                        <div class="component-details">
+                            <strong>用途：</strong>學會看波形/訊號、做硬體除錯思維<br>
+                            <strong>提醒：</strong>它不會讓你在家做超導/離子阱量子比特，但能提升工程能力
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: white; border-radius: 10px; line-height: 1.8;">
+                    <strong>你用 20 萬可以達成什麼（具體目標）：</strong>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>把量子電路（Bell/Teleportation/VQE/QAOA 入門）跑上雲端真實量子硬體</li>
+                        <li>建立可重複的實驗流程：版本控管、筆記、結果可視覺化、參數掃描</li>
+                        <li>（可選）用 QRNG 做密碼學/隨機性/安全相關的小專題</li>
+                    </ul>
+                    <strong>你做不到什麼（避免踩坑）：</strong>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>在家自建超導/離子阱量子電腦（需要低溫/真空/微波鏈路與實驗室安全）</li>
+                        <li>用 RF/FPGA 拼出真正量子比特（它們是控制/訊號系統，不是量子處理器本體）</li>
+                    </ul>
+                    <div style="margin-top: 12px; font-size: 1.15em; color: #f44336; font-weight: bold;">
+                        建議預算分配：主機 60%｜雲端點數 20%｜可摸得到的模組 20%
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 硬體清單區 -->
+        <div id="hardware" class="content-section">
+            <h2 class="section-title">硬體模組詳細清單</h2>
+            
+            <input type="text" class="search-box" id="hardwareSearch" placeholder="🔍 搜尋硬體模組..." onkeyup="filterHardware()">
+            
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterByCategory('all', event)">全部</button>
+                <button class="filter-btn" onclick="filterByCategory('fpga', event)">FPGA</button>
+                <button class="filter-btn" onclick="filterByCategory('qrng', event)">QRNG</button>
+                <button class="filter-btn" onclick="filterByCategory('rf', event)">RF/微波</button>
+                <button class="filter-btn" onclick="filterByCategory('cryo', event)">低溫系統</button>
+                <button class="filter-btn" onclick="filterByCategory('sensor', event)">感測器</button>
+                <button class="filter-btn" onclick="filterByCategory('optical', event)">光量子</button>
+            </div>
+
+            <table class="hardware-table" id="hardwareTable">
+                <thead>
+                    <tr>
+                        <th>硬體類型</th>
+                        <th>型號/名稱</th>
+                        <th>價格範圍</th>
+                        <th>主要規格</th>
+                        <th>用途</th>
+                        <th>供應商</th>
+                        <th>產品連結</th>
+                        <th>操作資訊</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-category="fpga">
+                        <td><strong>FPGA 控制板</strong></td>
+                        <td>Xilinx Zynq-7000</td>
+                        <td><span class="price-tag">$200-500</span></td>
+                        <td>ARM + FPGA，即時控制</td>
+                        <td>量子電路模擬、控制邏輯</td>
+                        <td>Digilent, Avnet</td>
+                        <td><a href="https://www.xilinx.com/products/silicon-devices/soc/zynq-7000.html" target="_blank" class="supplier-link">官方網站</a> | <a href="https://store.digilentinc.com/" target="_blank" class="supplier-link">Digilent</a></td>
+                        <td><a href="https://www.xilinx.com/support/documentation/user-guides/ug585-Zynq-7000-TRM.pdf" target="_blank" class="supplier-link">使用手冊</a> | <a href="https://www.xilinx.com/support/documentation-navigation/design-hubs/dh0073-zynq-7000-design-hub.html" target="_blank" class="supplier-link">設計中心</a></td>
+                    </tr>
+                    <tr data-category="fpga">
+                        <td><strong>FPGA 控制板</strong></td>
+                        <td>Intel Cyclone V SoC</td>
+                        <td><span class="price-tag">$300-600</span></td>
+                        <td>雙核 ARM，豐富 I/O</td>
+                        <td>量子電路模擬、控制邏輯</td>
+                        <td>Terasic, Arrow</td>
+                        <td><a href="https://www.intel.com/content/www/us/en/products/programmable/soc/cyclone-v.html" target="_blank" class="supplier-link">官方網站</a> | <a href="https://www.terasic.com.tw/" target="_blank" class="supplier-link">Terasic</a></td>
+                        <td><a href="https://www.intel.com/content/www/us/en/programmable/documentation/lit-index.html" target="_blank" class="supplier-link">技術文檔</a> | <a href="https://www.intel.com/content/www/us/en/programmable/documentation/nik1416467475324.html" target="_blank" class="supplier-link">快速入門</a></td>
+                    </tr>
+                    <tr data-category="qrng">
+                        <td><strong>量子隨機數發生器</strong></td>
+                        <td>ID Quantique QRNG USB</td>
+                        <td><span class="price-tag">$500-800</span></td>
+                        <td>4-16 Mbps，NIST 認證</td>
+                        <td>真隨機數生成、量子密碼學</td>
+                        <td>ID Quantique</td>
+                        <td><a href="https://www.idquantique.com/random-number-generation/products/quantis-random-number-generator/" target="_blank" class="supplier-link">產品頁面</a></td>
+                        <td><a href="https://www.idquantique.com/support/" target="_blank" class="supplier-link">下載中心</a> | <a href="https://www.idquantique.com/support/" target="_blank" class="supplier-link">技術文檔</a></td>
+                    </tr>
+                    <tr data-category="qrng">
+                        <td><strong>量子隨機數發生器</strong></td>
+                        <td>QNu Labs QRNG</td>
+                        <td><span class="price-tag">$300-600</span></td>
+                        <td>USB 3.0，低功耗</td>
+                        <td>真隨機數生成</td>
+                        <td>QNu Labs</td>
+                        <td><a href="https://www.qnulabs.com/" target="_blank" class="supplier-link">官方網站</a></td>
+                        <td><a href="https://www.qnulabs.com/" target="_blank" class="supplier-link">支援中心</a></td>
+                    </tr>
+                    <tr data-category="rf">
+                        <td><strong>RF 信號發生器</strong></td>
+                        <td>Mini-Circuits ZX95-5400+</td>
+                        <td><span class="price-tag">$400-1,000</span></td>
+                        <td>5-4000 MHz，相位噪聲 <-120 dBc/Hz</td>
+                        <td>基礎量子控制</td>
+                        <td>Mini-Circuits</td>
+                        <td><a href="https://www.minicircuits.com/WebStore/dashboard.html?model=ZX95-5400-S+" target="_blank" class="supplier-link">產品頁面</a></td>
+                        <td><a href="https://www.minicircuits.com/appnotes/" target="_blank" class="supplier-link">應用筆記</a> | <a href="https://www.minicircuits.com/softwaredownload/" target="_blank" class="supplier-link">軟體下載</a></td>
+                    </tr>
+                    <tr data-category="rf">
+                        <td><strong>RF 信號發生器</strong></td>
+                        <td>Keysight E8267D</td>
+                        <td><span class="price-tag">$3,000-8,000</span></td>
+                        <td>250 kHz - 20 GHz，高精度</td>
+                        <td>精確量子閘門控制</td>
+                        <td>Keysight</td>
+                        <td><a href="https://www.keysight.com/us/en/product/E8267D/psg-vector-signal-generator.html" target="_blank" class="supplier-link">產品頁面</a></td>
+                        <td><a href="https://www.keysight.com/us/en/support/E8267D/psg-vector-signal-generator.html" target="_blank" class="supplier-link">使用手冊</a> | <a href="https://www.keysight.com/us/en/education/training/keysight-university.html" target="_blank" class="supplier-link">教學資源</a></td>
+                    </tr>
+                    <tr data-category="rf">
+                        <td><strong>任意波形發生器</strong></td>
+                        <td>Zurich Instruments HDAWG</td>
+                        <td><span class="price-tag">$3,000-8,000</span></td>
+                        <td>8 通道，2.4 GS/s</td>
+                        <td>多量子比特控制</td>
+                        <td>Zurich Instruments</td>
+                        <td><a href="https://www.zhinst.com/americas/en/products/hdawg" target="_blank" class="supplier-link">產品頁面</a></td>
+                        <td><a href="https://www.zhinst.com/americas/en/products/hdawg-arbitrary-waveform-generator" target="_blank" class="supplier-link">使用手冊</a> | <a href="https://www.zhinst.com/americas/en/resources" target="_blank" class="supplier-link">應用筆記</a> | <a href="https://www.zhinst.com/americas/en/resources" target="_blank" class="supplier-link">範例程式</a></td>
+                    </tr>
+                    <tr data-category="cryo">
+                        <td><strong>桌面型低溫系統</strong></td>
+                        <td>Montana Instruments Cryostation</td>
+                        <td><span class="price-tag">$2,000-5,000</span></td>
+                        <td>3-400 K</td>
+                        <td>小型量子實驗</td>
+                        <td>Montana Instruments</td>
+                        <td><a href="https://www.montanainstruments.com/" target="_blank" class="supplier-link">產品頁面</a></td>
+                        <td><a href="https://www.montanainstruments.com/" target="_blank" class="supplier-link">使用手冊</a> | <a href="https://www.montanainstruments.com/" target="_blank" class="supplier-link">培訓資源</a></td>
+                    </tr>
+                    <tr data-category="cryo">
+                        <td><strong>專業低溫系統</strong></td>
+                        <td>Bluefors LD 系列</td>
+                        <td><span class="price-tag">$50,000-200,000</span></td>
+                        <td>10 mK</td>
+                        <td>大規模量子處理器</td>
+                        <td>Bluefors</td>
+                        <td><a href="https://bluefors.com/products/" target="_blank" class="supplier-link">產品頁面</a></td>
+                        <td><a href="https://bluefors.com/services/" target="_blank" class="supplier-link">技術文檔</a> | <a href="https://bluefors.com/services/training/" target="_blank" class="supplier-link">培訓課程</a></td>
+                    </tr>
+                    <tr data-category="cryo">
+                        <td><strong>專業低溫系統</strong></td>
+                        <td>Oxford Instruments Triton</td>
+                        <td><span class="price-tag">$50,000-200,000</span></td>
+                        <td><10 mK</td>
+                        <td>研究級量子實驗</td>
+                        <td>Oxford Instruments</td>
+                        <td><a href="https://www.oxford-instruments.com/products/cryogenic-environments/dilution-refrigerators/triton" target="_blank" class="supplier-link">產品頁面</a></td>
+                        <td><a href="https://www.oxford-instruments.com/support/documentation" target="_blank" class="supplier-link">使用手冊</a> | <a href="https://www.oxford-instruments.com/support/training" target="_blank" class="supplier-link">培訓資源</a></td>
+                    </tr>
+                    <tr data-category="sensor">
+                        <td><strong>量子磁力計</strong></td>
+                        <td>QuSpin QZFM</td>
+                        <td><span class="price-tag">$1,000-5,000</span></td>
+                        <td>靈敏度 fT/√Hz</td>
+                        <td>磁場測量、量子感測</td>
+                        <td>QuSpin</td>
+                        <td><a href="https://quspin.com/products-qzfm/" target="_blank" class="supplier-link">產品頁面</a></td>
+                        <td><a href="https://quspin.com/" target="_blank" class="supplier-link">技術支援</a> | <a href="https://quspin.com/" target="_blank" class="supplier-link">應用資源</a></td>
+                    </tr>
+                    <tr data-category="sensor">
+                        <td><strong>量子陀螺儀</strong></td>
+                        <td>AOSense 量子陀螺儀</td>
+                        <td><span class="price-tag">$5,000-20,000</span></td>
+                        <td>高精度</td>
+                        <td>導航、慣性測量</td>
+                        <td>AOSense</td>
+                        <td><a href="https://www.aosense.com/" target="_blank" class="supplier-link">產品頁面</a></td>
+                        <td><a href="https://www.aosense.com/" target="_blank" class="supplier-link">技術支援</a> | <a href="https://www.aosense.com/" target="_blank" class="supplier-link">技術文檔</a></td>
+                    </tr>
+                    <tr data-category="optical">
+                        <td><strong>單光子源</strong></td>
+                        <td>ID Quantique id201</td>
+                        <td><span class="price-tag">$2,000-10,000</span></td>
+                        <td>波長 1550 nm</td>
+                        <td>量子通訊、光量子計算</td>
+                        <td>ID Quantique</td>
+                        <td><a href="https://www.idquantique.com/" target="_blank" class="supplier-link">產品頁面</a></td>
+                        <td><a href="https://www.idquantique.com/support/" target="_blank" class="supplier-link">技術文檔</a> | <a href="https://www.idquantique.com/support/" target="_blank" class="supplier-link">下載中心</a></td>
+                    </tr>
+                    <tr data-category="optical">
+                        <td><strong>光子探測器</strong></td>
+                        <td>Excelitas SPCM</td>
+                        <td><span class="price-tag">$1,000-5,000</span></td>
+                        <td>效率 >60%，暗計數 <100 cps</td>
+                        <td>單光子檢測</td>
+                        <td>Excelitas</td>
+                        <td><a href="https://www.excelitas.com/" target="_blank" class="supplier-link">產品頁面</a></td>
+                        <td><a href="https://www.excelitas.com/" target="_blank" class="supplier-link">技術文檔</a> | <a href="https://www.excelitas.com/" target="_blank" class="supplier-link">應用筆記</a></td>
+                    </tr>
+                    <tr data-category="optical">
+                        <td><strong>光學元件套件</strong></td>
+                        <td>Thorlabs, Newport</td>
+                        <td><span class="price-tag">$500-2,000</span></td>
+                        <td>分束器、偏振器、相位調製器</td>
+                        <td>光量子實驗</td>
+                        <td>Thorlabs, Newport</td>
+                        <td><a href="https://www.thorlabs.com/" target="_blank" class="supplier-link">Thorlabs</a> | <a href="https://www.newport.com/" target="_blank" class="supplier-link">Newport</a></td>
+                        <td><a href="https://www.thorlabs.com/newgrouppage9.cfm?objectgroup_id=9013" target="_blank" class="supplier-link">Thorlabs 教學</a> | <a href="https://www.newport.com/t/educational-resources" target="_blank" class="supplier-link">Newport 資源</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 軟體工具區 -->
+        <div id="software" class="content-section">
+            <h2 class="section-title">軟體工具與平台</h2>
+            
+            <div class="components-grid">
+                <div class="component-card">
+                    <div class="component-name">Qiskit (IBM)</div>
+                    <div class="component-price" style="color: #4caf50;">免費</div>
+                    <div class="component-details">
+                        <strong>語言：</strong>Python<br>
+                        <strong>功能：</strong>量子電路設計、模擬、雲端執行<br>
+                        <strong>平台：</strong>IBM Quantum Lab（免費配額）<br>
+                        <strong>網站：</strong><a href="https://qiskit.org" target="_blank" class="supplier-link">qiskit.org</a><br>
+                        <strong>操作資訊：</strong><a href="https://qiskit.org/documentation/" target="_blank" class="supplier-link">完整文檔</a> | <a href="https://qiskit.org/textbook/" target="_blank" class="supplier-link">免費教科書</a> | <a href="https://qiskit.org/learn/" target="_blank" class="supplier-link">教學課程</a> | <a href="https://quantum-computing.ibm.com/lab" target="_blank" class="supplier-link">線上實驗室</a>
+                    </div>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-name">Cirq (Google)</div>
+                    <div class="component-price" style="color: #4caf50;">免費</div>
+                    <div class="component-details">
+                        <strong>語言：</strong>Python<br>
+                        <strong>功能：</strong>量子演算法開發<br>
+                        <strong>平台：</strong>Google Colab 整合<br>
+                        <strong>網站：</strong><a href="https://quantumai.google/cirq" target="_blank" class="supplier-link">quantumai.google</a><br>
+                        <strong>操作資訊：</strong><a href="https://quantumai.google/cirq/tutorials" target="_blank" class="supplier-link">教學課程</a> | <a href="https://quantumai.google/cirq/install" target="_blank" class="supplier-link">安裝指南</a> | <a href="https://quantumai.google/cirq/experiments" target="_blank" class="supplier-link">範例程式</a>
+                    </div>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-name">Q# (Microsoft)</div>
+                    <div class="component-price" style="color: #4caf50;">免費</div>
+                    <div class="component-details">
+                        <strong>語言：</strong>C#<br>
+                        <strong>功能：</strong>量子程式設計<br>
+                        <strong>平台：</strong>Azure Quantum（部分免費）<br>
+                        <strong>網站：</strong><a href="https://learn.microsoft.com/en-us/azure/quantum/" target="_blank" class="supplier-link">learn.microsoft.com</a><br>
+                        <strong>操作資訊：</strong><a href="https://learn.microsoft.com/en-us/azure/quantum/" target="_blank" class="supplier-link">學習中心</a> | <a href="https://learn.microsoft.com/en-us/azure/quantum/" target="_blank" class="supplier-link">快速入門</a> | <a href="https://github.com/microsoft/Quantum" target="_blank" class="supplier-link">GitHub 範例</a>
+                    </div>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-name">ProjectQ</div>
+                    <div class="component-price" style="color: #4caf50;">開源</div>
+                    <div class="component-details">
+                        <strong>語言：</strong>Python<br>
+                        <strong>功能：</strong>開源量子計算框架<br>
+                        <strong>特點：</strong>支援多種後端<br>
+                        <strong>網站：</strong><a href="https://projectq.ch" target="_blank" class="supplier-link">projectq.ch</a><br>
+                        <strong>操作資訊：</strong><a href="https://projectq.readthedocs.io/" target="_blank" class="supplier-link">完整文檔</a> | <a href="https://github.com/ProjectQ-Framework/ProjectQ" target="_blank" class="supplier-link">GitHub</a> | <a href="https://projectq.readthedocs.io/en/latest/tutorials.html" target="_blank" class="supplier-link">教學課程</a>
+                    </div>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-name">Quantum Machines OPX+</div>
+                    <div class="component-price">$50,000+</div>
+                    <div class="component-details">
+                        <strong>類型：</strong>專業量子控制系統<br>
+                        <strong>適用：</strong>研究實驗室<br>
+                        <strong>功能：</strong>多通道控制、實時反饋<br>
+                        <strong>網站：</strong><a href="https://www.quantum-machines.co" target="_blank" class="supplier-link">quantum-machines.co</a><br>
+                        <strong>操作資訊：</strong><a href="https://www.quantum-machines.co/" target="_blank" class="supplier-link">技術文檔</a> | <a href="https://www.quantum-machines.co/" target="_blank" class="supplier-link">培訓課程</a> | <a href="https://www.quantum-machines.co/" target="_blank" class="supplier-link">應用範例</a>
+                    </div>
+                </div>
+
+                <div class="component-card">
+                    <div class="component-name">Classiq</div>
+                    <div class="component-price">訂閱制</div>
+                    <div class="component-details">
+                        <strong>類型：</strong>高階量子演算法設計<br>
+                        <strong>適用：</strong>企業應用<br>
+                        <strong>功能：</strong>自動化電路優化<br>
+                        <strong>網站：</strong><a href="https://www.classiq.io" target="_blank" class="supplier-link">classiq.io</a><br>
+                        <strong>操作資訊：</strong><a href="https://docs.classiq.io/" target="_blank" class="supplier-link">完整文檔</a> | <a href="https://docs.classiq.io/latest/" target="_blank" class="supplier-link">教學課程</a> | <a href="https://docs.classiq.io/latest/" target="_blank" class="supplier-link">應用範例</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 供應商區 -->
+        <div id="suppliers" class="content-section">
+            <h2 class="section-title">推薦供應商</h2>
+            
+            <h3 style="margin: 30px 0 20px 0; color: #667eea;">國際供應商</h3>
+            <div class="supplier-card">
+                <div class="supplier-name">Quantum Machines</div>
+                <div class="supplier-info">
+                    <strong>產品：</strong>OPX+ 控制系統<br>
+                    <strong>網站：</strong><a href="https://www.quantum-machines.co" target="_blank" class="supplier-link">quantum-machines.co</a><br>
+                    <strong>產品頁：</strong><a href="https://www.quantum-machines.co/products/opx/" target="_blank" class="supplier-link">OPX+ 詳細資訊</a><br>
+                    <strong>聯繫：</strong>sales@quantum-machines.co
+                </div>
+            </div>
+
+            <div class="supplier-card">
+                <div class="supplier-name">Zurich Instruments</div>
+                <div class="supplier-info">
+                    <strong>產品：</strong>HDAWG, UHFLI<br>
+                    <strong>網站：</strong><a href="https://www.zhinst.com" target="_blank" class="supplier-link">zhinst.com</a><br>
+                    <strong>產品頁：</strong><a href="https://www.zhinst.com/americas/en/products/hdawg" target="_blank" class="supplier-link">HDAWG 詳細資訊</a><br>
+                    <strong>聯繫：</strong>info@zhinst.com
+                </div>
+            </div>
+
+            <div class="supplier-card">
+                <div class="supplier-name">ID Quantique</div>
+                <div class="supplier-info">
+                    <strong>產品：</strong>QRNG, QKD 系統<br>
+                    <strong>網站：</strong><a href="https://www.idquantique.com" target="_blank" class="supplier-link">idquantique.com</a><br>
+                    <strong>產品頁：</strong><a href="https://www.idquantique.com/random-number-generation/products/quantis-random-number-generator/" target="_blank" class="supplier-link">QRNG 詳細資訊</a><br>
+                    <strong>聯繫：</strong>sales@idquantique.com
+                </div>
+            </div>
+
+            <div class="supplier-card">
+                <div class="supplier-name">Mouser Electronics</div>
+                <div class="supplier-info">
+                    <strong>產品：</strong>全球電子元件分銷<br>
+                    <strong>網站：</strong><a href="https://www.mouser.com" target="_blank" class="supplier-link">mouser.com</a><br>
+                    <strong>特色：</strong>快速配送、豐富庫存、線上購買
+                </div>
+            </div>
+
+            <div class="supplier-card">
+                <div class="supplier-name">Digi-Key</div>
+                <div class="supplier-info">
+                    <strong>產品：</strong>全球電子元件分銷<br>
+                    <strong>網站：</strong><a href="https://www.digikey.com" target="_blank" class="supplier-link">digikey.com</a><br>
+                    <strong>特色：</strong>全球配送、技術支援、線上購買
+                </div>
+            </div>
+
+            <div class="supplier-card">
+                <div class="supplier-name">Arrow Electronics</div>
+                <div class="supplier-info">
+                    <strong>產品：</strong>電子元件分銷、大訂單優惠<br>
+                    <strong>網站：</strong><a href="https://www.arrow.com" target="_blank" class="supplier-link">arrow.com</a><br>
+                    <strong>特色：</strong>企業級服務、批量採購優惠
+                </div>
+            </div>
+
+            <h3 style="margin: 30px 0 20px 0; color: #667eea;">中國供應商</h3>
+            <div class="supplier-card">
+                <div class="supplier-name">本源量子</div>
+                <div class="supplier-info">
+                    <strong>產品：</strong>量子處理器、控制系統<br>
+                    <strong>網站：</strong><a href="https://www.originqc.com.cn" target="_blank" class="supplier-link">originqc.com.cn</a><br>
+                    <strong>商城：</strong><a href="https://mall.originqc.com.cn" target="_blank" class="supplier-link">mall.originqc.com.cn</a>（線上購買）
+                </div>
+            </div>
+
+            <div class="supplier-card">
+                <div class="supplier-name">百度量子</div>
+                <div class="supplier-info">
+                    <strong>產品：</strong>量子平台、軟體工具<br>
+                    <strong>網站：</strong><a href="https://quantum-hub.baidu.com" target="_blank" class="supplier-link">quantum-hub.baidu.com</a><br>
+                    <strong>平台：</strong>量易伏（Quanlse）、量槳（Paddle Quantum）
+                </div>
+            </div>
+
+            <div class="supplier-card">
+                <div class="supplier-name">量旋科技</div>
+                <div class="supplier-info">
+                    <strong>產品：</strong>桌面級核磁共振量子計算機（雙子座Lab）<br>
+                    <strong>網站：</strong><a href="https://www.spinq.cn" target="_blank" class="supplier-link">spinq.cn</a><br>
+                    <strong>特色：</strong>適合教學和實驗的桌面級量子計算平台
+                </div>
+            </div>
+
+            <h3 style="margin: 30px 0 20px 0; color: #667eea;">台灣供應商</h3>
+            <div class="supplier-card">
+                <div class="supplier-name">是德科技台灣</div>
+                <div class="supplier-info">
+                    <strong>產品：</strong>RF/微波測試設備<br>
+                    <strong>網站：</strong><a href="https://www.keysight.com/tw" target="_blank" class="supplier-link">keysight.com/tw</a><br>
+                    <strong>聯繫：</strong>可透過官網聯繫台灣辦事處
+                </div>
+            </div>
+
+            <div class="supplier-card">
+                <div class="supplier-name">茂綸電子</div>
+                <div class="supplier-info">
+                    <strong>產品：</strong>FPGA、RF 元件<br>
+                    <strong>類型：</strong>電子元件分銷商<br>
+                    <strong>網站：</strong><a href="https://www.mouser.tw" target="_blank" class="supplier-link">Mouser 台灣</a>（茂綸為 Mouser 台灣代理商）
+                </div>
+            </div>
+
+            <div class="supplier-card">
+                <div class="supplier-name">文曄科技</div>
+                <div class="supplier-info">
+                    <strong>產品：</strong>半導體元件<br>
+                    <strong>類型：</strong>電子元件分銷商<br>
+                    <strong>網站：</strong><a href="https://www.wtmec.com" target="_blank" class="supplier-link">wtmec.com</a>
+                </div>
+            </div>
+
+            <div class="supplier-card">
+                <div class="supplier-name">大聯大控股</div>
+                <div class="supplier-info">
+                    <strong>產品：</strong>電子元件分銷<br>
+                    <strong>類型：</strong>電子元件分銷商<br>
+                    <strong>網站：</strong><a href="https://www.wpgholdings.com" target="_blank" class="supplier-link">wpgholdings.com</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 實作步驟區 -->
+        <div id="timeline" class="content-section">
+            <h2 class="section-title">實作步驟總覽</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">階段一：理論準備（1-2個月）</div>
+                        <p><strong>目標：</strong>建立量子計算基礎知識</p>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>學習量子力學基礎（線性代數、量子態、量子閘門）</li>
+                            <li>理解量子計算原理（Qubit、糾纏、演算法）</li>
+                            <li>熟悉編程框架（Qiskit、Cirq、Q#）</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">階段二：模擬器實踐（2-3個月）</div>
+                        <p><strong>目標：</strong>在模擬環境中實作量子電路</p>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>本地模擬器（Qiskit Aer、Cirq）</li>
+                            <li>雲端模擬器（IBM Quantum Lab、Google Colab）</li>
+                            <li>實作項目（量子隨機數生成器、Bell 態、量子隱形傳態）</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">階段三：硬體模組實作（3-6個月）</div>
+                        <p><strong>目標：</strong>使用實際硬體模組進行實驗</p>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>入門級硬體（FPGA、QRNG、簡單感測器）</li>
+                            <li>中級硬體（超導量子比特控制、離子阱、光量子）</li>
+                            <li>高級硬體（完整量子處理器、低溫系統、量子網路）</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">階段四：系統整合（6個月+）</div>
+                        <p><strong>目標：</strong>整合硬體與軟體，開發完整應用</p>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>控制系統開發（RF 脈衝、數據採集、錯誤修正）</li>
+                            <li>應用開發（量子優化、量子機器學習、量子化學模擬）</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function agentLogNoCors(payload) {
+            try {
+                const body = JSON.stringify(payload);
+                if (navigator && typeof navigator.sendBeacon === 'function') {
+                    const blob = new Blob([body], { type: 'text/plain' });
+                    navigator.sendBeacon('http://127.0.0.1:7242/ingest/dc9699bb-60cb-4caa-971b-91fe13082499', blob);
+                    return;
+                }
+                fetch('http://127.0.0.1:7242/ingest/dc9699bb-60cb-4caa-971b-91fe13082499', { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body }).catch(() => {});
+            } catch (_) {}
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // #region agent log
+            agentLogNoCors({sessionId:'debug-session',runId:'pre-fix',hypothesisId:'H0',location:'量子計算採購清單_視覺化.html:DOMContentLoaded',message:'page loaded',data:{origin:location.origin,href:location.href},timestamp:Date.now()});
+            // #endregion
+        });
+
+        function showSection(sectionId, evt) {
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/dc9699bb-60cb-4caa-971b-91fe13082499',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:'debug-session',runId:'pre-fix',hypothesisId:'H1',location:'量子計算採購清單_視覺化.html:showSection',message:'showSection called',data:{sectionId,hasEvt:!!evt,targetTag:evt&&evt.target&&evt.target.tagName,activeBefore:document.querySelectorAll('.content-section.active').length},timestamp:Date.now()})}).catch(()=>{});
+            // #endregion
+            // #region agent log
+            agentLogNoCors({sessionId:'debug-session',runId:'pre-fix',hypothesisId:'H1',location:'量子計算採購清單_視覺化.html:showSection',message:'showSection called (no-cors)',data:{sectionId,hasEvt:!!evt,targetTag:evt&&evt.target&&evt.target.tagName,activeBefore:document.querySelectorAll('.content-section.active').length},timestamp:Date.now()});
+            // #endregion
+            // 隱藏所有區塊
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            // 移除所有標籤的 active 狀態
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // 顯示選中的區塊
+            document.getElementById(sectionId).classList.add('active');
+
+            // 添加標籤的 active 狀態
+            const tabEl = (evt && (evt.currentTarget || evt.target)) ? (evt.currentTarget || evt.target) : null;
+            if (tabEl && tabEl.classList) tabEl.classList.add('active');
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/dc9699bb-60cb-4caa-971b-91fe13082499',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:'debug-session',runId:'pre-fix',hypothesisId:'H1',location:'量子計算採購清單_視覺化.html:showSection',message:'showSection applied',data:{sectionId,activeAfter:document.querySelectorAll('.content-section.active').length,tabActivated:!!tabEl},timestamp:Date.now()})}).catch(()=>{});
+            // #endregion
+            // #region agent log
+            agentLogNoCors({sessionId:'debug-session',runId:'pre-fix',hypothesisId:'H1',location:'量子計算採購清單_視覺化.html:showSection',message:'showSection applied (no-cors)',data:{sectionId,activeAfter:document.querySelectorAll('.content-section.active').length,tabActivated:!!tabEl},timestamp:Date.now()});
+            // #endregion
+        }
+
+        function filterHardware() {
+            const input = document.getElementById('hardwareSearch');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('hardwareTable');
+            const rows = table.getElementsByTagName('tr');
+
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/dc9699bb-60cb-4caa-971b-91fe13082499',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:'debug-session',runId:'pre-fix',hypothesisId:'H2',location:'量子計算採購清單_視覺化.html:filterHardware',message:'filterHardware input',data:{q:filter,rowCount:rows.length},timestamp:Date.now()})}).catch(()=>{});
+            // #endregion
+            // #region agent log
+            agentLogNoCors({sessionId:'debug-session',runId:'pre-fix',hypothesisId:'H2',location:'量子計算採購清單_視覺化.html:filterHardware',message:'filterHardware input (no-cors)',data:{q:filter,rowCount:rows.length},timestamp:Date.now()});
+            // #endregion
+            for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                const text = row.textContent.toLowerCase();
+                if (text.includes(filter)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/dc9699bb-60cb-4caa-971b-91fe13082499',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:'debug-session',runId:'pre-fix',hypothesisId:'H2',location:'量子計算採購清單_視覺化.html:filterHardware',message:'filterHardware done',data:{q:filter,visibleRows:Array.from(document.querySelectorAll('#hardwareTable tbody tr')).filter(r=>r.style.display!=='none').length},timestamp:Date.now()})}).catch(()=>{});
+            // #endregion
+            // #region agent log
+            agentLogNoCors({sessionId:'debug-session',runId:'pre-fix',hypothesisId:'H2',location:'量子計算採購清單_視覺化.html:filterHardware',message:'filterHardware done (no-cors)',data:{q:filter,visibleRows:Array.from(document.querySelectorAll('#hardwareTable tbody tr')).filter(r=>r.style.display!=='none').length},timestamp:Date.now()});
+            // #endregion
+        }
+
+        function filterByCategory(category, evt) {
+            const rows = document.querySelectorAll('#hardwareTable tbody tr');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // 更新按鈕狀態
+            buttons.forEach(btn => btn.classList.remove('active'));
+            const btnEl = (evt && (evt.currentTarget || evt.target)) ? (evt.currentTarget || evt.target) : null;
+            if (btnEl && btnEl.classList) btnEl.classList.add('active');
+
+            // 過濾表格
+            rows.forEach(row => {
+                if (category === 'all' || row.getAttribute('data-category') === category) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+            // #region agent log
+            fetch('http://127.0.0.1:7242/ingest/dc9699bb-60cb-4caa-971b-91fe13082499',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:'debug-session',runId:'pre-fix',hypothesisId:'H3',location:'量子計算採購清單_視覺化.html:filterByCategory',message:'filterByCategory applied',data:{category,hasEvt:!!evt,buttonActivated:!!btnEl,visibleRows:Array.from(rows).filter(r=>r.style.display!=='none').length,totalRows:rows.length},timestamp:Date.now()})}).catch(()=>{});
+            // #endregion
+            // #region agent log
+            agentLogNoCors({sessionId:'debug-session',runId:'pre-fix',hypothesisId:'H3',location:'量子計算採購清單_視覺化.html:filterByCategory',message:'filterByCategory applied (no-cors)',data:{category,hasEvt:!!evt,buttonActivated:!!btnEl,visibleRows:Array.from(rows).filter(r=>r.style.display!=='none').length,totalRows:rows.length},timestamp:Date.now()});
+            // #endregion
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,26 @@
+{
+  "title": "防務/導彈板塊自選股",
+  "description": "地緣政治防禦性板塊，依局勢可作為 DCA 或觀察名單",
+  "updated_at": "",
+  "companies": [
+    {"country": "US", "name": "Lockheed Martin", "products": "F-35、PAC-3、THAAD", "symbol_candidates": ["LMT"], "role": "全球最大防務承包商"},
+    {"country": "US", "name": "RTX (Raytheon)", "products": "Patriot、AIM-120、SM系列", "symbol_candidates": ["RTX", "RTN"], "role": "導彈與雷達"},
+    {"country": "US", "name": "Northrop Grumman", "products": "B-2、ICBM、GBSD", "symbol_candidates": ["NOC"], "role": "戰略武器"},
+    {"country": "US", "name": "Boeing Defense", "products": "JDAM、Harpoon", "symbol_candidates": ["BA"], "role": "航空與精準打擊"},
+    {"country": "US", "name": "General Dynamics", "products": "彈藥、地面武器", "symbol_candidates": ["GD"], "role": "陸戰供應商"},
+    {"country": "US", "name": "L3Harris Technologies", "products": "電子戰、導引系統", "symbol_candidates": ["LHX"], "role": "軍用通訊"},
+    {"country": "US", "name": "Textron", "products": "戰術導彈、無人機", "symbol_candidates": ["TXT"], "role": "戰術系統"},
+    {"country": "EU", "name": "Thales", "products": "防空雷達、導彈控制", "symbol_candidates": ["HO.PA", "THLEF"], "role": "歐洲電子系統"},
+    {"country": "IT", "name": "Leonardo", "products": "空防系統、直升機", "symbol_candidates": ["LDO.MI", "LDO"], "role": "義大利防務"},
+    {"country": "DE", "name": "Rheinmetall", "products": "火炮、防空武器", "symbol_candidates": ["RHM.DE", "RHM"], "role": "德國陸戰"},
+    {"country": "IL", "name": "IAI (Israel Aerospace)", "products": "Arrow、Barak", "symbol_candidates": ["IAI.TA", "ISRA"], "role": "以色列防空"},
+    {"country": "SE", "name": "Saab", "products": "RBS 防空導彈", "symbol_candidates": ["SAAB.B", "SAAB.ST"], "role": "北歐防務"},
+    {"country": "NO", "name": "Kongsberg", "products": "NSM 反艦導彈", "symbol_candidates": ["KOG.OL", "KOG"], "role": "挪威海軍武器"},
+    {"country": "KR", "name": "Hanwha Aerospace", "products": "K 系列防空、火炮", "symbol_candidates": ["012450.KS", "HWAJF"], "role": "韓國防務"}
+  ],
+  "notes": [
+    "MBDA、Rafael、俄中企業多數未在 eToro 上市",
+    "BA 為波音整體，含民用與國防",
+    "依策略規則：股票只減不加，可作為觀察或擇機小量配置"
+  ]
+}

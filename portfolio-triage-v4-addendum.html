@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v4 補充:C 節貸款反推 + I 節回檔買入手冊</title>
+<style>
+  :root {
+    --bg:#0f1115; --surface:#1a1d24; --surface2:#22262f; --border:#2a2f3a;
+    --text:#e6e9ef; --muted:#8a93a6;
+    --success:#3fb950; --danger:#f85149; --warning:#e0a93f; --info:#58a6ff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;padding:40px 24px 80px;background:var(--bg);color:var(--text);
+    font-family:-apple-system,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.6;font-size:14px}
+  .container{max-width:1100px;margin:0 auto}
+  h1{font-size:26px;margin:0 0 4px}
+  h2{font-size:20px;margin:28px 0 10px;border-left:3px solid var(--info);padding-left:10px}
+  h3{font-size:16px;margin:16px 0 8px}
+  .secondary{color:var(--muted);font-size:12px}
+  .stat-grid{display:grid;gap:12px;margin:12px 0}
+  .stat-grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .stat-grid.cols-4{grid-template-columns:repeat(4,1fr)}
+  .stat{background:var(--surface);border:1px solid var(--border);
+    border-radius:10px;padding:14px}
+  .stat .value{font-size:20px;font-weight:700;margin-bottom:2px}
+  .stat .label{color:var(--muted);font-size:11px}
+  .stat.success .value{color:var(--success)}
+  .stat.danger .value{color:var(--danger)}
+  .stat.warning .value{color:var(--warning)}
+  .callout{border-radius:10px;padding:14px 16px;margin:12px 0;
+    border-left:4px solid var(--info);background:var(--surface)}
+  .callout.warning{background:rgba(224,169,63,0.12);border-left-color:var(--warning)}
+  .callout.danger{background:rgba(248,81,73,0.12);border-left-color:var(--danger)}
+  .callout.info{background:rgba(88,166,255,0.12);border-left-color:var(--info)}
+  .callout .title{font-weight:600;margin-bottom:6px}
+  .callout p{margin:4px 0}
+  table{width:100%;border-collapse:collapse;background:var(--surface);
+    border-radius:10px;overflow:hidden;font-size:13px;margin:8px 0}
+  th,td{padding:9px 11px;border-bottom:1px solid var(--border);text-align:left}
+  th{background:var(--surface2);font-size:11px;color:var(--muted);font-weight:600}
+  .right{text-align:right;font-variant-numeric:tabular-nums}
+  .center{text-align:center}
+  .bold{font-weight:700}
+  tr.success td{background:rgba(63,185,80,0.08)}
+  tr.warning td{background:rgba(224,169,63,0.08)}
+  tr.danger td{background:rgba(248,81,73,0.10)}
+  .pill{display:inline-block;padding:1px 8px;border-radius:999px;
+    font-size:11px;border:1px solid var(--border);background:var(--surface2)}
+  .pill.success{color:var(--success);background:rgba(63,185,80,0.15);border-color:transparent}
+  .pill.warning{color:var(--warning);background:rgba(224,169,63,0.15);border-color:transparent}
+  .pill.danger{color:var(--danger);background:rgba(248,81,73,0.15);border-color:transparent}
+  .pill.info{color:var(--info);background:rgba(88,166,255,0.15);border-color:transparent}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>v4 補充:C 節貸款反推 + I 節回檔買入作戰手冊</h1>
+  <div class="secondary">條件:月供 24K · 年利率 3.1% · 84 期 · 薪水 51K · 薪水負擔月供(投資帳戶不產生現金流)</div>
+
+  <!-- C section -->
+  <h2>C. 貸款倉條件釐清(v4 補上數字)</h2>
+
+  <h3>C-1. 貸款反推</h3>
+  <div class="stat-grid cols-4">
+    <div class="stat"><div class="value">NT$ 1.81M</div><div class="label">貸款本金(反推)</div></div>
+    <div class="stat warning"><div class="value">NT$ 206K</div><div class="label">7 年總利息</div></div>
+    <div class="stat warning"><div class="value">NT$ 53K</div><div class="label">首年利息(最高)</div></div>
+    <div class="stat success"><div class="value">NT$ 4K</div><div class="label">末年利息(最低)</div></div>
+  </div>
+
+  <h3>C-2. 每年利息攤還表(真賺門檻)</h3>
+  <table>
+    <thead><tr><th class="center">年度</th><th class="right">年初餘額</th><th class="right">當年利息</th><th class="right">當年本金</th><th class="right">佔元大 %</th><th class="right">佔合併 %</th></tr></thead>
+    <tbody>
+      <tr><td class="center">1</td><td class="right">NT$ 1,810,557</td><td class="right bold">NT$ 52,868</td><td class="right">235,132</td><td class="right">1.49%</td><td class="right">0.84%</td></tr>
+      <tr><td class="center">2</td><td class="right">1,575,425</td><td class="right">45,273</td><td class="right">242,727</td><td class="right">1.28%</td><td class="right">0.72%</td></tr>
+      <tr><td class="center">3</td><td class="right">1,332,698</td><td class="right">37,899</td><td class="right">250,101</td><td class="right">1.07%</td><td class="right">0.60%</td></tr>
+      <tr><td class="center">4</td><td class="right">1,082,597</td><td class="right">29,850</td><td class="right">258,150</td><td class="right">0.84%</td><td class="right">0.47%</td></tr>
+      <tr><td class="center">5</td><td class="right">824,447</td><td class="right">21,930</td><td class="right">266,070</td><td class="right">0.62%</td><td class="right">0.35%</td></tr>
+      <tr><td class="center">6</td><td class="right">558,377</td><td class="right">13,876</td><td class="right">274,124</td><td class="right">0.39%</td><td class="right">0.22%</td></tr>
+      <tr><td class="center">7</td><td class="right">284,253</td><td class="right">3,747</td><td class="right">284,253</td><td class="right">0.11%</td><td class="right">0.06%</td></tr>
+      <tr><td class="center bold">合計</td><td class="right">—</td><td class="right bold">NT$ 205,443</td><td class="right bold">1,810,557</td><td class="right">—</td><td class="right">—</td></tr>
+    </tbody>
+  </table>
+
+  <h3>C-3. 三層年化門檻(以元大 3.55M 為分母)</h3>
+  <table>
+    <thead><tr><th>層次</th><th>年化標準</th><th class="right">首年金額</th><th>意義</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pill success">最低</span></td><td>≥ 1.49%</td><td class="right">NT$ 53K</td><td>帳面淨賺,過了就不倒貼</td></tr>
+      <tr><td><span class="pill warning">實質</span></td><td>≥ 4%(利息 + 通膨 2.5%)</td><td class="right">NT$ 142K</td><td>購買力不縮水</td></tr>
+      <tr><td><span class="pill danger">值得</span></td><td>≥ 10%(= VOO 年化)</td><td class="right">NT$ 355K</td><td>配得上承擔波動 + 時間 + 心理負擔</td></tr>
+    </tbody>
+  </table>
+
+  <h3>C-4. 風險水位線(元大淨值警報)</h3>
+  <table>
+    <thead><tr><th class="right">帳戶市值</th><th class="center">跌幅</th><th class="right">淨值(扣貸款)</th><th>狀態</th></tr></thead>
+    <tbody>
+      <tr><td class="right">NT$ 3.55M</td><td class="center">0%</td><td class="right">+1.74M</td><td><span class="pill success">正常</span></td></tr>
+      <tr class="warning"><td class="right">NT$ 3.20M</td><td class="center">−10%</td><td class="right">+1.39M</td><td><span class="pill warning">黃線:暫停新單</span></td></tr>
+      <tr class="warning"><td class="right">NT$ 2.49M</td><td class="center">−30%</td><td class="right">+680K</td><td><span class="pill warning">橘線:被動減碼</span></td></tr>
+      <tr class="danger"><td class="right">NT$ 2.00M</td><td class="center">−44%</td><td class="right">+190K</td><td><span class="pill danger">紅線:強制去槓桿</span></td></tr>
+      <tr class="danger"><td class="right">NT$ 1.81M</td><td class="center">−49%</td><td class="right">0</td><td><span class="pill danger">☠ 淨值歸零臨界</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout info">
+    <div class="title">C 節的硬結論</div>
+    <p>1. <span class="bold">真賺門檻很低</span> —— 元大年化只要 1.5% 就不倒貼(薪水負擔利息,帳戶不需產生現金流)。</p>
+    <p>2. <span class="bold">值得門檻很高</span> —— 需要 10% 年化才對得起槓桿的心理成本,過去 3 年你沒做到。</p>
+    <p>3. <span class="bold">真脆弱點是失業</span> —— 不是帳戶浮虧,是薪水中斷,因為 DTI 47% + 緊急緩衝只有 3 個月。</p>
+  </div>
+
+  <!-- I section -->
+  <h2>I. 回檔買入作戰手冊 <span class="pill info">你的策略偏好</span></h2>
+  <div class="secondary">你的偏好:不喜歡 DCA,偏好大量回檔買入 + 按比例分批。這是正統 tranche buying,但需要結構支撐才跑得起來。</div>
+
+  <div class="callout warning">
+    <div class="title">現實檢查:你真的在做這件事嗎?</div>
+    <p>偏好:「等回檔,分批買」;實際做的事:「每週都在買,2.2% 現金,1,874 筆交易」。<span class="bold">偏好跟執行是兩回事,結構沒改,策略就是空話。</span></p>
+    <p class="secondary">好消息:你的大贏家(PLUG、OCGN、TSM、CLSK、IONQ)幾乎全是回檔買入打出來的 —— 表示你有眼光,缺的是系統化。</p>
+  </div>
+
+  <h3>I-1. 三條核心規則(缺一不可)</h3>
+  <table>
+    <thead><tr><th>規則</th><th>內容</th><th>你過去缺哪條</th></tr></thead>
+    <tbody>
+      <tr><td class="bold">1. 單檔上限</td><td>每檔不能超過組合的固定 %</td><td><span class="pill danger">沒設,CRM 已 4.4% 超題材上限</span></td></tr>
+      <tr><td class="bold">2. 分批節奏</td><td>預先決定「幾批」+「每批觸發條件」+「倒金字塔加碼」</td><td><span class="pill warning">憑感覺分批,沒寫明觸發</span></td></tr>
+      <tr><td class="bold">3. 停止加碼線</td><td>基本面破 / 達上限 / 忘了為什麼買 → 不再加</td><td><span class="pill danger">最缺的,CRM 就這樣變黑洞</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>I-2. 單檔上限表(規則 1)</h3>
+  <table>
+    <thead><tr><th>分類</th><th class="right">單檔上限(% 組合)</th><th class="right">金額上限(以 6.33M 計)</th><th>代表標的</th></tr></thead>
+    <tbody>
+      <tr><td>藍籌 + ETF</td><td class="right">≤ 8%</td><td class="right">NT$ 506K</td><td>TSM / VOO / NVDA / AMZN / MSFT</td></tr>
+      <tr><td>題材股有基本面</td><td class="right">≤ 3%</td><td class="right">NT$ 190K</td><td>PLUG / IONQ / ORCL / PYPL</td></tr>
+      <tr><td>題材股無基本面</td><td class="right">≤ 1%</td><td class="right">NT$ 63K</td><td>CRIS / ARQQ / BBAI / GPUS</td></tr>
+      <tr><td>加密資產</td><td class="right">≤ 10% 合計</td><td class="right">NT$ 633K</td><td>ETH / BTC / SOL / ADA</td></tr>
+    </tbody>
+  </table>
+
+  <h3>I-3. 分批節奏表(規則 2)</h3>
+  <div class="secondary">以「對該檔的信心」決定批數。每批金額逐批遞增(倒金字塔),越跌買越多。</div>
+  <table>
+    <thead><tr><th>信心</th><th class="center">批數</th><th>觸發價位</th><th>每批金額比例</th><th>平均成本效果</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pill success">高信心</span></td><td class="center">3</td><td>入場 / −10% / −20%</td><td>20% / 30% / 50%</td><td>若打到底,平均成本約 −14%</td></tr>
+      <tr><td><span class="pill warning">中信心</span></td><td class="center">4</td><td>0 / −15% / −25% / −35%</td><td>15% / 20% / 30% / 35%</td><td>若打到底,平均成本約 −24%</td></tr>
+      <tr><td><span class="pill info">低信心</span></td><td class="center">5</td><td>0 / −10% / −20% / −30% / −40%</td><td>10% / 15% / 20% / 25% / 30%</td><td>若打到底,平均成本約 −26%</td></tr>
+    </tbody>
+  </table>
+
+  <h3>I-4. 停止加碼線(規則 3,最關鍵)</h3>
+  <table>
+    <thead><tr><th>情境</th><th>具體訊號</th><th>例子</th></tr></thead>
+    <tbody>
+      <tr class="danger"><td>基本面事件性破損</td><td>財報結構性變臉 / 核心產品被取代 / 商業模式失效</td><td>NKE 中國+Hoka / CRIS 臨床失敗 / ARQQ 商業化受挫</td></tr>
+      <tr class="warning"><td>已達單檔上限</td><td>超過 I-2 表的上限比例</td><td>CRM 4.4% > 題材股 3% → 不加</td></tr>
+      <tr class="danger"><td>浮虧超過 −50% 且無基本面支撐</td><td>已經不是回檔,是破損</td><td>ARQQ / BBAI / GPUS / CMTL</td></tr>
+      <tr class="warning"><td class="bold">忘了為什麼當初買</td><td class="bold">A-2 的 Q1/Q2 答不出來</td><td class="bold">這是最直接也最常被忽略的一條</td></tr>
+    </tbody>
+  </table>
+
+  <h3>I-5. 現況實戰:你現在能打幾發子彈?</h3>
+  <div class="stat-grid cols-3">
+    <div class="stat"><div class="value">NT$ 135K</div><div class="label">元大 CMA(能動用)</div></div>
+    <div class="stat danger"><div class="value">~$202</div><div class="label">eToro 現金(幾乎 0)</div></div>
+    <div class="stat danger"><div class="value">NT$ 141K</div><div class="label">總有效子彈(2.2%)</div></div>
+  </div>
+  <div class="callout danger">
+    <div class="title">殘酷事實</div>
+    <p>你偏好「大量回檔買入 + 按比例分批」,但目前子彈只夠打 <span class="bold">1 次小型回檔(−10%)的一個標的</span>。</p>
+    <p>如果遇到 2020 年那種 −30% 大跌,你的策略 <span class="bold">完全無法執行</span> —— 這就是為什麼優先順序是「先造子彈,再談加碼」。</p>
+  </div>
+
+  <h3>I-6. 造子彈三步(3 個月內達成 NT$ 400K+)</h3>
+  <table>
+    <thead><tr><th class="center">步驟</th><th>動作</th><th class="right">預估釋放</th><th>重要性</th></tr></thead>
+    <tbody>
+      <tr><td class="center">1</td><td>A-3 八檔死倉停損(CRIS、MVIS、BBAI、GPUS、ARQQ、CMTL、BLNK、EVGO)</td><td class="right">~NT$ 90K</td><td><span class="pill danger">必做</span></td></tr>
+      <tr><td class="center">2</td><td>大贏家減半(PLUG/OCGN/TSM 單檔 +50% 自動減半規則)</td><td class="right">~NT$ 100K–150K</td><td><span class="pill warning">建議</span></td></tr>
+      <tr><td class="center">3</td><td>eToro 小於 $500 的雜魚一次清乾(30+ 檔)</td><td class="right">~NT$ 100K</td><td><span class="pill warning">建議</span></td></tr>
+      <tr><td class="center bold">合計</td><td class="bold">3 個月內能造出的子彈</td><td class="right bold">~NT$ 300K–350K</td><td>+ CMA 135K → 約 450K(~7% 組合)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>I-7. 你的狙擊清單(10 檔,要自己填)</h3>
+  <div class="secondary">寫不出 10 檔沒關係,5 檔也好。沒列在清單上的,就算暴跌也不動手。</div>
+  <table>
+    <thead><tr><th class="center">#</th><th>標的</th><th>理由(一句話)</th><th class="right">總預算</th><th>分批節奏</th><th class="center">狀態</th></tr></thead>
+    <tbody>
+      <tr><td class="center">1</td><td>(待填)</td><td>(為什麼會在清單上)</td><td class="right">NT$ __</td><td>高/中/低信心</td><td class="center"><span class="pill warning">空</span></td></tr>
+      <tr><td class="center">2</td><td>(待填)</td><td></td><td class="right"></td><td></td><td class="center"><span class="pill warning">空</span></td></tr>
+      <tr><td class="center">3</td><td>(待填)</td><td></td><td class="right"></td><td></td><td class="center"><span class="pill warning">空</span></td></tr>
+      <tr><td class="center">4</td><td>(待填)</td><td></td><td class="right"></td><td></td><td class="center"><span class="pill warning">空</span></td></tr>
+      <tr><td class="center">5</td><td>(待填)</td><td></td><td class="right"></td><td></td><td class="center"><span class="pill warning">空</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>I-8. 回檔觸發行動表</h3>
+  <table>
+    <thead><tr><th>大盤條件</th><th class="center">動用現金比例</th><th>優先買什麼</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td>S&P 500 高點 −5%</td><td class="center">10%</td><td>狙擊清單高信心檔</td><td>試水溫,小批</td></tr>
+      <tr><td>S&P 500 高點 −10%</td><td class="center">30%</td><td>VOO + 核心藍籌</td><td>第一個真正訊號</td></tr>
+      <tr><td>S&P 500 高點 −20%</td><td class="center">50%</td><td>主題股(清單內)</td><td>歷史上 3–5 年一次</td></tr>
+      <tr><td>S&P 500 高點 −30%+</td><td class="center">剩餘 100%</td><td>全力加碼清單</td><td>10–15 年一次機會</td></tr>
+      <tr class="warning"><td class="bold">牛市期間(非回檔)</td><td class="center bold">0%</td><td class="bold">不動</td><td class="bold">最難的一條,考驗在這</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout info">
+    <div class="title">I 節總結</div>
+    <p><span class="bold">你的策略沒問題,問題是「沒子彈 + 沒規則」。</span> 策略再好也要能執行。</p>
+    <p>造子彈 → 寫清單 → 訂規則 → 耐心等 —— 這四步完成,你過去 3 年的表現會被下一個 3 年完全洗掉。</p>
+  </div>
+
+  <div class="callout">
+    <div class="title">v4 異動摘要</div>
+    <p class="secondary">• C 節補上貸款反推:本金 1.81M / 7 年利息 206K / 逐年攤還表 / 三層門檻 / 風險水位線</p>
+    <p class="secondary">• I 節新增:回檔買入作戰手冊(單檔上限 / 分批節奏 / 停止加碼線 / 造子彈三步 / 狙擊清單 / 觸發行動表)</p>
+    <p class="secondary">• 主檔 Canvas(.canvas.tsx)也已同步更新至 v4,HTML 主檔仍為 v3,新內容請看此補充檔。</p>
+  </div>
+</div>
+</body>
+</html>

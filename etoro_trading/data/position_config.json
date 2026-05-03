@@ -1,0 +1,5 @@
+{
+  "min_cash_pct": 20.0,
+  "target_cash_pct": 30.0,
+  "max_dca_per_trade": 400.0
+}

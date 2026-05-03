@@ -1,0 +1,810 @@
+{
+  "100000": [
+    "BTC",
+    "Bitcoin"
+  ],
+  "100001": [
+    "ETH",
+    "Ethereum"
+  ],
+  "100017": [
+    "ADA",
+    "Cardano"
+  ],
+  "1001": [
+    "AAPL",
+    "Apple"
+  ],
+  "1002": [
+    "GOOG",
+    "Google"
+  ],
+  "1003": [
+    "META",
+    "Meta"
+  ],
+  "1004": [
+    "MSFT",
+    "Microsoft"
+  ],
+  "1005": [
+    "AMZN",
+    "Amazon"
+  ],
+  "1042": [
+    "NKE",
+    "Nike"
+  ],
+  "1111": [
+    "TSLA",
+    "Tesla"
+  ],
+  "1137": [
+    "NVDA",
+    "NVIDIA"
+  ],
+  "1839": [
+    "CRM",
+    "Salesforce"
+  ],
+  "100003": [
+    "XRP",
+    "XRP"
+  ],
+  "100063": [
+    "SOL",
+    "SOL"
+  ],
+  "100043": [
+    "DOGE",
+    "DOGE"
+  ],
+  "100005": [
+    "LTC",
+    "LTC"
+  ],
+  "100085": [
+    "AVAX",
+    "AVAX"
+  ],
+  "100040": [
+    "LINK",
+    "LINK"
+  ],
+  "100037": [
+    "DOT",
+    "DOT"
+  ],
+  "100041": [
+    "UNI",
+    "UNI"
+  ],
+  "100044": [
+    "AAVE",
+    "AAVE"
+  ],
+  "1127": [
+    "NFLX",
+    "NFLX"
+  ],
+  "1832": [
+    "AMD",
+    "AMD"
+  ],
+  "1967": [
+    "SQ",
+    "Block Inc"
+  ],
+  "1021": [
+    "INTC",
+    "INTC"
+  ],
+  "1023": [
+    "JPM",
+    "JPM"
+  ],
+  "1041": [
+    "MA",
+    "MA"
+  ],
+  "1016": [
+    "DIS",
+    "DIS"
+  ],
+  "6168": [
+    "COIN",
+    "COIN"
+  ],
+  "6473": [
+    "MSTR",
+    "MSTR"
+  ],
+  "1484": [
+    "PYPL",
+    "PYPL"
+  ],
+  "1181": [
+    "BBBY",
+    "Bed Bath & Beyond"
+  ],
+  "1186": [
+    "UBER",
+    "UBER"
+  ],
+  "8047": [
+    "ABNB",
+    "ABNB"
+  ],
+  "4148": [
+    "SHOP",
+    "SHOP"
+  ],
+  "1135": [
+    "ORCL",
+    "ORCL"
+  ],
+  "1126": [
+    "ADBE",
+    "ADBE"
+  ],
+  "1035": [
+    "WMT",
+    "WMT"
+  ],
+  "1018": [
+    "HD",
+    "HD"
+  ],
+  "1022": [
+    "JNJ",
+    "JNJ"
+  ],
+  "1028": [
+    "PFE",
+    "PFE"
+  ],
+  "1036": [
+    "XOM",
+    "XOM"
+  ],
+  "1014": [
+    "CVX",
+    "CVX"
+  ],
+  "1010": [
+    "BA",
+    "BA"
+  ],
+  "1012": [
+    "CAT",
+    "CAT"
+  ],
+  "1526": [
+    "DE",
+    "DE"
+  ],
+  "1017": [
+    "GE",
+    "GE"
+  ],
+  "1112": [
+    "F",
+    "F"
+  ],
+  "1501": [
+    "GM",
+    "GM"
+  ],
+  "1030": [
+    "T",
+    "T"
+  ],
+  "1034": [
+    "VZ",
+    "VZ"
+  ],
+  "1024": [
+    "KO",
+    "KO"
+  ],
+  "1043": [
+    "PEP",
+    "PEP"
+  ],
+  "1025": [
+    "MCD",
+    "MCD"
+  ],
+  "1142": [
+    "SBUX",
+    "SBUX"
+  ],
+  "1594": [
+    "NEE",
+    "NEE"
+  ],
+  "1651": [
+    "XEL",
+    "XEL"
+  ],
+  "1578": [
+    "SO",
+    "SO"
+  ],
+  "1541": [
+    "DUK",
+    "DUK"
+  ],
+  "1595": [
+    "AEP",
+    "AEP"
+  ],
+  "1664": [
+    "SRE",
+    "SRE"
+  ],
+  "1870": [
+    "WEC",
+    "WEC"
+  ],
+  "1748": [
+    "ES",
+    "ES"
+  ],
+  "1629": [
+    "EIX",
+    "EIX"
+  ],
+  "1637": [
+    "ED",
+    "ED"
+  ],
+  "4303": [
+    "DTE",
+    "DTE"
+  ],
+  "1667": [
+    "PEG",
+    "PEG"
+  ],
+  "4325": [
+    "AWK",
+    "AWK"
+  ],
+  "1700": [
+    "CNP",
+    "CNP"
+  ],
+  "3000": [
+    "SPY",
+    "SPY"
+  ],
+  "3006": [
+    "QQQ",
+    "QQQ"
+  ],
+  "4238": [
+    "VOO",
+    "VOO"
+  ],
+  "6264": [
+    "PLUG",
+    "Plug Power"
+  ],
+  "3005": [
+    "IWM",
+    "IWM"
+  ],
+  "3025": [
+    "GLD",
+    "GLD"
+  ],
+  "4430": [
+    "SLV",
+    "SLV"
+  ],
+  "3020": [
+    "TLT",
+    "TLT"
+  ],
+  "12200": [
+    "ETOR",
+    "ETOR"
+  ],
+  "5958": [
+    "ZM",
+    "ZM"
+  ],
+  "10881": [
+    "QBTS",
+    "QBTS"
+  ],
+  "100337": [
+    "NEAR",
+    "NEAR"
+  ],
+  "4363": [
+    "VST",
+    "VST"
+  ],
+  "8108": [
+    "AFRM",
+    "AFRM"
+  ],
+  "100079": [
+    "FET",
+    "FET"
+  ],
+  "1506": [
+    "FMC",
+    "FMC"
+  ],
+  "100316": [
+    "STRK",
+    "STRK"
+  ],
+  "6323": [
+    "CRIS",
+    "CRIS"
+  ],
+  "14427": [
+    "UUUU",
+    "UUUU"
+  ],
+  "100340": [
+    "SUI",
+    "SUI"
+  ],
+  "9425": [
+    "IONQ",
+    "IONQ"
+  ],
+  "10655": [
+    "RGTI",
+    "RGTI"
+  ],
+  "9801": [
+    "SMR",
+    "SMR"
+  ],
+  "9956": [
+    "OKLO",
+    "OKLO"
+  ],
+  "10967": [
+    "LUNR",
+    "LUNR"
+  ],
+  "14284": [
+    "QUBT",
+    "QUBT"
+  ],
+  "10901": [
+    "QSI",
+    "QSI"
+  ],
+  "6218": [
+    "APP",
+    "APP"
+  ],
+  "6222": [
+    "GEVO",
+    "Gevo Inc"
+  ],
+  "9085": [
+    "RKLB",
+    "RKLB"
+  ],
+  "9272": [
+    "HOOD",
+    "HOOD"
+  ],
+  "8105": [
+    "CHPT",
+    "CHPT"
+  ],
+  "9255": [
+    "SOFI",
+    "SOFI"
+  ],
+  "4286": [
+    "TEAM",
+    "TEAM"
+  ],
+  "100061": [
+    "HBAR",
+    "HBAR"
+  ],
+  "100046": [
+    "ALGO",
+    "ALGO"
+  ],
+  "6193": [
+    "BLNK",
+    "Blink Charging"
+  ],
+  "6194": [
+    "BNGO",
+    "BNGO"
+  ],
+  "8748": [
+    "URA",
+    "URA"
+  ],
+  "1388": [
+    "TTWO",
+    "TTWO"
+  ],
+  "1329": [
+    "RDDT",
+    "RDDT"
+  ],
+  "3173": [
+    "CQQQ",
+    "CQQQ"
+  ],
+  "5667": [
+    "DDD",
+    "DDD"
+  ],
+  "5777": [
+    "TEP.PA",
+    "Teleperformance SE"
+  ],
+  "10722": [
+    "AMPX",
+    "AMPX"
+  ],
+  "14304": [
+    "GEMI",
+    "GEMI"
+  ],
+  "6205": [
+    "CLSK",
+    "CLSK"
+  ],
+  "100020": [
+    "XLM",
+    "XLM"
+  ],
+  "6322": [
+    "CLOU",
+    "CLOU"
+  ],
+  "100026": [
+    "TRX",
+    "TRX"
+  ],
+  "3165": [
+    "ARKF",
+    "ARKF"
+  ],
+  "10805": [
+    "COPX",
+    "COPX"
+  ],
+  "7991": [
+    "PLTR",
+    "PLTR"
+  ],
+  "4121": [
+    "NXPI",
+    "NXPI"
+  ],
+  "1563": [
+    "DHR",
+    "DHR"
+  ],
+  "9088": [
+    "EXP",
+    "EXP"
+  ],
+  "4465": [
+    "TQQQ",
+    "TQQQ"
+  ],
+  "6258": [
+    "OCGN",
+    "OCGN"
+  ],
+  "1020": [
+    "IBM",
+    "IBM"
+  ],
+  "1032": [
+    "UNH",
+    "UNH"
+  ],
+  "1269": [
+    "VIE.PA",
+    "VIE.PA"
+  ],
+  "1450": [
+    "ACN",
+    "ACN"
+  ],
+  "1469": [
+    "HON",
+    "HON"
+  ],
+  "1709": [
+    "RSG",
+    "RSG"
+  ],
+  "4358": [
+    "MRVL",
+    "MRVL"
+  ],
+  "2072": [
+    "RR.L",
+    "RR.L"
+  ],
+  "2587": [
+    "RHM.DE",
+    "RHM.DE"
+  ],
+  "5747": [
+    "UMI.BR",
+    "UMI.BR"
+  ],
+  "5960": [
+    "SE",
+    "SE"
+  ],
+  "5968": [
+    "TDOC",
+    "Teladoc Health"
+  ],
+  "1917": [
+    "RACE",
+    "RACE"
+  ],
+  "4254": [
+    "TMUS",
+    "TMUS"
+  ],
+  "10825": [
+    "KBWB",
+    "KBWB"
+  ],
+  "9518": [
+    "HIMS",
+    "HIMS"
+  ],
+  "7100": [
+    "SGM.ASX",
+    "SGM.ASX"
+  ],
+  "6916": [
+    "RBLX",
+    "RBLX"
+  ],
+  "9092": [
+    "CLH",
+    "CLH"
+  ],
+  "6353": [
+    "QYLD",
+    "QYLD"
+  ],
+  "6270": [
+    "RIOT",
+    "RIOT"
+  ],
+  "15214": [
+    "GFL",
+    "GFL"
+  ],
+  "2142": [
+    "OXIG.L",
+    "OXIG.L"
+  ],
+  "10926": [
+    "SES",
+    "SES"
+  ],
+  "6855": [
+    "SPCE",
+    "SPCE"
+  ],
+  "7996": [
+    "U",
+    "Unity Software"
+  ],
+  "3166": [
+    "ARKK",
+    "ARKK"
+  ],
+  "6964": [
+    "ARKX",
+    "ARKX"
+  ],
+  "8745": [
+    "PAVE",
+    "PAVE"
+  ],
+  "100047": [
+    "ATOM",
+    "ATOM"
+  ],
+  "100077": [
+    "QNT",
+    "QNT"
+  ],
+  "10879": [
+    "IGV",
+    "IGV"
+  ],
+  "100308": [
+    "TRUMP",
+    "TRUMP"
+  ],
+  "3226": [
+    "SOXL",
+    "SOXL"
+  ],
+  "8595": [
+    "DJT",
+    "DJT"
+  ],
+  "10788": [
+    "BOTZ",
+    "BOTZ"
+  ],
+  "10814": [
+    "XYLD",
+    "XYLD"
+  ],
+  "10766": [
+    "RYLD",
+    "RYLD"
+  ],
+  "10836": [
+    "JEPQ",
+    "JEPQ"
+  ],
+  "14480": [
+    "CPER",
+    "CPER"
+  ],
+  "3241": [
+    "TNA",
+    "TNA"
+  ],
+  "4466": [
+    "SKYY",
+    "SKYY"
+  ],
+  "1115": [
+    "NOK",
+    "NOK"
+  ],
+  "1435": [
+    "IFRA",
+    "IFRA"
+  ],
+  "6421": [
+    "ERIC",
+    "ERIC"
+  ],
+  "6596": [
+    "AOS",
+    "AOS"
+  ],
+  "4429": [
+    "INDA",
+    "INDA"
+  ],
+  "4396": [
+    "IWN",
+    "IWN"
+  ],
+  "3001": [
+    "EEM",
+    "EEM"
+  ],
+  "4329": [
+    "SNPS",
+    "Synopsys Inc"
+  ],
+  "100442": [
+    "MOODENG",
+    "Moo Deng"
+  ],
+  "6369": [
+    "WCLD",
+    "WisdomTree Cloud Computing Fund"
+  ],
+  "4450": [
+    "KWEB",
+    "KraneShares CSI China Internet"
+  ],
+  "7999": [
+    "SNOW",
+    "Snowflake Inc."
+  ],
+  "14296": [
+    "WBA US CVR",
+    "WBA US merger CVR"
+  ],
+  "11030": [
+    "SPIR",
+    "Spire Global Inc"
+  ],
+  "10963": [
+    "RDW.US",
+    "Redwire Corp"
+  ],
+  "5712": [
+    "NET",
+    "Cloudflare"
+  ],
+  "1202": [
+    "SAP.DE",
+    "SAP SE"
+  ],
+  "1051858": [
+    "SIDU",
+    "Sidus Space Inc"
+  ],
+  "3122": [
+    "EWT",
+    "iShares MSCI Taiwan ETF"
+  ],
+  "3003": [
+    "EWJ",
+    "Ishares MSCI JAPAN ETF"
+  ],
+  "1050463": [
+    "AREC",
+    "American Resources Corp"
+  ],
+  "15627": [
+    "WQTM",
+    "WisdomTree Quantum Computing Fund"
+  ],
+  "1150": [
+    "LMND",
+    "Lemonade Inc."
+  ],
+  "2891": [
+    "OUST",
+    "Ouster Inc"
+  ],
+  "1356": [
+    "ARBE",
+    "ARBE Robotics LTD"
+  ],
+  "4397": [
+    "ON",
+    "ON Semiconductor Corp"
+  ],
+  "9536": [
+    "UEC",
+    "Uranium Energy Corp"
+  ],
+  "9765": [
+    "INVZ",
+    "Innoviz Technologies Ltd"
+  ],
+  "8580": [
+    "LAZRQ",
+    "Luminar Technologies Inc."
+  ],
+  "1265": [
+    "SU.PA",
+    "Schneider Electric SE"
+  ],
+  "100056": [
+    "POL",
+    "Polygon Ecosystem (ex Matic)"
+  ],
+  "1200": [
+    "SIE.DE",
+    "Siemens Aktiengesellschaft"
+  ],
+  "3002": [
+    "GDX",
+    "VanEck Vectors Gold Miners ETF"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "_說明": "手動整理的訂單量、交付量等（財報／法說）。複製為 fundamentals_manual.json 並填寫。",
+  "NVDA": {
+    "orderBacklogB": null,
+    "deliveryUnits": null,
+    "revenueDataCenterB": null,
+    "notes": "例：2026 FY Q4 營收 681B，資料中心 623B"
+  },
+  "AMD": {
+    "orderBacklogB": null,
+    "deliveryUnits": null,
+    "revenueDataCenterB": null,
+    "notes": "例：2025 Q4 資料中心 5.38B，AI GPU 約 2B"
+  }
+}

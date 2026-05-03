@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>跨帳戶投資組合健檢 · v5 更新摘要</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, "Segoe UI", "Microsoft JhengHei", sans-serif; background:#0f1115; color:#e6e8ec; padding:32px; max-width:1100px; margin:0 auto; line-height:1.6; }
+  h1 { font-size:28px; margin:0 0 4px; }
+  h2 { font-size:22px; margin:32px 0 12px; border-left:4px solid #4cc38a; padding-left:12px; }
+  h3 { font-size:17px; margin:20px 0 8px; color:#a5d8ff; }
+  .muted { color:#8a93a6; font-size:14px; }
+  .callout { background:#1a1d25; border-left:4px solid #4cc38a; padding:14px 18px; margin:16px 0; border-radius:4px; }
+  .callout.warn { border-left-color:#f0a85b; }
+  .callout.info { border-left-color:#5b9bf0; }
+  .callout.success { border-left-color:#4cc38a; background:#162521; }
+  .callout.danger { border-left-color:#e06b6b; }
+  table { width:100%; border-collapse:collapse; margin:12px 0; font-size:14px; }
+  th, td { padding:10px 12px; text-align:left; border-bottom:1px solid #2a2f3a; }
+  th { background:#1a1d25; color:#a5d8ff; font-weight:600; }
+  tr.success td { background:#13241d; }
+  tr.danger td { background:#2a1616; }
+  tr.warning td { background:#2a2416; }
+  tr.info td { background:#141d2a; }
+  .stat-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:12px; margin:12px 0; }
+  .stat-grid-3 { display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin:12px 0; }
+  .stat { background:#1a1d25; padding:14px; border-radius:6px; }
+  .stat .val { font-size:22px; font-weight:700; }
+  .stat .lbl { font-size:12px; color:#8a93a6; margin-top:4px; }
+  .stat.success .val { color:#4cc38a; }
+  .stat.danger .val { color:#e06b6b; }
+  .stat.warning .val { color:#f0a85b; }
+  .stat.info .val { color:#5b9bf0; }
+  .pill { display:inline-block; padding:2px 8px; border-radius:10px; font-size:12px; margin-right:4px; }
+  .pill.success { background:#1e3b2d; color:#4cc38a; }
+  .pill.danger { background:#3b1e1e; color:#e06b6b; }
+  .pill.warning { background:#3b2f1e; color:#f0a85b; }
+  .pill.info { background:#1e2d3b; color:#5b9bf0; }
+  .right { text-align:right; }
+  .center { text-align:center; }
+  strong { color:#f8d57e; }
+</style>
+</head>
+<body>
+
+<h1>跨帳戶投資組合健檢 · v5 更新摘要</h1>
+<p class="muted">v4 → v5 · 更新時間 2026/04/21 · 觸發:你提供月生活費 15K + 已還 12 期</p>
+
+<div class="callout success">
+  <strong>v5 最大翻盤:你比想像中健康很多</strong>
+  <p>1. <strong>月生活費 15K</strong> → 薪水 51K − 貸款 24K − 生活 15K = <strong>月淨儲蓄 NT$ 12K(年 144K,儲蓄率 23.5%)</strong>。</p>
+  <p>2. <strong>最貴那年已過</strong> → 已還 12/84 期,剩 72 期;剩餘總利息只剩 NT$ 152K,年均 25K。</p>
+  <p>3. <strong>「值得門檻」大幅降低</strong> → 年化只要 0.72% 就不倒貼;帳戶跌 2.3% 內都是淨賺(144K 補血)。</p>
+  <p>4. <strong>真正風險 = 12K 守不住</strong> → 不是失業,不是帳戶,是舊習慣復發讓淨儲蓄歸零。</p>
+</div>
+
+<h2>C-1 貸款現況(v5)</h2>
+<div class="stat-grid">
+  <div class="stat info"><div class="val">NT$ 1.58M</div><div class="lbl">剩餘本金(72 期)</div></div>
+  <div class="stat success"><div class="val">NT$ 152K</div><div class="lbl">剩餘總利息(6 年)</div></div>
+  <div class="stat"><div class="val">NT$ 53K</div><div class="lbl">已付利息(最貴那年已過)</div></div>
+  <div class="stat success"><div class="val">+NT$ 144K</div><div class="lbl">年淨儲蓄(薪水面)</div></div>
+</div>
+
+<h2>C-2 剩餘 6 年攤還</h2>
+<table>
+  <thead><tr><th>剩餘年度</th><th class="right">年初餘額</th><th class="right">當年利息</th><th class="right">當年本金</th><th class="right">佔元大 %</th><th>狀態</th></tr></thead>
+  <tbody>
+    <tr class="success"><td>0(已付)</td><td class="right">1,810,557</td><td class="right">52,868</td><td class="right">235,132</td><td class="right">1.49%</td><td><span class="pill success">✓ 已完成</span></td></tr>
+    <tr class="info"><td>1</td><td class="right">1,575,425</td><td class="right">45,273</td><td class="right">242,727</td><td class="right">1.28%</td><td><span class="pill info">現在</span></td></tr>
+    <tr><td>2</td><td class="right">1,332,698</td><td class="right">37,899</td><td class="right">250,101</td><td class="right">1.07%</td><td></td></tr>
+    <tr><td>3</td><td class="right">1,082,597</td><td class="right">29,850</td><td class="right">258,150</td><td class="right">0.84%</td><td></td></tr>
+    <tr><td>4</td><td class="right">824,447</td><td class="right">21,930</td><td class="right">266,070</td><td class="right">0.62%</td><td></td></tr>
+    <tr><td>5</td><td class="right">558,377</td><td class="right">13,876</td><td class="right">274,124</td><td class="right">0.39%</td><td></td></tr>
+    <tr><td>6</td><td class="right">284,253</td><td class="right">3,747</td><td class="right">284,253</td><td class="right">0.11%</td><td><span class="pill success">終點</span></td></tr>
+    <tr><td><strong>剩餘合計</strong></td><td></td><td class="right"><strong>152,575</strong></td><td class="right"><strong>1,575,425</strong></td><td></td><td></td></tr>
+  </tbody>
+</table>
+
+<h2>C-3 三層年化門檻(v5 大幅下修)</h2>
+<p class="muted">首年最貴那關已過,剩下 6 年年均利息只有 25K。</p>
+<table>
+  <thead><tr><th>層次</th><th>年化標準</th><th class="right">金額</th><th>意義</th></tr></thead>
+  <tbody>
+    <tr class="success"><td><span class="pill success">最低</span></td><td>≥ 0.72%</td><td class="right">NT$ 25K/年</td><td>只要不輸定存就不倒貼</td></tr>
+    <tr><td><span class="pill warning">實質</span></td><td>≥ 3.2% (利息+通膨)</td><td class="right">NT$ 114K/年</td><td>購買力不縮水</td></tr>
+    <tr class="danger"><td><span class="pill danger">值得</span></td><td>≥ 10% (VOO 年化)</td><td class="right">NT$ 355K/年</td><td>配得上槓桿的心理成本</td></tr>
+  </tbody>
+</table>
+
+<h2>C-4 外部補血效應(新增,極重要)</h2>
+<p class="muted">你每月 12K 淨儲蓄 = 年 144K 外部資本 = 合併組合 <strong>2.3% 年化「外部報酬」</strong>。帳戶跌 2.3% 內整體仍是淨賺。</p>
+<table>
+  <thead><tr><th class="center">帳戶年化表現</th><th class="right">帳面盈虧</th><th class="right">加 144K 補血</th><th class="center">實際淨值變化</th></tr></thead>
+  <tbody>
+    <tr class="danger"><td class="center">−10%</td><td class="right">-633K</td><td class="right">+144K</td><td class="center"><span class="pill danger">-7.7%</span></td></tr>
+    <tr class="warning"><td class="center">−5%</td><td class="right">-316K</td><td class="right">+144K</td><td class="center"><span class="pill warning">-2.7%</span></td></tr>
+    <tr><td class="center"><strong>−2.3%</strong></td><td class="right"><strong>-145K</strong></td><td class="right"><strong>+144K</strong></td><td class="center"><span class="pill info">持平(真分界)</span></td></tr>
+    <tr class="success"><td class="center">0%</td><td class="right">0</td><td class="right">+144K</td><td class="center"><span class="pill success">+2.3%</span></td></tr>
+    <tr class="success"><td class="center">+5%</td><td class="right">+316K</td><td class="right">+144K</td><td class="center"><span class="pill success">+7.3%</span></td></tr>
+    <tr class="success"><td class="center">+10%</td><td class="right">+633K</td><td class="right">+144K</td><td class="center"><span class="pill success">+12.3%</span></td></tr>
+  </tbody>
+</table>
+
+<h2>C-6 月淨儲蓄 NT$ 12K 的 3-3-3-3 硬規則(全新)</h2>
+<div class="callout warn">
+  <strong>為什麼要鎖死</strong>
+  <p>過去 1,874 筆交易的習慣,最大威脅就是「12K 到帳後又變成新買單」。<strong>不分桶 = 不存在</strong>。進帳自動分到 4 個桶,不允許臨時跨桶挪錢。</p>
+</div>
+<table>
+  <thead><tr><th>桶</th><th class="right">月分配</th><th>用途</th><th class="right">6 年後估算</th><th>觸發動用</th></tr></thead>
+  <tbody>
+    <tr class="info"><td><span class="pill info">緩衝 CMA</span></td><td class="right">3,000</td><td>補到 6 個月緩衝(234K)</td><td class="right">~216K</td><td>失業 / 醫療</td></tr>
+    <tr class="success"><td><span class="pill success">提前還款</span></td><td class="right">3,000</td><td>每月多還本金</td><td class="right">省 ~40K · 提早 2 年還完</td><td>每月自動</td></tr>
+    <tr class="success"><td><span class="pill success">VOO DCA</span></td><td class="right">3,000</td><td>買 VOO 不看盤</td><td class="right">~293K(10%年化)</td><td>每月自動,大跌不停</td></tr>
+    <tr class="warning"><td><span class="pill warning">狙擊子彈</span></td><td class="right">3,000</td><td>累積,等 I-8 觸發</td><td class="right">216K + 打回檔漲幅</td><td>S&amp;P −10% 以上</td></tr>
+  </tbody>
+</table>
+
+<h2>I-5 子彈「流水線」概念(v5 更新)</h2>
+<div class="stat-grid">
+  <div class="stat"><div class="val">NT$ 135K</div><div class="lbl">CMA 存量</div></div>
+  <div class="stat danger"><div class="val">~$202</div><div class="lbl">eToro 現金</div></div>
+  <div class="stat success"><div class="val">+NT$ 3K/月</div><div class="lbl">狙擊桶流量</div></div>
+  <div class="stat warning"><div class="val">NT$ 141K</div><div class="lbl">當下可打</div></div>
+</div>
+<div class="callout info">
+  <p>v4 說「只夠打 1 次小型回檔」—— 存量思維沒錯。<br>
+  v5 補上月流量:狙擊桶每月 +3K,1 年 +36K、2 年 +72K。加上 I-6 一次性釋放 300K+,12 個月內子彈庫可達 <strong>~NT$ 480K(7.6% 組合)</strong>。這才叫「回檔作戰可執行」。</p>
+</div>
+
+<h2>建議處理順序(v5 重排)</h2>
+<table>
+  <thead><tr><th>時機</th><th>做什麼</th><th>效果</th></tr></thead>
+  <tbody>
+    <tr class="success"><td><strong>今天</strong></td><td><strong>銀行自動轉帳把 12K/月分進 4 個桶(C-6)—— 最重要的一步</strong></td><td>0 成本 · 鎖住習慣</td></tr>
+    <tr><td>今天 / 本週</td><td>CMA 緩衝目標改為 NT$ 234K(6 個月 × 39K 燒)· 8 個月內達標</td><td>3K/月 × 8 月</td></tr>
+    <tr><td>今天 / 本週</td><td>H-1 的 11 檔重疊單,圈出「兩邊都賠」4 檔(CRM/NKE/PYPL/BLNK)</td><td>0 成本</td></tr>
+    <tr><td>本週內</td><td>I-6 造子彈三步:A-3 死倉停損 + 大贏家減半 + eToro 雜魚清倉</td><td>釋放 ~300K+</td></tr>
+    <tr><td>本週內</td><td>A-2 花 30 分鐘回答 12 檔</td><td>~30 分鐘認知</td></tr>
+    <tr><td>本月內</td><td>I-7 寫下狙擊清單 5–10 檔</td><td>~1 小時思考</td></tr>
+    <tr><td>本月內</td><td>銀行設定:月供從 24K 改為 27K(多還 3K 本金)</td><td>省利息 ~40K</td></tr>
+    <tr><td>平時</td><td>I-8 回檔觸發行動表照表操課,牛市不加戲</td><td>最難的紀律</td></tr>
+  </tbody>
+</table>
+
+<div class="callout warn" style="margin-top:40px;">
+  <p style="margin:0;" class="muted">本 HTML 僅呈現 v5 主要更新段落(C-1 至 C-6 + I-5 + 處理順序)。完整 Canvas 請打開 <code>cross-account-portfolio-triage.canvas.tsx</code> 看。所有數字為組合結構面討論,非投資建議。</p>
+</div>
+
+</body>
+</html>
