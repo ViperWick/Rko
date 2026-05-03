@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>跨帳戶投資組合整合健檢 · v3</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --surface: #1a1d24;
+    --surface-2: #22262f;
+    --border: #2a2f3a;
+    --text: #e6e9ef;
+    --muted: #8a93a6;
+    --accent: #6ea8fe;
+    --success: #3fb950;
+    --success-bg: rgba(63, 185, 80, 0.12);
+    --danger: #f85149;
+    --danger-bg: rgba(248, 81, 73, 0.12);
+    --warning: #e0a93f;
+    --warning-bg: rgba(224, 169, 63, 0.12);
+    --info: #58a6ff;
+    --info-bg: rgba(88, 166, 255, 0.12);
+    --neutral-bg: rgba(138, 147, 166, 0.12);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 24px 80px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Microsoft JhengHei", Roboto, sans-serif;
+    line-height: 1.6;
+    font-size: 14px;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 28px; margin: 0 0 4px; font-weight: 700; }
+  h2 { font-size: 20px; margin: 0 0 12px; font-weight: 600; border-left: 3px solid var(--accent); padding-left: 10px; }
+  h3 { font-size: 16px; margin: 16px 0 8px; font-weight: 600; color: var(--text); }
+  .secondary { color: var(--muted); font-size: 12px; }
+  .section { margin-bottom: 36px; }
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+  .stat-grid { display: grid; gap: 12px; }
+  .stat-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .stat-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .stat .value { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  .stat .label { color: var(--muted); font-size: 12px; }
+  .stat.success .value { color: var(--success); }
+  .stat.danger .value { color: var(--danger); }
+  .stat.warning .value { color: var(--warning); }
+  .stat.info .value { color: var(--info); }
+
+  .callout {
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 12px 0;
+    border-left: 4px solid var(--accent);
+    background: var(--surface);
+  }
+  .callout .title { font-weight: 600; margin-bottom: 8px; }
+  .callout.info { background: var(--info-bg); border-left-color: var(--info); }
+  .callout.success { background: var(--success-bg); border-left-color: var(--success); }
+  .callout.warning { background: var(--warning-bg); border-left-color: var(--warning); }
+  .callout.danger { background: var(--danger-bg); border-left-color: var(--danger); }
+  .callout.neutral { background: var(--neutral-bg); border-left-color: var(--muted); }
+  .callout p { margin: 4px 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 4px;
+    font-size: 13px;
+    background: var(--surface);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    background: var(--surface-2);
+    font-weight: 600;
+    color: var(--muted);
+    font-size: 12px;
+    text-transform: none;
+  }
+  .right { text-align: right; }
+  .center { text-align: center; }
+  tr.success td { background: rgba(63, 185, 80, 0.06); }
+  tr.danger td { background: rgba(248, 81, 73, 0.06); }
+  tr.warning td { background: rgba(224, 169, 63, 0.06); }
+
+  .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+  }
+  .pill.success { color: var(--success); background: var(--success-bg); border-color: transparent; }
+  .pill.danger  { color: var(--danger);  background: var(--danger-bg);  border-color: transparent; }
+  .pill.warning { color: var(--warning); background: var(--warning-bg); border-color: transparent; }
+  .pill.info    { color: var(--info);    background: var(--info-bg);    border-color: transparent; }
+  .pill.deleted { color: var(--danger);  background: var(--danger-bg);  border-color: transparent; text-decoration: line-through; }
+
+  .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .card .card-header { font-weight: 600; margin-bottom: 6px; color: var(--accent); }
+
+  .bold { font-weight: 600; }
+  .matrix td { font-weight: 500; }
+  ul { padding-left: 20px; margin: 6px 0; }
+  li { margin: 2px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="section">
+    <h1>跨帳戶投資組合整合健檢 · v3</h1>
+    <div class="secondary">元大(貸款帳戶)+ eToro · 合計 ~NT$ 6.33M · 元大資料更新 2026/04/22 · v3 新增 H 節跨帳戶重疊統計</div>
+  </div>
+
+  <div class="callout info">
+    <div class="title">v3 重要變化</div>
+    <p>1. <span class="bold">元大實際損益接近打平(+~NT$ 32K / +$1,015 USD)</span> —— 前一版 HTML 報告 -$1,061 USD,現在因大盤反彈 + 前版漏算的部位而轉正。</p>
+    <p>2. <span class="bold">CRM 部位被前一版嚴重低估</span> —— 實際 45 股(不是 24 股),合計虧 -NT$ 68,518,取代 TMUS 成為元大最大傷員。</p>
+    <p>3. <span class="bold">TSM 是真正的 MVP</span> —— 單檔貢獻 +NT$ 75,741,撐住整個組合的正報酬。</p>
+    <p>4. <span class="bold">方法論修正</span> —— 前一版 A 節按「帳面損益」機械分類有問題,本版改為「潛力評估」導向,需要你逐檔回答。</p>
+    <p>5. <span class="bold">v3 新增:跨帳戶重疊統計(H 節)</span> —— eToro 前 50 大有 30 檔在元大也有,合併重疊約 $79K USD,佔總組合 ~73%,「開兩個帳戶」的分散效果比想像中小很多。</p>
+  </div>
+
+  <div class="stat-grid cols-4 section">
+    <div class="stat"><div class="value">NT$ 6.33M</div><div class="label">合計權益</div></div>
+    <div class="stat danger"><div class="value">~-$19.5K</div><div class="label">合計未實現損益(USD)</div></div>
+    <div class="stat warning"><div class="value">~2.2%</div><div class="label">合計現金比例</div></div>
+    <div class="stat warning"><div class="value">160+</div><div class="label">持股檔數</div></div>
+  </div>
+
+  <div class="section">
+    <h2>兩個帳戶對照(更新版)</h2>
+    <table>
+      <thead><tr><th>帳戶</th><th class="right">權益</th><th class="right">現金 %</th><th class="right">未實現損益</th><th class="right">檔數</th><th>狀態</th></tr></thead>
+      <tbody>
+        <tr><td>元大(貸款帳戶)</td><td class="right">NT$ 3,551,088</td><td class="right">~3.8%</td><td class="right">+NT$ 32K (+~$1K)</td><td class="right">110+</td><td><span class="pill info">接近打平,靠 TSM 撐</span></td></tr>
+        <tr class="danger"><td>eToro</td><td class="right">~NT$ 2,781,000</td><td class="right">0.2%</td><td class="right">-$20,486 (-23%)</td><td class="right">50+ / 1,874 筆</td><td><span class="pill deleted">結構差,浮虧重</span></td></tr>
+        <tr><td class="bold">合計</td><td class="right bold">~NT$ 6,332,088</td><td class="right bold">~2.2%</td><td class="right bold">~-NT$ 613K</td><td class="right bold">160+</td><td><span class="pill warning">元大撐住,eToro 拖累</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>H. 跨帳戶重疊曝險統計 <span class="pill warning">v3 新增</span></h2>
+    <div class="secondary">以 eToro 前 50 大部位為基準,比對元大持股。匯率用 1 USD = 31.5 NTD 概略換算。</div>
+
+    <div class="stat-grid cols-4" style="margin-top:12px;">
+      <div class="stat warning"><div class="value">30 / 50</div><div class="label">eToro 前 50 與元大重疊檔數</div></div>
+      <div class="stat warning"><div class="value">~$79K</div><div class="label">合併重疊總曝險 (USD)</div></div>
+      <div class="stat danger"><div class="value">~73%</div><div class="label">重疊佔總組合比例</div></div>
+      <div class="stat info"><div class="value">~$48K</div><div class="label">真正獨立曝險(非重疊)</div></div>
+    </div>
+
+    <div class="callout danger">
+      <div class="title">核心發現:「兩個帳戶」的分散效果是幻覺</div>
+      <p>你原以為元大 + eToro 是兩個獨立帳戶,實際上 <span class="bold">73% 的資金是「同一套想法做了兩次」</span>。真正獨立的只有:</p>
+      <p>• <span class="bold">元大獨有(~$28K)</span>:TSM、NVDA、AMZN、TSLA、DXYZ、IBM、V、VOO、ARK 系、WM 等藍籌 + 台股 ETF</p>
+      <p>• <span class="bold">eToro 獨有(~$20K)</span>:ETH、ADA、BTC、SOL、NEAR、FET、SUI、HBAR 等加密(佔 eToro 近半)</p>
+      <p class="secondary">結論:想真正分散 → eToro 收斂成「加密為主」、元大做正統美股,重疊題材股只在一邊留。</p>
+    </div>
+
+    <h3>H-1. 合併曝險 &gt; $3,000 USD(11 檔,佔重疊 ~73%)</h3>
+    <div class="secondary">這是「兩帳戶集中下注同一檔」最嚴重的 11 檔。砍一邊不夠,動作要成對做。</div>
+    <table>
+      <thead><tr><th class="center">#</th><th>標的</th><th class="right">元大 (USD)</th><th class="right">eToro (USD)</th><th class="right">合併市值</th><th class="right">合併損益</th><th>備註</th></tr></thead>
+      <tbody>
+        <tr class="danger"><td class="center">1</td><td class="bold">CRM</td><td class="right">~$8,759</td><td class="right">$2,978</td><td class="right">~$11,737</td><td class="right">~-$3,174</td><td>最大重疊,兩邊都重傷</td></tr>
+        <tr class="success"><td class="center">2</td><td class="bold">PLUG</td><td class="right">~$2,242</td><td class="right">$4,422</td><td class="right">~$6,664</td><td class="right">~+$1,029</td><td>兩邊都翻綠</td></tr>
+        <tr class="warning"><td class="center">3</td><td class="bold">COIN</td><td class="right">~$5,989</td><td class="right">$505</td><td class="right">~$6,494</td><td class="right">~-$517</td><td>元大為主</td></tr>
+        <tr class="danger"><td class="center">4</td><td class="bold">NKE</td><td class="right">~$2,006</td><td class="right">$3,465</td><td class="right">~$5,471</td><td class="right">~-$3,608</td><td>兩邊都在賠</td></tr>
+        <tr><td class="center">5</td><td class="bold">MSFT</td><td class="right">~$3,637</td><td class="right">$1,066</td><td class="right">~$4,703</td><td class="right">~+$140</td><td>核心藍籌</td></tr>
+        <tr class="danger"><td class="center">6</td><td class="bold">PYPL</td><td class="right">~$3,546</td><td class="right">$1,093</td><td class="right">~$4,639</td><td class="right">~-$2,070</td><td>兩邊都套牢</td></tr>
+        <tr class="success"><td class="center">7</td><td class="bold">ORCL</td><td class="right">~$2,628</td><td class="right">$1,826</td><td class="right">~$4,454</td><td class="right">~+$333</td><td>兩邊都賺</td></tr>
+        <tr class="success"><td class="center">8</td><td class="bold">OCGN</td><td class="right">~$276</td><td class="right">$3,854</td><td class="right">~$4,130</td><td class="right">~+$1,910</td><td>eToro 為主,已翻倍</td></tr>
+        <tr class="danger"><td class="center">9</td><td class="bold">BLNK</td><td class="right">~$2,039</td><td class="right">$1,398</td><td class="right">~$3,437</td><td class="right">~-$1,672</td><td>兩邊都爛</td></tr>
+        <tr><td class="center">10</td><td class="bold">QBTS</td><td class="right">~$2,340</td><td class="right">$809</td><td class="right">~$3,149</td><td class="right">~+$418</td><td>量子題材</td></tr>
+        <tr class="warning"><td class="center">11</td><td class="bold">GEVO</td><td class="right">~$1,056</td><td class="right">$2,079</td><td class="right">~$3,135</td><td class="right">~-$350</td><td>eToro 為主</td></tr>
+      </tbody>
+    </table>
+
+    <h3>H-2. 中型重疊($1,000 – $3,000,10 檔)</h3>
+    <table>
+      <thead><tr><th class="center">#</th><th>標的</th><th class="right">元大 (USD)</th><th class="right">eToro (USD)</th><th class="right">合併市值</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr><td class="center">12</td><td>XYZ / SQ</td><td class="right">~$1,234</td><td class="right">$1,385</td><td class="right">~$2,619</td><td>Block,兩邊標記不同但同一檔</td></tr>
+        <tr><td class="center">13</td><td>TDOC</td><td class="right">~$1,269</td><td class="right">$1,035</td><td class="right">~$2,304</td><td>兩邊都重傷</td></tr>
+        <tr><td class="center">14</td><td>VST</td><td class="right">~$1,404</td><td class="right">$695</td><td class="right">~$2,099</td><td>AI 電力概念</td></tr>
+        <tr><td class="center">15</td><td>UUUU</td><td class="right">~$1,563</td><td class="right">$449</td><td class="right">~$2,012</td><td>鈾礦</td></tr>
+        <tr><td class="center">16</td><td>U</td><td class="right">~$801</td><td class="right">$942</td><td class="right">~$1,743</td><td>Unity</td></tr>
+        <tr><td class="center">17</td><td>IONQ</td><td class="right">~$1,090</td><td class="right">$523</td><td class="right">~$1,613</td><td>量子</td></tr>
+        <tr><td class="center">18</td><td>AFRM</td><td class="right">~$867</td><td class="right">$702</td><td class="right">~$1,569</td><td>BNPL</td></tr>
+        <tr><td class="center">19</td><td>CLSK</td><td class="right">~$1,100</td><td class="right">$358</td><td class="right">~$1,458</td><td>比特幣礦商</td></tr>
+        <tr><td class="center">20</td><td>ETOR</td><td class="right">~$264</td><td class="right">$975</td><td class="right">~$1,239</td><td>你用的平台自己的股票,有點奇妙</td></tr>
+        <tr><td class="center">21</td><td>RGTI</td><td class="right">~$681</td><td class="right">$386</td><td class="right">~$1,067</td><td>量子</td></tr>
+      </tbody>
+    </table>
+
+    <h3>H-3. 小型重疊(&lt; $1,000,9 檔)</h3>
+    <p><span class="bold">SMR</span>(~$888)、<span class="bold">QUBT</span>(~$869)、<span class="bold">FMC</span>(~$738)、<span class="bold">OKLO</span>(~$568)、<span class="bold">RKLB</span>(~$550)、<span class="bold">TEAM</span>(~$536)、<span class="bold">SOFI</span>(~$530)、<span class="bold">CHPT</span>(~$348)、<span class="bold">CRIS</span>(~$240)</p>
+    <div class="secondary">這批小型重疊金額不大,但數量多(9 檔)代表「題材股雙下注」的習慣深植 —— 清倉原則:一次砍一邊就好,不用兩邊都動。</div>
+
+    <h3>H-4. 曝險結構拆解(依重疊狀態分類)</h3>
+    <table>
+      <thead><tr><th>分類</th><th class="right">規模 (USD)</th><th class="right">佔合計 %</th><th>代表標的</th><th>健康度</th></tr></thead>
+      <tbody>
+        <tr class="warning"><td class="bold">重疊單(兩邊都有)</td><td class="right">~$79,000</td><td class="right">~73%</td><td>CRM / PLUG / COIN / NKE / MSFT / PYPL ...</td><td><span class="pill warning">集中度過高</span></td></tr>
+        <tr class="success"><td>元大獨有(藍籌 + ETF)</td><td class="right">~$28,000</td><td class="right">~16%</td><td>TSM / NVDA / AMZN / TSLA / VOO / IBM / V</td><td><span class="pill success">健康,組合基石</span></td></tr>
+        <tr><td>eToro 獨有(加密為主)</td><td class="right">~$20,000</td><td class="right">~11%</td><td>ETH / ADA / BTC / SOL / NEAR / FET</td><td><span class="pill info">高波動,但確實分散</span></td></tr>
+      </tbody>
+    </table>
+
+    <h3>H-5. 重疊題材的「真實暴險」合計</h3>
+    <div class="secondary">單看任一帳戶的主題股暴險,都低估了你的實際曝險。下表是把兩邊合併看的真相。</div>
+    <table>
+      <thead><tr><th>主題</th><th class="right">元大 (USD)</th><th class="right">eToro (USD)</th><th class="right">合併暴險</th><th>警示</th></tr></thead>
+      <tbody>
+        <tr><td class="bold">量子計算</td><td class="right">~$2,286</td><td class="right">~$2,093</td><td class="right">~$4,379</td><td><span class="pill warning">IONQ+QBTS+RGTI+QUBT+SMR+OKLO 合計</span></td></tr>
+        <tr><td class="bold">氫能 / 替代能源</td><td class="right">~$4,707</td><td class="right">~$3,955</td><td class="right">~$8,662</td><td><span class="pill warning">PLUG+BLNK+GEVO+CHPT+EVGO</span></td></tr>
+        <tr><td class="bold">加密 / 礦業</td><td class="right">~$7,089</td><td class="right">~$22,000+</td><td class="right">~$29,000+</td><td><span class="pill danger">COIN+CLSK 元大 / ETH+ADA+BTC+SOL eToro</span></td></tr>
+        <tr><td class="bold">生技 / 醫療題材股</td><td class="right">~$1,668</td><td class="right">~$5,006</td><td class="right">~$6,674</td><td><span class="pill warning">OCGN+TDOC+CRIS 重疊,CRSP+CYRX 元大獨有</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout info">
+      <div class="title">策略啟示(三條硬結論)</div>
+      <p><span class="bold">1. 清倉動作要成對做。</span> A-3 列的八檔死倉(CRIS、BLNK、ARQQ 等),重疊的部分要兩邊同步出場,不然等於治標。</p>
+      <p><span class="bold">2. 獲利了結也要成對想。</span> PLUG 兩邊都翻綠了,要減就一起減,不要只砍一邊留下不對稱的裸露。</p>
+      <p><span class="bold">3. 重新定位兩個帳戶的角色。</span> eToro 的真正價值在加密(元大買不到),其他題材股可以逐步收到元大(稅務 / 匯款成本低)。</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>元大前 20 大獲利(合計 NT$)</h2>
+    <div class="secondary">多筆同檔已合併;TSM 單檔 NT$ 75,741 是元大正報酬主力。前 6 名合計貢獻 NT$ 206,340(佔獲利六成以上)。</div>
+    <table>
+      <thead><tr><th class="center">#</th><th>標的</th><th>類型</th><th class="right">獲利 (NT$)</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr class="success"><td class="center">1</td><td>TSM</td><td>定 + 現 2 筆</td><td class="right">+75,741</td><td>台積電 ADR,+96% 獲利,組合 MVP</td></tr>
+        <tr class="success"><td class="center">2</td><td>AMZN</td><td>定 + 現 2 筆</td><td class="right">+38,752</td><td>亞馬遜,定期定額累積健康</td></tr>
+        <tr class="success"><td class="center">3</td><td>PLUG</td><td>現 2 筆</td><td class="right">+29,468</td><td>氫能翻身王,-25% 變 +66%</td></tr>
+        <tr class="success"><td class="center">4</td><td>TSLA</td><td>現</td><td class="right">+23,022</td><td>特斯拉,+36%</td></tr>
+        <tr class="success"><td class="center">5</td><td>DXYZ</td><td>現 2 筆</td><td class="right">+21,099</td><td>Destiny Tech 100,私募科技 ETN</td></tr>
+        <tr class="success"><td class="center">6</td><td>NVDA</td><td>定</td><td class="right">+18,258</td><td>輝達 DCA,+42%</td></tr>
+        <tr class="success"><td class="center">7</td><td>CLSK</td><td>現 2 筆</td><td class="right">+9,774</td><td>比特幣礦商</td></tr>
+        <tr class="success"><td class="center">8</td><td>IONQ</td><td>現 2 筆</td><td class="right">+9,378</td><td>量子計算,+31 ~ +53%</td></tr>
+        <tr class="success"><td class="center">9</td><td>UUUU</td><td>現 2 筆</td><td class="right">+8,679</td><td>鈾礦,Energy Fuels</td></tr>
+        <tr class="success"><td class="center">10</td><td>QBTS</td><td>現 2 筆</td><td class="right">+7,579</td><td>D-Wave Quantum,量子</td></tr>
+        <tr class="success"><td class="center">11</td><td>ARKG</td><td>定</td><td class="right">+6,668</td><td>ARK 基因 ETF DCA</td></tr>
+        <tr class="success"><td class="center">12</td><td>VOO</td><td>定</td><td class="right">+6,662</td><td>S&amp;P 500 ETF,健康 DCA</td></tr>
+        <tr><td class="center">13</td><td>ORCL</td><td>現 2 筆</td><td class="right">+6,524</td><td>甲骨文</td></tr>
+        <tr><td class="center">14</td><td>V</td><td>定 + 現</td><td class="right">+5,708</td><td>Visa,DCA 為主</td></tr>
+        <tr><td class="center">15</td><td>U</td><td>現 2 筆</td><td class="right">+5,572</td><td>Unity 軟體</td></tr>
+        <tr><td class="center">16</td><td>WM</td><td>現</td><td class="right">+4,119</td><td>廢棄物管理,防禦型</td></tr>
+        <tr><td class="center">17</td><td>GEVO</td><td>現 2 筆(混合)</td><td class="right">+3,511</td><td>替代燃料</td></tr>
+        <tr><td class="center">18</td><td>XYZ</td><td>現</td><td class="right">+3,258</td><td>Block(前 Square)</td></tr>
+        <tr><td class="center">19</td><td>IBM</td><td>現</td><td class="right">+3,103</td><td>IBM</td></tr>
+        <tr><td class="center">20</td><td>MSFT</td><td>定 + 現 2 筆</td><td class="right">+2,612</td><td>微軟,DCA 為主</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>元大前 15 大重傷(合計 NT$)</h2>
+    <div class="secondary">前 3 名(CRM、TMUS、NKE)合計虧 NT$ 176,705(約 -$5,610 USD),佔全部虧損六成以上。任何止損討論都應聚焦在這三檔。</div>
+    <table>
+      <thead><tr><th class="center">#</th><th>標的</th><th>類型</th><th class="right">虧損 (NT$)</th><th>關鍵問題</th></tr></thead>
+      <tbody>
+        <tr class="danger"><td class="center">1</td><td>CRM</td><td>定 + 現 2 筆</td><td class="right">-68,518</td><td>Salesforce 45 股,實際最大傷員</td></tr>
+        <tr class="danger"><td class="center">2</td><td>TMUS</td><td>現 2 筆</td><td class="right">-65,115</td><td>T-Mobile 61 股,藍籌套牢</td></tr>
+        <tr class="danger"><td class="center">3</td><td>NKE</td><td>定 + 現</td><td class="right">-43,072</td><td>耐吉,品牌衰退的真實重傷</td></tr>
+        <tr class="danger"><td class="center">4</td><td>COIN</td><td>現 2 筆</td><td class="right">-12,310</td><td>Coinbase,加密週期</td></tr>
+        <tr class="danger"><td class="center">5</td><td>TDOC</td><td>現 2 筆</td><td class="right">-11,496</td><td>Teladoc,遠距醫療破損</td></tr>
+        <tr class="danger"><td class="center">6</td><td>ARQQ</td><td>現</td><td class="right">-9,608</td><td>Arqit 量子,商業化受挫</td></tr>
+        <tr class="danger"><td class="center">7</td><td>CRIS</td><td>現</td><td class="right">-9,178</td><td>Curis,penny stock</td></tr>
+        <tr class="danger"><td class="center">8</td><td>BLNK</td><td>現 2 筆</td><td class="right">-8,587</td><td>Blink 充電,燒現金</td></tr>
+        <tr class="danger"><td class="center">9</td><td>PYPL</td><td>定 + 現 2 筆</td><td class="right">-6,694</td><td>PayPal,估值壓縮</td></tr>
+        <tr><td class="center">10</td><td>FMC</td><td>現</td><td class="right">-4,632</td><td>FMC 農化</td></tr>
+        <tr><td class="center">11</td><td>SNOW</td><td>現</td><td class="right">-4,516</td><td>Snowflake 雲端</td></tr>
+        <tr><td class="center">12</td><td>PG</td><td>定</td><td class="right">-4,051</td><td>寶鹼 DCA</td></tr>
+        <tr><td class="center">13</td><td>AREC</td><td>現 2 筆</td><td class="right">-3,977</td><td>American Resources</td></tr>
+        <tr><td class="center">14</td><td>TGT</td><td>定</td><td class="right">-3,150</td><td>目標百貨 DCA</td></tr>
+        <tr><td class="center">15</td><td>MVIS</td><td>現</td><td class="right">-3,057</td><td>MicroVision,penny</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>A. 潛力評估(方法論修正版) <span class="pill warning">待你回答</span></h2>
+    <div class="callout warning">
+      <div class="title">為什麼重做 A 節</div>
+      <p>前一版我照搬「獲利多 → 止盈 / 虧損多 → 停損」的機械分類,<span class="bold">違反了 2×2 矩陣的正確順序「先看基本面再看賺賠」</span>。</p>
+      <p>真相:獲利多的可能還在長坡起點(TSM、PLUG、IONQ),虧損多的可能已到底部(TDOC、PYPL、CRM)。<span class="bold">不問潛力就賣,是賣飛成長、抱死屍。</span></p>
+    </div>
+
+    <h3>A-1. 正確的決策矩陣(先看基本面,再看賺賠)</h3>
+    <table class="matrix">
+      <thead><tr><th></th><th>基本面/潛力 強</th><th>基本面/潛力 普通</th><th>基本面/潛力 破損</th></tr></thead>
+      <tbody>
+        <tr><td class="bold">浮盈</td><td>續抱,設移動停利</td><td>部分止盈,觀察</td><td class="bold">第一順位賣(最常犯的錯)</td></tr>
+        <tr><td class="bold">浮虧</td><td class="bold">加碼機會</td><td>觀察,不加不減</td><td class="bold">立刻停損</td></tr>
+      </tbody>
+    </table>
+
+    <h3>A-2. 需要你逐檔回答的 12 檔核心標的</h3>
+    <div class="secondary">這 12 檔貢獻元大組合 70% 以上損益。一檔一檔回答:<span class="bold">Q1 當初為什麼買?Q2 那個理由現在還成立嗎?</span></div>
+    <table>
+      <thead><tr><th>標的</th><th>現況</th><th>Q1 當初理由</th><th>Q2 現在還成立?</th><th>我猜的潛力</th></tr></thead>
+      <tbody>
+        <tr><td class="bold">TSM</td><td>+$2.4K · 10 股</td><td>(待填)</td><td>(待填)</td><td><span class="pill success">強</span></td></tr>
+        <tr><td class="bold">PLUG</td><td>+$935 · 702 股</td><td>(待填)</td><td>(待填)</td><td><span class="pill warning">不確定</span></td></tr>
+        <tr><td class="bold">TSLA</td><td>+$731 · 7 股</td><td>(待填)</td><td>(待填)</td><td><span class="pill warning">普通</span></td></tr>
+        <tr><td class="bold">NVDA</td><td>+$580 · DCA</td><td>(待填)</td><td>(待填)</td><td><span class="pill success">強</span></td></tr>
+        <tr><td class="bold">DXYZ</td><td>+$670 · 112 股</td><td>(待填)</td><td>(待填)</td><td><span class="pill warning">不確定</span></td></tr>
+        <tr><td class="bold">IONQ</td><td>+$298 · 23 股</td><td>(待填)</td><td>(待填)</td><td><span class="pill warning">題材兩極</span></td></tr>
+        <tr><td class="bold">CRM</td><td>-$2,175 · 46 股</td><td>(待填)</td><td>(待填)</td><td><span class="pill warning">基本面沒破,成長放緩</span></td></tr>
+        <tr><td class="bold">TMUS</td><td>-$2,068 · 61 股</td><td>(待填)</td><td>(待填)</td><td><span class="pill info">藍籌,現金流穩</span></td></tr>
+        <tr><td class="bold">NKE</td><td>-$1,368 · 44 股</td><td>(待填)</td><td>(待填)</td><td><span class="pill deleted">真實破損(中國/Hoka 侵蝕)</span></td></tr>
+        <tr><td class="bold">TDOC</td><td>-$365 · 214 股</td><td>(待填)</td><td>(待填)</td><td><span class="pill warning">超跌,需驗證基本面</span></td></tr>
+        <tr><td class="bold">PYPL</td><td>-$212 合計</td><td>(待填)</td><td>(待填)</td><td><span class="pill info">現金流好,估值超跌</span></td></tr>
+        <tr><td class="bold">COIN</td><td>-$391 合計</td><td>(待填)</td><td>(待填)</td><td><span class="pill warning">跟加密週期綁死</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout info">
+      <div class="title">快速版(如果不想一檔一檔想)</div>
+      <p>把這 12 檔分成三堆告訴我就好:</p>
+      <p>• <span class="bold">A 堆 —— 現在是現金我還會買的</span></p>
+      <p>• <span class="bold">B 堆 —— 不會買,但想等回本再走</span></p>
+      <p>• <span class="bold">C 堆 —— 不會買,也不太記得為什麼當初買</span></p>
+      <p class="secondary">C 堆就是 2×2 矩陣裡該賣的。B 堆最危險(「等回本」是最大的認知陷阱)。</p>
+    </div>
+
+    <h3>A-3. 不用問你也能判斷的死倉(基本面已破)</h3>
+    <div class="secondary">下列基本面長期破損 / penny stock / 燒錢無止盡。留著只是希望回本,統計上不會回本 —— 這批可以直接停損。</div>
+    <table>
+      <thead><tr><th>標的</th><th>現況</th><th>建議</th></tr></thead>
+      <tbody>
+        <tr class="danger"><td>CRIS</td><td>生技 penny -77%</td><td>停損無懸念</td></tr>
+        <tr class="danger"><td>MVIS</td><td>MicroVision 長期破損</td><td>停損</td></tr>
+        <tr class="danger"><td>BBAI</td><td>BigBear.ai 低迷</td><td>停損</td></tr>
+        <tr class="danger"><td>GPUS</td><td>Hyperscale Data penny</td><td>停損</td></tr>
+        <tr class="danger"><td>ARQQ</td><td>Arqit 量子 -27%,商業化失敗</td><td>停損</td></tr>
+        <tr class="danger"><td>CMTL</td><td>Comtech 殭屍股</td><td>停損</td></tr>
+        <tr class="danger"><td>BLNK</td><td>燒現金、無止盈跡象</td><td>停損(兩帳戶同步)</td></tr>
+        <tr class="danger"><td>EVGO</td><td>EV 充電基本面破損</td><td>停損</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>B. 現金重建目標</h2>
+    <table>
+      <thead><tr><th>項目</th><th class="right">現在</th><th class="right">保守目標</th><th class="right">穩健目標</th></tr></thead>
+      <tbody>
+        <tr><td>元大 CMA</td><td class="right">NT$ 135,717 (3.8%)</td><td class="right">NT$ 180,000 (5%)</td><td class="right">NT$ 350,000 (10%)</td></tr>
+        <tr class="danger"><td>eToro</td><td class="right">$202 (0.2%)</td><td class="right">$4,400 (~5%)</td><td class="right">$8,840 (~10%)</td></tr>
+        <tr><td class="bold">合計現金 %</td><td class="right bold">~2.2%</td><td class="right bold">~5%</td><td class="right bold">~10%</td></tr>
+      </tbody>
+    </table>
+    <div class="callout warning">
+      <div class="title">硬規則(立刻生效)</div>
+      <p class="bold">現金比例 &lt; 5% 時,所有新買單停用(DCA 除外)。</p>
+      <p class="secondary">把目標從「獲利金額」改成「現金存量」—— 它是你能控制的動作,不是市場決定的結果。</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>C. 貸款倉條件釐清</h2>
+    <p>元大確認是你的貸款帳戶。現金 CMA 135K / 總權益 3.55M = 3.8% 是粗估,還要加上貸款條件才能算真正的紀律閾值。</p>
+    <table>
+      <thead><tr><th class="center">#</th><th>你需要回答的問題</th><th>我會幫你算的東西</th></tr></thead>
+      <tbody>
+        <tr><td class="center">1</td><td>貸款總金額(NT$)</td><td>合併部位 vs 貸款比</td></tr>
+        <tr><td class="center">2</td><td>年利率(%)</td><td>真實月度成本</td></tr>
+        <tr><td class="center">3</td><td>貸款期限 / 還剩多久</td><td>橫盤一年倒貼多少</td></tr>
+        <tr><td class="center">4</td><td>貸款資金是否只放在元大?</td><td>帳戶風險歸屬</td></tr>
+        <tr><td class="center">5</td><td>有無擔保品 / 質押</td><td>追繳觸發條件</td></tr>
+      </tbody>
+    </table>
+    <div class="callout info">
+      <div class="title">貸款倉紀律獨立設</div>
+      <p>貸款倉 −10% 立即減碼,優先於整體 −10%。它每天都在消耗時間成本,不能跟自有資金同步看。</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>D. 機會成本實算(vs VOO)</h2>
+    <div class="secondary">用 VOO 過去 3 年年化 ~13% 的概略估計。你自己的 VOO DCA 真的賺了 NT$ 6,662(+45%)—— 就是最好的驗證。</div>
+    <div class="stat-grid cols-3" style="margin-top:12px;">
+      <div class="stat success"><div class="value">+NT$ 2.66M</div><div class="label">VOO 假想獲利(3 年)</div></div>
+      <div class="stat danger"><div class="value">~-NT$ 613K</div><div class="label">實際合計損益</div></div>
+      <div class="stat warning"><div class="value">NT$ 3.27M</div><div class="label">機會成本差距</div></div>
+    </div>
+    <div class="callout warning">
+      <div class="title">關鍵問題</div>
+      <p>從今天起到年底,你自選組合能跑贏 VOO 5%+ 嗎?沒把握 → 減量、併回 VOO / DCA。<span class="bold">你的 VOO DCA 已經證明「簡單就夠了」。</span></p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>E. 主題股收斂</h2>
+    <table>
+      <thead><tr><th>主題</th><th>代表標的</th><th class="right">大致投入</th><th>目前狀態</th></tr></thead>
+      <tbody>
+        <tr><td>加密 / 礦業</td><td>ETH / ADA / BTC / SOL / COIN / CLSK</td><td class="right">~$30,000(主要 eToro)</td><td><span class="pill warning">ADA 重傷,CLSK 翻正</span></td></tr>
+        <tr><td>氫能 / 替代能源</td><td>PLUG / BLNK / GEVO / CHPT / EVGO</td><td class="right">~$8,500+</td><td><span class="pill success">PLUG 翻身</span> <span class="pill deleted">BLNK 爛</span></td></tr>
+        <tr><td>生技 / 醫療</td><td>OCGN / CRIS / TDOC / CRSP / CYRX</td><td class="right">~$5,500+</td><td><span class="pill success">OCGN +95%</span> <span class="pill deleted">CRIS/TDOC 重傷</span></td></tr>
+        <tr><td>量子計算</td><td>IONQ / QBTS / RGTI / QUBT / QSI / ARQQ</td><td class="right">~$2,500</td><td><span class="pill warning">IONQ/QBTS 強,ARQQ 爛</span></td></tr>
+        <tr><td>核能 / 小核</td><td>SMR / OKLO / UUUU / LEU / URA / UEC / NXE</td><td class="right">~$3,000+</td><td><span class="pill warning">UUUU/OKLO 正,SMR/LEU 虧</span></td></tr>
+        <tr><td>3D 列印 / 太空</td><td>DXYZ / RKLB / SPIR / DDD / NNDM / SSYS</td><td class="right">~$2,000+</td><td><span class="pill success">多數正</span></td></tr>
+      </tbody>
+    </table>
+    <div class="callout info">
+      <div class="title">收斂原則</div>
+      <p>• 主題股合計 ≤ 15% 總資產</p>
+      <p>• 每個主題最多 3 檔,每檔至少 NT$ 20,000</p>
+      <p>• 不到門檻的小位 → 認賠或止盈 → 併回 VOO / 現金</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>F. 注意力 / 流程管理</h2>
+    <p>每日看盤負擔:160+ 標的 + eToro 1,874 筆。用固定頻率取代「每天什麼都看」。</p>
+    <table>
+      <thead><tr><th>頻率</th><th>時間</th><th>看什麼</th><th>不看什麼</th></tr></thead>
+      <tbody>
+        <tr><td>每日</td><td>≤ 10 分</td><td>大盤指數 + 前 10 大持倉</td><td>小部位、單檔新聞</td></tr>
+        <tr><td>每週</td><td>~30 分</td><td>全組合 vs VOO、觸發式檢查</td><td>媒體雜訊、短線波動</td></tr>
+        <tr><td>每月</td><td>~1 小時</td><td>現金 %、主題 %、DCA 進度</td><td>新買單(先寫 7 天再決定)</td></tr>
+        <tr><td>每季</td><td>半天</td><td>績效對照、買進理由檢核</td><td>對自己仁慈的藉口</td></tr>
+      </tbody>
+    </table>
+    <div class="callout info">
+      <div class="title">兩個自我提問(貼在電腦旁)</div>
+      <p><span class="bold">Q1:</span> 如果今天我手上是現金,我還會買這檔嗎? → 答「不會」就賣。</p>
+      <p><span class="bold">Q2:</span> 當初買這檔的理由,現在還成立嗎? → 答「不」或「忘了」就賣。</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>G. 開放空間 —— 值得慢慢想</h2>
+    <div class="card-grid">
+      <div class="card"><div class="card-header">心理層面</div><p>去年 10 月從 +100 萬回吐到現在,情緒上還有疙瘩嗎?對自己決策的信任感有沒有被打擊?這會影響你執行紀律的能力。</p></div>
+      <div class="card"><div class="card-header">生活層面</div><p>貸款倉這筆錢,幾年後要用?能承受多大最差情境?目前的配置符合這個定位嗎?</p></div>
+      <div class="card"><div class="card-header">社交層面</div><p>家人知道嗎?有沒有可以商量的人?孤軍奮戰容易做極端決策。</p></div>
+      <div class="card"><div class="card-header">動機層面</div><p>你投入這麼多時間,為了錢還是為了玩?是錢就要嚴格紀律,是玩就當訂閱費。</p></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <h2>建議處理順序(v3)</h2>
+    <table>
+      <thead><tr><th>時機</th><th>做什麼</th><th>成本</th></tr></thead>
+      <tbody>
+        <tr><td>今天 / 本週</td><td>B 節硬規則「現金 &lt; 5% 不開新單」立刻生效</td><td>0 成本</td></tr>
+        <tr><td>今天 / 本週</td><td>H-1 的 11 檔重疊單,圈出「兩邊都賠」的 4 檔(CRM/NKE/PYPL/BLNK)作為本週清倉重點</td><td>0 成本</td></tr>
+        <tr><td>本週內</td><td>A-2 花 30 分鐘回答 12 檔(完整版 Q1/Q2,或快速版 A/B/C 堆)</td><td>~30 分鐘認知</td></tr>
+        <tr><td>本週內</td><td>A-3 八檔死倉可直接停損(兩帳戶同步,對照 H 節)</td><td>認列約 -$3K USD</td></tr>
+        <tr><td>本月內</td><td>C 節五個貸款問題告訴我,重算紀律閾值</td><td>~10 分鐘</td></tr>
+        <tr><td>本月內</td><td>H 節策略啟示決定:eToro 要不要收斂成「加密為主」?</td><td>~1 小時思考</td></tr>
+        <tr><td>月內試行</td><td>F 節流程跑一週,看注意力負擔能否下降</td><td>每天多一點紀律</td></tr>
+        <tr><td>慢慢來</td><td>D、E、G 更深層對焦,一次聊一塊</td><td>無時限</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout neutral">
+    <div class="title">免責 · 版本說明</div>
+    <p class="secondary">v3 更新:新增 H 節「跨帳戶重疊曝險統計」,以 eToro 前 50 大部位為基準比對元大持股,匯率用 1 USD = 31.5 NTD 概略換算。v2 依 2026/04/22 15:46 元大資產總覽 App 截圖重算元大部位(eToro 資料沿用先前 API 抓取結果,未再次更新)。所有數字、建議為組合結構面的討論,非投資建議;實際下單前請再對照即時價格。機會成本估算用 VOO 過去 3 年年化 ~13%,真實值可能差 1–2 個百分點。</p>
+  </div>
+
+</div>
+</body>
+</html>

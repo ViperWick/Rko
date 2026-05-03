@@ -1,0 +1,12 @@
+﻿country,name,symbol,instrument_id,products,role
+US,Lockheed Martin,LMT,1136,F-35、PAC-3、THAAD,全球最大防務承包商
+US,RTX (Raytheon),RTX,1033,Patriot、AIM-120、SM系列,導彈與雷達
+US,Northrop Grumman,NOC,1545,B-2、ICBM、GBSD,戰略武器
+US,Boeing Defense,BA,1010,JDAM、Harpoon,航空與精準打擊
+US,General Dynamics,GD,1534,彈藥、地面武器,陸戰供應商
+US,L3Harris Technologies,LHX,1868,電子戰、導引系統,軍用通訊
+US,Textron,TXT,1622,戰術導彈、無人機,戰術系統
+EU,Thales,HO.PA,5040,防空雷達、導彈控制,歐洲電子系統
+IT,Leonardo,LDO.MI,1286,空防系統、直升機,義大利防務
+DE,Rheinmetall,RHM.DE,2587,火炮、防空武器,德國陸戰
+NO,Kongsberg,KOG.OL,12758,NSM 反艦導彈,挪威海軍武器

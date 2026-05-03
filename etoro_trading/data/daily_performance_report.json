@@ -1,0 +1,35 @@
+{
+  "updated_at": "2026-03-16T23:32:49",
+  "balance": {
+    "credit": 118.67,
+    "unrealized_pnl": -21762.88,
+    "bonus_credit": 0.0,
+    "positions_count": 1827,
+    "orders_count": 0
+  },
+  "total_equity": 88168.97,
+  "unrealized_pnl": -21762.88,
+  "today_gain": null,
+  "market_today": [
+    {
+      "symbol": "SPY",
+      "name": "標普 500",
+      "change_pct": 1.23
+    },
+    {
+      "symbol": "QQQ",
+      "name": "納斯達克 100",
+      "change_pct": 1.36
+    },
+    {
+      "symbol": "BTC-USD",
+      "name": "比特幣",
+      "change_pct": 1.42
+    },
+    {
+      "symbol": "ETH-USD",
+      "name": "以太坊",
+      "change_pct": 5.2
+    }
+  ]
+}

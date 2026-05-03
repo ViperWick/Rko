@@ -1,0 +1,10 @@
+.env
+__pycache__/
+*.pyc
+*.log
+.env.local
+portfolio_output.txt
+
+# Agent Portfolio 子資料夾下的所有 .env（含各策略的 userToken 秘文）
+agents/**/.env
+agents/**/.env.local

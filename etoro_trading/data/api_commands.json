@@ -1,0 +1,79 @@
+{
+  "title": "eToro 官方 API 指令對照",
+  "updated_at": "2025-03",
+  "description": "以下指令對應 eToro 官方 API 文件，在本介面中可直接執行或透過對應頁籤操作。",
+  "commands": [
+    {
+      "id": "portfolio",
+      "name": "查詢投資組合",
+      "api_summary": "取得持倉、待處理訂單、跟單、帳戶餘額與狀態",
+      "ui_action": "投資組合",
+      "doc_link": "https://api-portal.etoro.com/api-reference/trading--real/retrieve-comprehensive-portfolio-information-including-positions-orders-and-account-status",
+      "endpoint": "GET /trading/info/.../pnl"
+    },
+    {
+      "id": "market_open_amount",
+      "name": "市價買入（依金額）",
+      "api_summary": "以指定金額開倉，市價成交，可設槓桿、止損、止盈",
+      "ui_action": "交易 → 買入",
+      "doc_link": "https://api-portal.etoro.com/api-reference/trading--real/create-a-market-order-to-open-a-position-by-specifying-the-amount-of-cash-you-would-like-to-use-in-the-trade",
+      "endpoint": "POST .../market-open-orders/by-amount"
+    },
+    {
+      "id": "market_close",
+      "name": "市價平倉",
+      "api_summary": "依 positionId 平倉或部分平倉（指定單位數）",
+      "ui_action": "交易 → 平倉",
+      "doc_link": "https://api-portal.etoro.com/guides/market-orders",
+      "endpoint": "POST .../market-close-orders/positions/{positionId}"
+    },
+    {
+      "id": "search_instruments",
+      "name": "搜尋標的（取得 Instrument ID）",
+      "api_summary": "以代碼（如 AAPL、BTC）搜尋，取得 instrumentId 供下單使用",
+      "ui_action": "買入/賣出時自動解析",
+      "doc_link": "https://api-portal.etoro.com/guides/get-instrument-id",
+      "endpoint": "GET /market-data/search?internalSymbolFull=..."
+    },
+    {
+      "id": "instruments_rates",
+      "name": "查詢即時報價",
+      "api_summary": "指定標的的買賣價、轉換匯率、可執行價",
+      "ui_action": "下單前建議查詢",
+      "doc_link": "https://api-portal.etoro.com/api-reference/market-data/retrieve-current-market-rates-and-pricing-information-for-specified-instruments",
+      "endpoint": "GET /instruments/rates"
+    },
+    {
+      "id": "candles",
+      "name": "歷史 K 線",
+      "api_summary": "OHLCV 資料，週期可選 1 分鐘～1 週",
+      "ui_action": "策略（MA60、零售訊號）內部使用",
+      "doc_link": "https://api-portal.etoro.com/api-reference/market-data/get-historical-candles-data-for-an-instrument",
+      "endpoint": "GET /instruments/{id}/history/candles/..."
+    },
+    {
+      "id": "mit_order",
+      "name": "觸價單（類限價）",
+      "api_summary": "市價觸及指定價格時開倉，可設止損止盈",
+      "ui_action": "官方 API 支援，本介面可擴充",
+      "doc_link": "https://api-portal.etoro.com/api-reference/trading--real/places-a-market-if-touched-order-similar-to-limit-order-to-open-a-position-when-a-threshold-price-is-reached",
+      "endpoint": "POST .../market-if-touched-open-orders"
+    },
+    {
+      "id": "order_details",
+      "name": "訂單與持倉詳情",
+      "api_summary": "查詢單筆訂單狀態、執行結果及由此訂單開出的持倉",
+      "ui_action": "追蹤下單結果",
+      "doc_link": "https://api-portal.etoro.com/api-reference/trading--real/get-order-information-and-position-details-for-real-account",
+      "endpoint": "GET /trading/info/.../orders/{orderId}"
+    },
+    {
+      "id": "instruments_metadata",
+      "name": "標的元數據",
+      "api_summary": "多檔標的的顯示名稱、交易所、分類等",
+      "ui_action": "持倉列表名稱解析",
+      "doc_link": "https://api-portal.etoro.com/api-reference/market-data/retrieves-metadata-for-specified-instruments-including-display-names-exchange-ids-and-classification",
+      "endpoint": "GET /market-data/instruments"
+    }
+  ]
+}

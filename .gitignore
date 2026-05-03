@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+*.log
+gmail_ai_agent/credentials.json
+gmail_ai_agent/token.json

@@ -1,0 +1,48 @@
+{
+  "title": "目前策略配置",
+  "updated_at": "2025-03-08",
+  "core_principles": [
+    {"rule": "只做多", "desc": "不開空倉，不做空"},
+    {"rule": "對沖用 covered call", "desc": "QYLD、XYLD、RYLD"},
+    {"rule": "台灣入金", "desc": "eToro 為主"}
+  ],
+  "asset_actions": [
+    {"asset": "股票", "action": "只減不加", "desc": "不新開倉，止盈時減倉"},
+    {"asset": "ETF", "action": "加倉", "desc": "順勢（價 > MA60 且偏離 ≥ 2%）"},
+    {"asset": "槓桿 ETF", "action": "加倉", "desc": "保守買跌（回撤 25%/35%/45% 分批）"},
+    {"asset": "加密貨幣", "action": "暫不動", "desc": "質押利息，不加倉"}
+  ],
+  "etf_buy_list": [
+    {"symbol": "GLD", "weight": "22%", "role": "避險", "amount": "$300-500"},
+    {"symbol": "QYLD", "weight": "18%", "role": "對沖/收益", "amount": "$300-500"},
+    {"symbol": "ARKK", "weight": "20%", "role": "成長", "amount": "$300-500"},
+    {"symbol": "PAVE", "weight": "15%", "role": "基建", "amount": "$300-500"},
+    {"symbol": "ARKX", "weight": "10%", "role": "太空", "amount": "$200-300"},
+    {"symbol": "WQTM", "weight": "10%", "role": "量子計算", "amount": "$200-300"},
+    {"symbol": "UEC", "weight": "8%", "role": "鈾礦/核能", "amount": "$200-300"},
+    {"symbol": "ITA", "weight": "10%", "role": "航太/國防", "amount": "$200-300"}
+  ],
+  "defense_watchlist": {
+    "role": "觀察/擇機配置",
+    "symbols": ["LMT", "RTX", "NOC", "GD", "LHX", "RHM.DE", "LDO.MI", "HO.PA", "KOG.OL"],
+    "amount": "$200-300",
+    "note": "地緣防禦板塊。依股票規則：只減不加；若策略放寬可小額擇機"
+  },
+  "leverage_etf": [
+    {"symbol": "TQQQ", "amount": "$100", "trigger": "回撤 25%/35%/45%"},
+    {"symbol": "SOXL", "amount": "$100", "trigger": "回撤 25%/35%/45%"}
+  ],
+  "sell_rules": [
+    {"condition": "現金 ≥ 25%", "action": "不止盈"},
+    {"condition": "現金 < 15% 且獲利 ≥ 20%", "action": "止盈，保留 1/3"},
+    {"condition": "大跌", "action": "不賣，逢低加碼"}
+  ],
+  "params": {
+    "ma_period": 60,
+    "deviation_pct": 2,
+    "take_profit_pct": 20,
+    "keep_ratio": "1/3",
+    "cash_no_tp": 25,
+    "cash_do_tp": 15
+  }
+}
